@@ -34,6 +34,9 @@ public class PWGLSurfaceView extends GLSurfaceView {
         // Create an OpenGL ES 2.0 context.
         setEGLContextClientVersion(2);
 
+        // Set the EGL config chooser to specify the pixel formats and depth size
+        setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+
         // Set the Renderer for drawing on the GLSurfaceView
         mRenderer = new PWGLRenderer();
         setRenderer(mRenderer);
@@ -42,16 +45,14 @@ public class PWGLSurfaceView extends GLSurfaceView {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 final PWGLActivity act = (PWGLActivity)getContext();
-                act.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        if (act.buttonsAreOff)
-                            act.timerHandler.post(act.timerButtonsOn);
-                        else {
-                            act.timerHandler.removeCallbacks(act.timerButtonsOff);
-                            act.timerHandler.postDelayed(act.timerButtonsOff, act.buttonsFadeOutTime);
-                        }
-                    } });
+                act.runOnUiThread(() -> {
+                    if (act.buttonsAreOff)
+                        act.timerHandler.post(act.timerButtonsOn);
+                    else {
+                        act.timerHandler.removeCallbacks(act.timerButtonsOff);
+                        act.timerHandler.postDelayed(act.timerButtonsOff, act.buttonsFadeOutTime);
+                    }
+                });
                 return true;
             }
         });
