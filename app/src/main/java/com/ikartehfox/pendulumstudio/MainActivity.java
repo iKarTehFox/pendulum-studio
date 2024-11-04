@@ -236,17 +236,20 @@ public class MainActivity extends ListActivity {
     }
 
     @Override
-    public boolean onMenuOpened(int featureId, @NonNull Menu menu) {
-        if (featureId == Window.FEATURE_ACTION_BAR) {
-            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
-                try {
+    public boolean onMenuOpened(int featureId, Menu menu)
+    {
+        if(featureId == Window.FEATURE_ACTION_BAR && menu != null){
+            if(menu.getClass().getSimpleName().equals("MenuBuilder")){
+                try{
                     Method m = menu.getClass().getDeclaredMethod(
                             "setOptionalIconsVisible", Boolean.TYPE);
                     m.setAccessible(true);
                     m.invoke(menu, true);
-                } catch (NoSuchMethodException e) {
+                }
+                catch(NoSuchMethodException e){
                     Log.e(TAG, "onMenuOpened", e);
-                } catch (Exception e) {
+                }
+                catch(Exception e){
                     throw new RuntimeException(e);
                 }
             }
