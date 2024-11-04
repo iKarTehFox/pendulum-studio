@@ -5,10 +5,6 @@
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/label_param" />
     <item
-        android:id="@+id/action_rate"
-        android:icon="@drawable/ic_action_rate"
-        android:title="@string/github" />
-    <item
         android:id="@+id/action_information"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="@string/information" />

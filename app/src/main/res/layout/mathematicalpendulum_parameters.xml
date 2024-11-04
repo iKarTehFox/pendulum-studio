@@ -269,8 +269,45 @@
 
 			</LinearLayout>
 
-
 		</ScrollView>
+
+		<LinearLayout
+			style="@android:style/ButtonBar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<Button
+				android:id="@+id/SP_okButton"
+				android:onClick="okButton"
+
+				android:layout_width="0dip"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+
+				android:text="@string/button_ok" />
+
+			<Button
+				android:id="@+id/SP_cancelButton"
+				android:onClick="cancelButton"
+
+				android:layout_width="0dip"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+
+				android:text="@string/button_cancel" />
+
+			<Button
+				android:id="@+id/SP_resetButton"
+				android:onClick="resetButton"
+
+				android:layout_width="0dip"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+
+				android:text="@string/button_reset" />
+
+		</LinearLayout>
 
 	</LinearLayout>
 </androidx.core.widget.NestedScrollView>

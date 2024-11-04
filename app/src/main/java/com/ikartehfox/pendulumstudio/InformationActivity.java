@@ -20,7 +20,7 @@ public class InformationActivity extends AppCompatActivity {
         TextView tver = findViewById(R.id.version_text);
         tver.setText(getText(R.string.version) + " " + BuildConfig.VERSION_NAME);
 
-        TextView tv = findViewById(R.id.google_play);
+        TextView tv = findViewById(R.id.github);
         //makeTextViewHyperlink(tv);
         tv.setOnClickListener(v -> {
             String githubUrl = "https://github.com/iKarTehFox/pendulum-studio";

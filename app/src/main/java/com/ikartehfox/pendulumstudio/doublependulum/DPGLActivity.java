@@ -15,7 +15,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +26,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -40,14 +38,14 @@ import java.lang.reflect.Method;
 public class DPGLActivity extends Activity implements SensorEventListener {
 
     private static final String TAG = "DPGLActivity";
-	private DPGLSurfaceView mGLView;
-	//private DSPGLRenderer mRenderer;
-	private SensorManager mSensorManager;
-	private Sensor mGravity;
-	private boolean useDynGravity;
-	private boolean useDamping;
+    private DPGLSurfaceView mGLView;
+    //private DSPGLRenderer mRenderer;
+    private SensorManager mSensorManager;
+    private Sensor mGravity;
+    private boolean useDynGravity;
+    private boolean useDamping;
     private boolean isRunning;
-	private Display display;
+    private Display display;
 
     static int frequency = 1000;
     static int buttonsFadeOutTime = 4000;
@@ -61,8 +59,8 @@ public class DPGLActivity extends Activity implements SensorEventListener {
             deltaT = System.currentTimeMillis() - deltaT;
             //Log.d("DPGLActivity", "dT: " + deltaT);
             //Log.d("DPGLActivity", "Frames: " + DPGLRenderer.mPendulum.frames);
-            float fps = DPGLRenderer.mPendulum.frames / (float)(deltaT) * 1.e3f;
-            ((TextView)findViewById(R.id.fps)).setText("FPS: " + String.format("%.0f", fps));
+            float fps = DPGLRenderer.mPendulum.frames / (float) (deltaT) * 1.e3f;
+            ((TextView) findViewById(R.id.fps)).setText("FPS: " + String.format("%.0f", fps));
             DPGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
             if (isRunning && !paused) timerHandler.postDelayed(this, frequency);
@@ -74,25 +72,19 @@ public class DPGLActivity extends Activity implements SensorEventListener {
         @Override
         public void run() {
             //Log.d("Act","ButtonsOff");
-            if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true)) return;
+            if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true))
+                return;
 
-            if(Build.VERSION.SDK_INT >= 12) {
-
-                findViewById(R.id.DP_buttons).animate()
-                        .alpha(0f)
-                        .setDuration(buttonsFadeAnimationTime)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                findViewById(R.id.DP_buttons).setVisibility(View.GONE);
-                                buttonsAreOff = true;
-                            }
-                        });
-            }
-            else {
-                findViewById(R.id.DP_buttons).setVisibility(View.GONE);
-                buttonsAreOff = true;
-            }
+            findViewById(R.id.DP_buttons).animate()
+                    .alpha(0f)
+                    .setDuration(buttonsFadeAnimationTime)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            findViewById(R.id.DP_buttons).setVisibility(View.GONE);
+                            buttonsAreOff = true;
+                        }
+                    });
 
         }
     };
@@ -101,17 +93,12 @@ public class DPGLActivity extends Activity implements SensorEventListener {
         @Override
         public void run() {
             //Log.d("Act","ButtonsOn");
-            if(Build.VERSION.SDK_INT >= 12) {
-
-                findViewById(R.id.DP_buttons).setAlpha(0f);
-                findViewById(R.id.DP_buttons).setVisibility(View.VISIBLE);
-                findViewById(R.id.DP_buttons).animate()
-                        .alpha(1f)
-                        .setDuration(buttonsFadeAnimationTime)
-                        .setListener(null);
-            }
-            else
-                findViewById(R.id.DP_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.DP_buttons).setAlpha(0f);
+            findViewById(R.id.DP_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.DP_buttons).animate()
+                    .alpha(1f)
+                    .setDuration(buttonsFadeAnimationTime)
+                    .setListener(null);
 
             buttonsAreOff = false;
 
@@ -125,10 +112,9 @@ public class DPGLActivity extends Activity implements SensorEventListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getResources().getBoolean(R.bool.portrait_only)){
+        if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-        else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.doublependulum_gl);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // Create a GLSurfaceView instance and set it
@@ -139,8 +125,7 @@ public class DPGLActivity extends Activity implements SensorEventListener {
         setFullScreenMode();
         setFpsMode();
 
-        mGLView = (DPGLSurfaceView)findViewById(R.id.gl_surface_view);
-
+        mGLView = findViewById(R.id.gl_surface_view);
 
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -151,108 +136,81 @@ public class DPGLActivity extends Activity implements SensorEventListener {
 
         display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
-        if (Math.abs(DPGLRenderer.mPendulum.k)>1.e-7) useDamping = true;
-        else useDamping = false;
+        useDamping = Math.abs(DPGLRenderer.mPendulum.k) > 1.e-7;
 
         isRunning = !DPGLRenderer.mPendulum.paused;
-        if (!isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-        else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
-        findViewById(R.id.button_playpause).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-                else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
-                isRunning = !isRunning;
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        //MPGLRenderer.mPendulum.restart();
-                        if (!isRunning) DPGLRenderer.mPendulum.paused = true;
-                        else DPGLRenderer.mPendulum.paused = false;
-                    }});
-                if (isRunning) {
-                    DPGLRenderer.mPendulum.frames = 0;
-                    deltaT = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, frequency);
-                }
+        if (!isRunning)
+            ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+        else
+            ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+        findViewById(R.id.button_playpause).setOnClickListener(v -> {
+            if (isRunning)
+                ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+            else
+                ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+            isRunning = !isRunning;
+            // This method will be called on the rendering
+// thread:
+            mGLView.queueEvent(() -> {
+                //MPGLRenderer.mPendulum.restart();
+                DPGLRenderer.mPendulum.paused = !isRunning;
+            });
+            if (isRunning) {
+                DPGLRenderer.mPendulum.frames = 0;
+                deltaT = System.currentTimeMillis();
+                timerHandler.postDelayed(timerRunnable, frequency);
+            }
 
+        });
+
+        // This method will be called on the rendering
+// thread:
+        findViewById(R.id.button_restart).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            DPGLRenderer.mPendulum.restart();
+            DPGLRenderer.resetAccumBuffer();
+            if (useDamping) DPGLRenderer.mPendulum.k = DPSimulationParameters.simParams.k;
+            else DPGLRenderer.mPendulum.k = 0.;
+        }));
+
+        // This method will be called on the rendering
+// thread:
+        findViewById(R.id.button_settings).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            Intent intentParam = new Intent(DPGLActivity.this, DPParametersActivity.class);
+            startActivity(intentParam);
+        }));
+
+        findViewById(R.id.togglebutton_sensor_gravity).setOnClickListener(v -> {
+            DPGLRenderer.mPendulum.toggleGravity();
+            useDynGravity = !useDynGravity;
+            if (useDynGravity)
+                mSensorManager.registerListener(DPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
+            else mSensorManager.unregisterListener(DPGLActivity.this);
+        });
+
+        findViewById(R.id.togglebutton_damping).setOnClickListener(v -> {
+
+            useDamping = !useDamping;
+            if (useDamping) DPGLRenderer.mPendulum.k = DPSimulationParameters.simParams.k;
+            else DPGLRenderer.mPendulum.k = 0.;
+        });
+
+        findViewById(R.id.togglebutton_trace).setOnClickListener(v -> {
+            DPSimulationParameters.simParams.showTrajectory = !DPSimulationParameters.simParams.showTrajectory;
+            if (DPSimulationParameters.simParams.showTrajectory) {
+                // This method will be called on the rendering
+// thread:
+                mGLView.queueEvent(() -> {
+                    DPGLRenderer.mPendulum.clearTrajectory();
+                    DPGLRenderer.resetAccumBuffer();
+                });
             }
         });
 
-        findViewById(R.id.button_restart).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                    	DPGLRenderer.mPendulum.restart();
-                        DPGLRenderer.resetAccumBuffer();
-                    	if (useDamping) DPGLRenderer.mPendulum.k = DPSimulationParameters.simParams.k;
-                        else DPGLRenderer.mPendulum.k = 0.;
-                    }});
-			}
-		});
+        ((ToggleButton) findViewById(R.id.togglebutton_sensor_gravity)).setChecked(useDynGravity);
 
-        findViewById(R.id.button_settings).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        Intent intentParam = new Intent(DPGLActivity.this, DPParametersActivity.class);
-                        startActivity(intentParam);
-                    }});
-            }
-        });
+        ((ToggleButton) findViewById(R.id.togglebutton_damping)).setChecked(useDamping);
 
-        findViewById(R.id.togglebutton_sensor_gravity).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				DPGLRenderer.mPendulum.toggleGravity();
-                useDynGravity = !useDynGravity;
-                if (useDynGravity) mSensorManager.registerListener(DPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
-                else mSensorManager.unregisterListener(DPGLActivity.this);
-			}
-		});
-
-        findViewById(R.id.togglebutton_damping).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-                useDamping = !useDamping;
-                if (useDamping) DPGLRenderer.mPendulum.k = DPSimulationParameters.simParams.k;
-                else DPGLRenderer.mPendulum.k = 0.;
-			}
-		});
-
-        findViewById(R.id.togglebutton_trace).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DPSimulationParameters.simParams.showTrajectory = !DPSimulationParameters.simParams.showTrajectory;
-                if (DPSimulationParameters.simParams.showTrajectory) {
-                    mGLView.queueEvent(new Runnable() {
-                        // This method will be called on the rendering
-                        // thread:
-                        public void run() {
-                            DPGLRenderer.mPendulum.clearTrajectory();
-                            DPGLRenderer.resetAccumBuffer();
-                        }
-                    });
-                }
-            }
-        });
-
-        if (!useDynGravity) ((ToggleButton)findViewById(R.id.togglebutton_sensor_gravity)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_sensor_gravity)).setChecked(true);
-
-        if (!useDamping) ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(true);
-
-        if (!DPSimulationParameters.simParams.showTrajectory) ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(true);
+        ((ToggleButton) findViewById(R.id.togglebutton_trace)).setChecked(DPSimulationParameters.simParams.showTrajectory);
 
         paused = false;
 
@@ -262,19 +220,23 @@ public class DPGLActivity extends Activity implements SensorEventListener {
 
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
-      // Do something here if sensor accuracy changes.
+        // Do something here if sensor accuracy changes.
     }
 
     @Override
     public final void onSensorChanged(SensorEvent event) {
-      // The light sensor returns a single value.
-      // Many sensors return 3 values, one for each axis.
-      int rotmode = display.getRotation();
-      if (rotmode==Surface.ROTATION_0) DPGLRenderer.mPendulum.setGravity(event.values[0], event.values[1], event.values[2]);
-      else if (rotmode==Surface.ROTATION_90) DPGLRenderer.mPendulum.setGravity(-event.values[1], event.values[0], event.values[2]);
-      else if (rotmode==Surface.ROTATION_180) DPGLRenderer.mPendulum.setGravity(event.values[0], -event.values[1], event.values[2]);
-      else if (rotmode==Surface.ROTATION_270) DPGLRenderer.mPendulum.setGravity(event.values[1], -event.values[0], event.values[2]);
-      // Do something with this sensor value.
+        // The light sensor returns a single value.
+        // Many sensors return 3 values, one for each axis.
+        int rotmode = display.getRotation();
+        if (rotmode == Surface.ROTATION_0)
+            DPGLRenderer.mPendulum.setGravity(event.values[0], event.values[1], event.values[2]);
+        else if (rotmode == Surface.ROTATION_90)
+            DPGLRenderer.mPendulum.setGravity(-event.values[1], event.values[0], event.values[2]);
+        else if (rotmode == Surface.ROTATION_180)
+            DPGLRenderer.mPendulum.setGravity(event.values[0], -event.values[1], event.values[2]);
+        else if (rotmode == Surface.ROTATION_270)
+            DPGLRenderer.mPendulum.setGravity(event.values[1], -event.values[0], event.values[2]);
+        // Do something with this sensor value.
     }
 
     @Override
@@ -300,28 +262,22 @@ public class DPGLActivity extends Activity implements SensorEventListener {
         // The following call resumes a paused rendering thread.
         // If you de-allocated graphic objects for onPause()
         // this is a good place to re-allocate them.
-        if (DPSimulationParameters.simParams.showTrajectory && !((ToggleButton)findViewById(R.id.togglebutton_trace)).isChecked())
-            mGLView.queueEvent(new Runnable() {
-                // This method will be called on the rendering
-                // thread:
-                public void run() {
-                    DPGLRenderer.mPendulum.clearTrajectory();
-                }
-            });
-        if (!DPSimulationParameters.simParams.showTrajectory) ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(true);
-
-        mGLView.queueEvent(new Runnable() {
+        if (DPSimulationParameters.simParams.showTrajectory && !((ToggleButton) findViewById(R.id.togglebutton_trace)).isChecked())
             // This method will be called on the rendering
-            // thread:
-            public void run() {
-                DPGLRenderer.mPendulum.setColorPendulum1(DPSimulationParameters.simParams.pendulumColor);
-                DPGLRenderer.mPendulum.setColorPendulum2(DPSimulationParameters.simParams.pendulumColor2);
-            }
+// thread:
+            mGLView.queueEvent(() -> DPGLRenderer.mPendulum.clearTrajectory());
+        ((ToggleButton) findViewById(R.id.togglebutton_trace)).setChecked(DPSimulationParameters.simParams.showTrajectory);
+
+        // This method will be called on the rendering
+// thread:
+        mGLView.queueEvent(() -> {
+            DPGLRenderer.mPendulum.setColorPendulum1(DPSimulationParameters.simParams.pendulumColor);
+            DPGLRenderer.mPendulum.setColorPendulum2(DPSimulationParameters.simParams.pendulumColor2);
         });
 
         mGLView.onResume();
-        if (useDynGravity) mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_GAME);
+        if (useDynGravity)
+            mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_GAME);
 
         makeButtonsVisible();
 
@@ -342,8 +298,6 @@ public class DPGLActivity extends Activity implements SensorEventListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.doublependulum, menu);
-        MenuItem item = menu.findItem(R.id.action_rate);
-        item.setVisible(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("rate_clicked", false));
         return true;
     }
 
@@ -352,21 +306,8 @@ public class DPGLActivity extends Activity implements SensorEventListener {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.DP_parameters:
-            	Intent intentParam = new Intent(DPGLActivity.this, DPParametersActivity.class);
+                Intent intentParam = new Intent(DPGLActivity.this, DPParametersActivity.class);
                 startActivity(intentParam);
-                return true;
-            case R.id.action_rate:
-                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                } catch (Exception e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                }
-
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("rate_clicked", true).apply();
-                if(Build.VERSION.SDK_INT >= 11)
-                    invalidateOptionsMenu();
-
                 return true;
             case R.id.action_information:
                 Intent intent = new Intent(DPGLActivity.this, InformationActivity.class);
@@ -378,20 +319,17 @@ public class DPGLActivity extends Activity implements SensorEventListener {
     }
 
     @Override
-    public boolean onMenuOpened(int featureId, Menu menu)
-    {
-        if(Build.VERSION.SDK_INT >= 14 && featureId == Window.FEATURE_ACTION_BAR && menu != null){
-            if(menu.getClass().getSimpleName().equals("MenuBuilder")){
-                try{
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
                     Method m = menu.getClass().getDeclaredMethod(
                             "setOptionalIconsVisible", Boolean.TYPE);
                     m.setAccessible(true);
                     m.invoke(menu, true);
-                }
-                catch(NoSuchMethodException e){
+                } catch (NoSuchMethodException e) {
                     Log.e(TAG, "onMenuOpened", e);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -422,8 +360,7 @@ public class DPGLActivity extends Activity implements SensorEventListener {
                 ActionBar actionBar = getActionBar();
                 actionBar.hide();
             }
-        }
-        else {
+        } else {
             if (Build.VERSION.SDK_INT < 16) { //old method
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             } else { // Jellybean and up, new hotness
@@ -442,7 +379,7 @@ public class DPGLActivity extends Activity implements SensorEventListener {
     protected void setFpsMode() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean show_fps = sharedPref.getBoolean("pref_fps", false);
-        LinearLayout view = (LinearLayout) findViewById(R.id.fps_layout);
+        LinearLayout view = findViewById(R.id.fps_layout);
         if (show_fps)
             view.setVisibility(View.VISIBLE);
         else
@@ -451,8 +388,7 @@ public class DPGLActivity extends Activity implements SensorEventListener {
 
     protected void makeButtonsVisible() {
         timerHandler.removeCallbacks(timerButtonsOff);
-        if(Build.VERSION.SDK_INT >= 12)
-            findViewById(R.id.DP_buttons).setAlpha(1f);
+        findViewById(R.id.DP_buttons).setAlpha(1f);
         findViewById(R.id.DP_buttons).setVisibility(View.VISIBLE);
         buttonsAreOff = false;
     }

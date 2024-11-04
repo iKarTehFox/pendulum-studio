@@ -15,7 +15,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +26,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -74,23 +72,16 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         public void run() {
             if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true)) return;
 
-            if(Build.VERSION.SDK_INT >= 12) {
-
-                findViewById(R.id.SP_buttons).animate()
-                        .alpha(0f)
-                        .setDuration(buttonsFadeAnimationTime)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                findViewById(R.id.SP_buttons).setVisibility(View.GONE);
-                                buttonsAreOff = true;
-                            }
-                        });
-            }
-            else {
-                findViewById(R.id.SP_buttons).setVisibility(View.GONE);
-                buttonsAreOff = true;
-            }
+            findViewById(R.id.SP_buttons).animate()
+                    .alpha(0f)
+                    .setDuration(buttonsFadeAnimationTime)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            findViewById(R.id.SP_buttons).setVisibility(View.GONE);
+                            buttonsAreOff = true;
+                        }
+                    });
 
         }
     };
@@ -99,17 +90,12 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         @Override
         public void run() {
             //Log.d("Act","ButtonsOn");
-            if(Build.VERSION.SDK_INT >= 12) {
-
-                findViewById(R.id.SP_buttons).setAlpha(0f);
-                findViewById(R.id.SP_buttons).setVisibility(View.VISIBLE);
-                findViewById(R.id.SP_buttons).animate()
-                        .alpha(1f)
-                        .setDuration(buttonsFadeAnimationTime)
-                        .setListener(null);
-            }
-            else
-                findViewById(R.id.SP_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.SP_buttons).setAlpha(0f);
+            findViewById(R.id.SP_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.SP_buttons).animate()
+                    .alpha(1f)
+                    .setDuration(buttonsFadeAnimationTime)
+                    .setListener(null);
 
             buttonsAreOff = false;
 
@@ -133,7 +119,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         setFullScreenMode();
         setFpsMode();
         
-        mGLView = (SPGLSurfaceView)findViewById(R.id.gl_surface_view);
+        mGLView = findViewById(R.id.gl_surface_view);
         
         
         
@@ -144,109 +130,77 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         useDynGravity = SPGLRenderer.mPendulum.dynamicGravity;
         
         display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        
-        if (Math.abs(SPGLRenderer.mPendulum.k)>1.e-7) useDamping = true;
-        else useDamping = false;
 
-        findViewById(R.id.button_restart).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        SPGLRenderer.mPendulum.restart();
-                        SPGLRenderer.resetAccumBuffer();
-                        if (useDamping) SPGLRenderer.mPendulum.k = SPSimulationParameters.simParams.k;
-                        else SPGLRenderer.mPendulum.k = 0.;
-                    }});
-            }
-        });
+        useDamping = Math.abs(SPGLRenderer.mPendulum.k) > 1.e-7;
+
+        // This method will be called on the rendering
+// thread:
+        findViewById(R.id.button_restart).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            SPGLRenderer.mPendulum.restart();
+            SPGLRenderer.resetAccumBuffer();
+            if (useDamping) SPGLRenderer.mPendulum.k = SPSimulationParameters.simParams.k;
+            else SPGLRenderer.mPendulum.k = 0.;
+        }));
 
         isRunning = !SPGLRenderer.mPendulum.paused;
         if (!isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
         else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
-        findViewById(R.id.button_playpause).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-                else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
-                isRunning = !isRunning;
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        //MPGLRenderer.mPendulum.restart();
-                        if (!isRunning) SPGLRenderer.mPendulum.paused = true;
-                        else SPGLRenderer.mPendulum.paused = false;
-                    }});
-                if (isRunning) {
-                    SPGLRenderer.mPendulum.frames = 0;
-                    deltaT = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, frequency);
-                }
+        findViewById(R.id.button_playpause).setOnClickListener(v -> {
+            if (isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+            else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+            isRunning = !isRunning;
+            // This method will be called on the rendering
+// thread:
+            mGLView.queueEvent(() -> {
+                //MPGLRenderer.mPendulum.restart();
+                SPGLRenderer.mPendulum.paused = !isRunning;
+            });
+            if (isRunning) {
+                SPGLRenderer.mPendulum.frames = 0;
+                deltaT = System.currentTimeMillis();
+                timerHandler.postDelayed(timerRunnable, frequency);
+            }
 
+        });
+
+        // This method will be called on the rendering
+// thread:
+        findViewById(R.id.button_settings).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            Intent intentParam = new Intent(SPGLActivity.this, SPParametersActivity.class);
+            startActivity(intentParam);
+        }));
+
+        findViewById(R.id.togglebutton_sensor_gravity).setOnClickListener(v -> {
+            SPGLRenderer.mPendulum.toggleGravity();
+            useDynGravity = !useDynGravity;
+            if (useDynGravity) mSensorManager.registerListener(SPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
+            else mSensorManager.unregisterListener(SPGLActivity.this);
+        });
+
+        findViewById(R.id.togglebutton_damping).setOnClickListener(v -> {
+
+            useDamping = !useDamping;
+            if (useDamping) SPGLRenderer.mPendulum.k = SPSimulationParameters.simParams.k;
+            else SPGLRenderer.mPendulum.k = 0.;
+        });
+
+        findViewById(R.id.togglebutton_trace).setOnClickListener(v -> {
+            SPSimulationParameters.simParams.showTrajectory = !SPSimulationParameters.simParams.showTrajectory;
+            if (SPSimulationParameters.simParams.showTrajectory) {
+                // This method will be called on the rendering
+// thread:
+                mGLView.queueEvent(() -> {
+                    SPGLRenderer.mPendulum.clearTrajectory();
+                    SPGLRenderer.resetAccumBuffer();
+                });
             }
         });
 
-        findViewById(R.id.button_settings).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        Intent intentParam = new Intent(SPGLActivity.this, SPParametersActivity.class);
-                        startActivity(intentParam);
-                    }});
-            }
-        });
+        ((ToggleButton)findViewById(R.id.togglebutton_sensor_gravity)).setChecked(useDynGravity);
 
-        findViewById(R.id.togglebutton_sensor_gravity).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SPGLRenderer.mPendulum.toggleGravity();
-                useDynGravity = !useDynGravity;
-                if (useDynGravity) mSensorManager.registerListener(SPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
-                else mSensorManager.unregisterListener(SPGLActivity.this);
-            }
-        });
+        ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(useDamping);
 
-        findViewById(R.id.togglebutton_damping).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                useDamping = !useDamping;
-                if (useDamping) SPGLRenderer.mPendulum.k = SPSimulationParameters.simParams.k;
-                else SPGLRenderer.mPendulum.k = 0.;
-            }
-        });
-
-        findViewById(R.id.togglebutton_trace).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SPSimulationParameters.simParams.showTrajectory = !SPSimulationParameters.simParams.showTrajectory;
-                if (SPSimulationParameters.simParams.showTrajectory) {
-                    mGLView.queueEvent(new Runnable() {
-                        // This method will be called on the rendering
-                        // thread:
-                        public void run() {
-                            SPGLRenderer.mPendulum.clearTrajectory();
-                            SPGLRenderer.resetAccumBuffer();
-                        }
-                    });
-                }
-            }
-        });
-
-        if (!useDynGravity) ((ToggleButton)findViewById(R.id.togglebutton_sensor_gravity)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_sensor_gravity)).setChecked(true);
-
-        if (!useDamping) ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(true);
-
-        if (!SPSimulationParameters.simParams.showTrajectory) ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(true);
+        ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(SPSimulationParameters.simParams.showTrajectory);
 
         paused = false;
 
@@ -292,23 +246,14 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         setFpsMode();
 
         if (SPSimulationParameters.simParams.showTrajectory && !((ToggleButton)findViewById(R.id.togglebutton_trace)).isChecked())
-            mGLView.queueEvent(new Runnable() {
-                // This method will be called on the rendering
-                // thread:
-                public void run() {
-                    SPGLRenderer.mPendulum.clearTrajectory();
-                }
-            });
-        if (!SPSimulationParameters.simParams.showTrajectory) ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(true);
-
-        mGLView.queueEvent(new Runnable() {
             // This method will be called on the rendering
-            // thread:
-            public void run() {
-                SPGLRenderer.mPendulum.setColorPendulum1(SPSimulationParameters.simParams.pendulumColor);
-            }
-        });
+// thread:
+            mGLView.queueEvent(() -> SPGLRenderer.mPendulum.clearTrajectory());
+        ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(SPSimulationParameters.simParams.showTrajectory);
+
+        // This method will be called on the rendering
+// thread:
+        mGLView.queueEvent(() -> SPGLRenderer.mPendulum.setColorPendulum1(SPSimulationParameters.simParams.pendulumColor));
 
         // The following call resumes a paused rendering thread.
         // If you de-allocated graphic objects for onPause()
@@ -335,8 +280,6 @@ public class SPGLActivity extends Activity implements SensorEventListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.sphericalpendulum, menu);
-        MenuItem item = menu.findItem(R.id.action_rate);
-        item.setVisible(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("rate_clicked", false));
         return true;
     }
     
@@ -347,19 +290,6 @@ public class SPGLActivity extends Activity implements SensorEventListener {
             case R.id.SP_parameters:
             	Intent intentParam = new Intent(SPGLActivity.this, SPParametersActivity.class);
                 startActivity(intentParam);
-                return true;
-            case R.id.action_rate:
-                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                } catch (Exception e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                }
-
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("rate_clicked", true).apply();
-                if(Build.VERSION.SDK_INT >= 11)
-                    invalidateOptionsMenu();
-
                 return true;
             case R.id.action_information:
                 Intent intent = new Intent(SPGLActivity.this, InformationActivity.class);
@@ -373,7 +303,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
     @Override
     public boolean onMenuOpened(int featureId, Menu menu)
     {
-        if(Build.VERSION.SDK_INT >= 14 && featureId == Window.FEATURE_ACTION_BAR && menu != null){
+        if(featureId == Window.FEATURE_ACTION_BAR && menu != null){
             if(menu.getClass().getSimpleName().equals("MenuBuilder")){
                 try{
                     Method m = menu.getClass().getDeclaredMethod(
@@ -435,7 +365,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
     protected void setFpsMode() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean show_fps = sharedPref.getBoolean("pref_fps", false);
-        LinearLayout view = (LinearLayout) findViewById(R.id.fps_layout);
+        LinearLayout view = findViewById(R.id.fps_layout);
         if (show_fps)
             view.setVisibility(View.VISIBLE);
         else
@@ -444,8 +374,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
 
     protected void makeButtonsVisible() {
         timerHandler.removeCallbacks(timerButtonsOff);
-        if(Build.VERSION.SDK_INT >= 12)
-            findViewById(R.id.SP_buttons).setAlpha(1f);
+        findViewById(R.id.SP_buttons).setAlpha(1f);
         findViewById(R.id.SP_buttons).setVisibility(View.VISIBLE);
         buttonsAreOff = false;
     }

@@ -12,7 +12,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -76,23 +75,16 @@ public class PWGLActivity extends Activity implements SensorEventListener {
         public void run() {
             if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true)) return;
 
-            if(Build.VERSION.SDK_INT >= 12) {
-
-                findViewById(R.id.PW_buttons).animate()
-                        .alpha(0f)
-                        .setDuration(buttonsFadeAnimationTime)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                findViewById(R.id.PW_buttons).setVisibility(View.GONE);
-                                buttonsAreOff = true;
-                            }
-                        });
-            }
-            else {
-                findViewById(R.id.PW_buttons).setVisibility(View.GONE);
-                buttonsAreOff = true;
-            }
+            findViewById(R.id.PW_buttons).animate()
+                    .alpha(0f)
+                    .setDuration(buttonsFadeAnimationTime)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            findViewById(R.id.PW_buttons).setVisibility(View.GONE);
+                            buttonsAreOff = true;
+                        }
+                    });
 
         }
     };
@@ -101,17 +93,12 @@ public class PWGLActivity extends Activity implements SensorEventListener {
         @Override
         public void run() {
             Log.d("Act","ButtonsOn");
-            if(Build.VERSION.SDK_INT >= 12) {
-
-                findViewById(R.id.PW_buttons).setAlpha(0f);
-                findViewById(R.id.PW_buttons).setVisibility(View.VISIBLE);
-                findViewById(R.id.PW_buttons).animate()
-                        .alpha(1f)
-                        .setDuration(buttonsFadeAnimationTime)
-                        .setListener(null);
-            }
-            else
-                findViewById(R.id.PW_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.PW_buttons).setAlpha(0f);
+            findViewById(R.id.PW_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.PW_buttons).animate()
+                    .alpha(1f)
+                    .setDuration(buttonsFadeAnimationTime)
+                    .setListener(null);
 
             buttonsAreOff = false;
 
@@ -136,7 +123,7 @@ public class PWGLActivity extends Activity implements SensorEventListener {
         setFullScreenMode();
         setFpsMode();
 
-        mGLView = (PWGLSurfaceView)findViewById(R.id.gl_surface_view);
+        mGLView = findViewById(R.id.gl_surface_view);
 
 
 
@@ -148,74 +135,50 @@ public class PWGLActivity extends Activity implements SensorEventListener {
 
         display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
-        if (Math.abs(PWGLRenderer.mPendulum.k)>1.e-7) useDamping = true;
-        else useDamping = false;
+        useDamping = Math.abs(PWGLRenderer.mPendulum.k) > 1.e-7;
 
 
-        findViewById(R.id.button_restart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        PWGLRenderer.mPendulum.restart();
-                        if (useDamping) PWGLRenderer.mPendulum.setDamping(PWSimulationParameters.simParams.k); //PWGLRenderer.mPendulum.k = MPSimulationParameters.simParams.k;
-                        else PWGLRenderer.mPendulum.setDamping(0.); //PWGLRenderer.mPendulum.k = 0.;
-                    }});
-            }
-        });
+        // This method will be called on the rendering
+// thread:
+        findViewById(R.id.button_restart).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            PWGLRenderer.mPendulum.restart();
+            if (useDamping) PWGLRenderer.mPendulum.setDamping(PWSimulationParameters.simParams.k); //PWGLRenderer.mPendulum.k = MPSimulationParameters.simParams.k;
+            else PWGLRenderer.mPendulum.setDamping(0.); //PWGLRenderer.mPendulum.k = 0.;
+        }));
 
         isRunning = !PWGLRenderer.mPendulum.paused;
         if (!isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
         else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
-        findViewById(R.id.button_playpause).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-                else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
-                isRunning = !isRunning;
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        if (!isRunning) PWGLRenderer.mPendulum.paused = true;
-                        else PWGLRenderer.mPendulum.paused = false;
-                    }});
-                if (isRunning) {
-                    PWGLRenderer.mPendulum.frames = 0;
-                    deltaT = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, frequency);
-                }
-
+        findViewById(R.id.button_playpause).setOnClickListener(v -> {
+            if (isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+            else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+            isRunning = !isRunning;
+            // This method will be called on the rendering
+// thread:
+            mGLView.queueEvent(() -> PWGLRenderer.mPendulum.paused = !isRunning);
+            if (isRunning) {
+                PWGLRenderer.mPendulum.frames = 0;
+                deltaT = System.currentTimeMillis();
+                timerHandler.postDelayed(timerRunnable, frequency);
             }
+
         });
 
-        findViewById(R.id.button_settings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mGLView.queueEvent(new Runnable() {
-                    // This method will be called on the rendering
-                    // thread:
-                    public void run() {
-                        Intent intentParam = new Intent(PWGLActivity.this, PWParametersActivity.class);
-                        startActivity(intentParam);
-                    }});
-            }
+        // This method will be called on the rendering
+// thread:
+        findViewById(R.id.button_settings).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            Intent intentParam = new Intent(PWGLActivity.this, PWParametersActivity.class);
+            startActivity(intentParam);
+        }));
+
+        findViewById(R.id.togglebutton_damping).setOnClickListener(v -> {
+
+            useDamping = !useDamping;
+            if (useDamping) PWGLRenderer.mPendulum.k = PWSimulationParameters.simParams.k;
+            else PWGLRenderer.mPendulum.k = 0.;
         });
 
-        findViewById(R.id.togglebutton_damping).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                useDamping = !useDamping;
-                if (useDamping) PWGLRenderer.mPendulum.k = PWSimulationParameters.simParams.k;
-                else PWGLRenderer.mPendulum.k = 0.;
-            }
-        });
-
-        if (!useDamping) ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(false);
-        else ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(true);
+        ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(useDamping);
 
         paused = false;
 
@@ -260,13 +223,9 @@ public class PWGLActivity extends Activity implements SensorEventListener {
 
         setFullScreenMode();
         setFpsMode();
-        mGLView.queueEvent(new Runnable() {
-            // This method will be called on the rendering
-            // thread:
-            public void run() {
-                PWGLRenderer.mPendulum.setColorPendulum1(PWSimulationParameters.simParams.pendulumColor);
-            }
-        });
+        // This method will be called on the rendering
+// thread:
+        mGLView.queueEvent(() -> PWGLRenderer.mPendulum.setColorPendulum1(PWSimulationParameters.simParams.pendulumColor));
 
         // The following call resumes a paused rendering thread.
         // If you de-allocated graphic objects for onPause()
@@ -294,8 +253,6 @@ public class PWGLActivity extends Activity implements SensorEventListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.pendulumwave, menu);
-        MenuItem item = menu.findItem(R.id.action_rate);
-        item.setVisible(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("rate_clicked", false));
         return true;
     }
 
@@ -306,19 +263,6 @@ public class PWGLActivity extends Activity implements SensorEventListener {
             case R.id.PW_parameters:
                 Intent intentParam = new Intent(PWGLActivity.this, PWParametersActivity.class);
                 startActivity(intentParam);
-                return true;
-            case R.id.action_rate:
-                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                } catch (Exception e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                }
-
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("rate_clicked", true).apply();
-                if(Build.VERSION.SDK_INT >= 11)
-                    invalidateOptionsMenu();
-
                 return true;
             case R.id.action_information:
                 Intent intent = new Intent(PWGLActivity.this, InformationActivity.class);
@@ -332,7 +276,7 @@ public class PWGLActivity extends Activity implements SensorEventListener {
     @Override
     public boolean onMenuOpened(int featureId, Menu menu)
     {
-        if(Build.VERSION.SDK_INT >= 14 && featureId == Window.FEATURE_ACTION_BAR && menu != null){
+        if(featureId == Window.FEATURE_ACTION_BAR && menu != null){
             if(menu.getClass().getSimpleName().equals("MenuBuilder")){
                 try{
                     Method m = menu.getClass().getDeclaredMethod(
@@ -394,7 +338,7 @@ public class PWGLActivity extends Activity implements SensorEventListener {
     protected void setFpsMode() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean show_fps = sharedPref.getBoolean("pref_fps", false);
-        LinearLayout view = (LinearLayout) findViewById(R.id.fps_layout);
+        LinearLayout view = findViewById(R.id.fps_layout);
         if (show_fps)
             view.setVisibility(View.VISIBLE);
         else
@@ -403,8 +347,7 @@ public class PWGLActivity extends Activity implements SensorEventListener {
 
     protected void makeButtonsVisible() {
         timerHandler.removeCallbacks(timerButtonsOff);
-        if(Build.VERSION.SDK_INT >= 12)
-            findViewById(R.id.PW_buttons).setAlpha(1f);
+        findViewById(R.id.PW_buttons).setAlpha(1f);
         findViewById(R.id.PW_buttons).setVisibility(View.VISIBLE);
         buttonsAreOff = false;
     }
