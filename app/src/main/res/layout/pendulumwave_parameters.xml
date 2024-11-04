@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:fitsSystemWindows="true">
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +15,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dip"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,12 +32,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -54,17 +51,17 @@
 
                         <EditText
                             android:id="@+id/PW_editNP"
-                            android:layout_width="wrap_content" android:layout_weight="0"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="number" >
-                        </EditText>
+                            android:layout_weight="0"
+                            android:inputType="number"></EditText>
                     </LinearLayout>
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -78,10 +75,10 @@
 
                         <EditText
                             android:id="@+id/PW_editNT"
-                            android:layout_width="wrap_content" android:layout_weight="0"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="number" >
-                        </EditText>
+                            android:layout_weight="0"
+                            android:inputType="number"></EditText>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -89,7 +86,7 @@
                 <LinearLayout
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dip"
@@ -99,70 +96,70 @@
 
                     <EditText
                         android:id="@+id/PW_editl"
-                        android:layout_width="wrap_content" android:layout_weight="0.25"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" >
-                    </EditText>
+                        android:layout_weight="0.25"
+                        android:inputType="numberDecimal"></EditText>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
-                        android:text="@string/PW_label_m"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="@string/PW_label_m" />
 
                     <EditText
                         android:id="@+id/PW_editm"
-                        android:layout_width="wrap_content" android:layout_weight="0.25"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" >
-                    </EditText>
+                        android:layout_weight="0.25"
+                        android:inputType="numberDecimal"></EditText>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/PW_labelg"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
-                        android:text="@string/PW_label_g"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="@string/PW_label_g" />
 
                     <EditText
                         android:id="@+id/PW_editg"
-                        android:layout_width="wrap_content" android:layout_weight="0.25"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" >
-                    </EditText>
+                        android:layout_weight="0.25"
+                        android:inputType="numberDecimal"></EditText>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
-                        android:text="@string/PW_label_k"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="@string/PW_label_k" />
 
                     <EditText
                         android:id="@+id/PW_editk"
-                        android:layout_width="wrap_content" android:layout_weight="0.25"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" >
-                    </EditText>
+                        android:layout_weight="0.25"
+                        android:inputType="numberDecimal"></EditText>
 
                 </LinearLayout>
 
@@ -176,7 +173,7 @@
                     android:id="@+id/PW_radioGroupInit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/PW_radioRand"
@@ -196,7 +193,7 @@
                 <LinearLayout
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/PW_label_th0"
@@ -207,10 +204,10 @@
 
                     <EditText
                         android:id="@+id/PW_editth0"
-                        android:layout_width="wrap_content" android:layout_weight="0.25"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" >
-                    </EditText>
+                        android:layout_weight="0.25"
+                        android:inputType="numberDecimal"></EditText>
                 </LinearLayout>
 
                 <View
@@ -220,22 +217,22 @@
                 <LinearLayout
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical" >
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
-                        android:text="@string/pendulum_color"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="@string/pendulum_color" />
 
                     <Button
                         android:id="@+id/PW_PendulumColor"
-                        android:onClick="PendulumColor"
-
                         android:layout_width="wrap_content"
+
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:onClick="PendulumColor" />
 
                 </LinearLayout>
 
@@ -279,31 +276,31 @@
 
             <Button
                 android:id="@+id/PW_okButton"
-                android:onClick="okButton"
-
                 android:layout_width="0dip"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="okButton"
 
                 android:text="@string/button_ok" />
 
             <Button
                 android:id="@+id/PW_cancelButton"
-                android:onClick="cancelButton"
-
                 android:layout_width="0dip"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="cancelButton"
 
                 android:text="@string/button_cancel" />
 
             <Button
                 android:id="@+id/PW_resetButton"
-                android:onClick="resetButton"
-
                 android:layout_width="0dip"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="resetButton"
 
                 android:text="@string/button_reset" />
 

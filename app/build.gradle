@@ -13,7 +13,7 @@ android {
         versionName "2.0.0"
     }
 
-    configurations.all {
+    configurations.configureEach {
         resolutionStrategy {
             force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
             force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'
@@ -25,7 +25,7 @@ android {
         release {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            if (properties!=null && properties.containsKey('storeFile') && properties.containsKey('keyAlias') &&
+            if (properties != null && properties.containsKey('storeFile') && properties.containsKey('keyAlias') &&
                     properties.containsKey('storePassword') && properties.containsKey('keyPassword')) {
                 storeFile file(properties.getProperty('storeFile'))
                 keyAlias properties.getProperty('keyAlias')

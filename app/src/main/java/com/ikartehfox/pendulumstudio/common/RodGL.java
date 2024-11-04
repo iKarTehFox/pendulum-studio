@@ -13,12 +13,10 @@ public class RodGL {
     static final int COORDS_PER_VERTEX = 3;
     private final int vertexCount;
     private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
-    private float rad;
 
     public RodGL(float Length, float zoffset, float Radius, int iterPhi) {
         // initialize vertex byte buffer for shape coordinates
         int iterZ = 1;
-        rad = Radius;
         vertexCount = iterPhi * iterZ * 6;
         ByteBuffer bb = ByteBuffer.allocateDirect(
                 // (number of coordinate values * 4 bytes per float)
@@ -64,44 +62,44 @@ public class RodGL {
                     y[3] = (float) Math.sin(phi + dphi);
                     z[3] = cz;
 
-                    vertexBuffer.put(rad * x[0]);
+                    vertexBuffer.put(Radius * x[0]);
                     normalBuffer.put(x[0]);
-                    vertexBuffer.put(rad * y[0]);
+                    vertexBuffer.put(Radius * y[0]);
                     normalBuffer.put(y[0]);
                     vertexBuffer.put(z[0]);
                     normalBuffer.put(0.f);
 
-                    vertexBuffer.put(rad * x[1]);
+                    vertexBuffer.put(Radius * x[1]);
                     normalBuffer.put(x[1]);
-                    vertexBuffer.put(rad * y[1]);
+                    vertexBuffer.put(Radius * y[1]);
                     normalBuffer.put(y[1]);
                     vertexBuffer.put(z[1]);
                     normalBuffer.put(0.f);
 
-                    vertexBuffer.put(rad * x[2]);
+                    vertexBuffer.put(Radius * x[2]);
                     normalBuffer.put(x[2]);
-                    vertexBuffer.put(rad * y[2]);
+                    vertexBuffer.put(Radius * y[2]);
                     normalBuffer.put(y[2]);
                     vertexBuffer.put(z[2]);
                     normalBuffer.put(0.f);
 
-                    vertexBuffer.put(rad * x[0]);
+                    vertexBuffer.put(Radius * x[0]);
                     normalBuffer.put(x[0]);
-                    vertexBuffer.put(rad * y[0]);
+                    vertexBuffer.put(Radius * y[0]);
                     normalBuffer.put(y[0]);
                     vertexBuffer.put(z[0]);
                     normalBuffer.put(0.f);
 
-                    vertexBuffer.put(rad * x[2]);
+                    vertexBuffer.put(Radius * x[2]);
                     normalBuffer.put(x[2]);
-                    vertexBuffer.put(rad * y[2]);
+                    vertexBuffer.put(Radius * y[2]);
                     normalBuffer.put(y[2]);
                     vertexBuffer.put(z[2]);
                     normalBuffer.put(0.f);
 
-                    vertexBuffer.put(rad * x[3]);
+                    vertexBuffer.put(Radius * x[3]);
                     normalBuffer.put(x[3]);
-                    vertexBuffer.put(rad * y[3]);
+                    vertexBuffer.put(Radius * y[3]);
                     normalBuffer.put(y[3]);
                     vertexBuffer.put(z[3]);
                     normalBuffer.put(0.f);

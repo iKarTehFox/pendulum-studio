@@ -49,20 +49,20 @@ public class PWGLActivity extends Activity implements SensorEventListener {
     private boolean isRunning;
     private Display display;
 
-    static int frequency = 1000;
-    static int buttonsFadeOutTime = 4000;
-    static int buttonsFadeAnimationTime = 300;
+    static final int frequency = 1000;
+    static final int buttonsFadeOutTime = 4000;
+    static final int buttonsFadeAnimationTime = 300;
     private boolean paused;
     private long deltaT;
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+    final Handler timerHandler = new Handler();
+    final Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             deltaT = System.currentTimeMillis() - deltaT;
             //Log.d("PWGLActivity", "dT: " + deltaT);
             //Log.d("PWGLActivity", "Frames: " + PWGLRenderer.mPendulum.frames);
-            float fps = PWGLRenderer.mPendulum.frames / (float)(deltaT) * 1.e3f;
-            ((TextView)findViewById(R.id.fps)).setText("FPS: " + String.format("%.0f", fps));
+            float fps = PWGLRenderer.mPendulum.frames / (float) (deltaT) * 1.e3f;
+            ((TextView) findViewById(R.id.fps)).setText("FPS: " + String.format("%.0f", fps));
             PWGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
             if (isRunning && !paused) timerHandler.postDelayed(this, frequency);
@@ -70,10 +70,11 @@ public class PWGLActivity extends Activity implements SensorEventListener {
     };
 
     boolean buttonsAreOff;
-    Runnable timerButtonsOff = new Runnable() {
+    final Runnable timerButtonsOff = new Runnable() {
         @Override
         public void run() {
-            if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true)) return;
+            if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true))
+                return;
 
             findViewById(R.id.PW_buttons).animate()
                     .alpha(0f)
@@ -89,10 +90,10 @@ public class PWGLActivity extends Activity implements SensorEventListener {
         }
     };
 
-    Runnable timerButtonsOn = new Runnable() {
+    final Runnable timerButtonsOn = new Runnable() {
         @Override
         public void run() {
-            Log.d("Act","ButtonsOn");
+            Log.d("Act", "ButtonsOn");
             findViewById(R.id.PW_buttons).setAlpha(0f);
             findViewById(R.id.PW_buttons).setVisibility(View.VISIBLE);
             findViewById(R.id.PW_buttons).animate()
@@ -112,10 +113,9 @@ public class PWGLActivity extends Activity implements SensorEventListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getResources().getBoolean(R.bool.portrait_only)){
+        if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-        else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.pendulumwave_gl);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -124,7 +124,6 @@ public class PWGLActivity extends Activity implements SensorEventListener {
         setFpsMode();
 
         mGLView = findViewById(R.id.gl_surface_view);
-
 
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -142,16 +141,21 @@ public class PWGLActivity extends Activity implements SensorEventListener {
 // thread:
         findViewById(R.id.button_restart).setOnClickListener(v -> mGLView.queueEvent(() -> {
             PWGLRenderer.mPendulum.restart();
-            if (useDamping) PWGLRenderer.mPendulum.setDamping(PWSimulationParameters.simParams.k); //PWGLRenderer.mPendulum.k = MPSimulationParameters.simParams.k;
+            if (useDamping)
+                PWGLRenderer.mPendulum.setDamping(PWSimulationParameters.simParams.k); //PWGLRenderer.mPendulum.k = MPSimulationParameters.simParams.k;
             else PWGLRenderer.mPendulum.setDamping(0.); //PWGLRenderer.mPendulum.k = 0.;
         }));
 
         isRunning = !PWGLRenderer.mPendulum.paused;
-        if (!isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-        else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+        if (!isRunning)
+            ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+        else
+            ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
         findViewById(R.id.button_playpause).setOnClickListener(v -> {
-            if (isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-            else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+            if (isRunning)
+                ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+            else
+                ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
             isRunning = !isRunning;
             // This method will be called on the rendering
 // thread:
@@ -178,7 +182,7 @@ public class PWGLActivity extends Activity implements SensorEventListener {
             else PWGLRenderer.mPendulum.k = 0.;
         });
 
-        ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(useDamping);
+        ((ToggleButton) findViewById(R.id.togglebutton_damping)).setChecked(useDamping);
 
         paused = false;
 
@@ -196,10 +200,14 @@ public class PWGLActivity extends Activity implements SensorEventListener {
         // The light sensor returns a single value.
         // Many sensors return 3 values, one for each axis.
         int rotmode = display.getRotation();
-        if (rotmode== Surface.ROTATION_0) PWGLRenderer.mPendulum.setGravity(event.values[0], event.values[1], event.values[2]);
-        else if (rotmode==Surface.ROTATION_90) PWGLRenderer.mPendulum.setGravity(-event.values[1], event.values[0], event.values[2]);
-        else if (rotmode==Surface.ROTATION_180) PWGLRenderer.mPendulum.setGravity(event.values[0], -event.values[1], event.values[2]);
-        else if (rotmode==Surface.ROTATION_270) PWGLRenderer.mPendulum.setGravity(event.values[1], -event.values[0], event.values[2]);
+        if (rotmode == Surface.ROTATION_0)
+            PWGLRenderer.mPendulum.setGravity(event.values[0], event.values[1], event.values[2]);
+        else if (rotmode == Surface.ROTATION_90)
+            PWGLRenderer.mPendulum.setGravity(-event.values[1], event.values[0], event.values[2]);
+        else if (rotmode == Surface.ROTATION_180)
+            PWGLRenderer.mPendulum.setGravity(event.values[0], -event.values[1], event.values[2]);
+        else if (rotmode == Surface.ROTATION_270)
+            PWGLRenderer.mPendulum.setGravity(event.values[1], -event.values[0], event.values[2]);
         // Do something with this sensor value.
     }
 
@@ -232,12 +240,13 @@ public class PWGLActivity extends Activity implements SensorEventListener {
         // this is a good place to re-allocate them.
         timerHandler.removeCallbacks(timerRunnable);
         mGLView.onResume();
-        if (useDynGravity) mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_GAME);
+        if (useDynGravity)
+            mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_GAME);
 
         makeButtonsVisible();
 
         paused = false;
-        if (isRunning && !paused) {
+        if (isRunning) {
             PWGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
             timerHandler.postDelayed(timerRunnable, frequency);
@@ -274,20 +283,17 @@ public class PWGLActivity extends Activity implements SensorEventListener {
     }
 
     @Override
-    public boolean onMenuOpened(int featureId, Menu menu)
-    {
-        if(featureId == Window.FEATURE_ACTION_BAR && menu != null){
-            if(menu.getClass().getSimpleName().equals("MenuBuilder")){
-                try{
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
                     Method m = menu.getClass().getDeclaredMethod(
                             "setOptionalIconsVisible", Boolean.TYPE);
                     m.setAccessible(true);
                     m.invoke(menu, true);
-                }
-                catch(NoSuchMethodException e){
+                } catch (NoSuchMethodException e) {
                     Log.e(TAG, "onMenuOpened", e);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -318,8 +324,7 @@ public class PWGLActivity extends Activity implements SensorEventListener {
                 ActionBar actionBar = getActionBar();
                 actionBar.hide();
             }
-        }
-        else {
+        } else {
             if (Build.VERSION.SDK_INT < 16) { //old method
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             } else { // Jellybean and up, new hotness

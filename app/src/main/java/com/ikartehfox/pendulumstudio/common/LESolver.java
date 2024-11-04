@@ -5,10 +5,10 @@ package com.ikartehfox.pendulumstudio.common;
  * using the LU decomposition.
  */
 public class LESolver {
-    int order;
-    double[][] a;
-    double[] b;
-    double[] x;
+    final int order;
+    final double[][] a;
+    final double[] b;
+    final double[] x;
     public int LUDecomposited;
 
     public LESolver(int sz, double[][] inA, double[] inB) {

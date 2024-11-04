@@ -121,7 +121,7 @@ public class ColorPickerPreference extends DialogPreference implements ColorPick
 	protected void onBindView(View view) {
 		super.onBindView(view);
 		
-		ColorPanelView preview = (ColorPanelView) view.findViewById(R.id.preference_preview_color_panel);
+		ColorPanelView preview = view.findViewById(R.id.preference_preview_color_panel);
 		
 		if(preview != null) {
 			preview.setColor(mColor);
@@ -135,19 +135,19 @@ public class ColorPickerPreference extends DialogPreference implements ColorPick
 		
 		boolean isLandscapeLayout = false;
 		
-		mColorPickerView = (ColorPickerView) layout.findViewById(R.id.color_picker_view);
+		mColorPickerView = layout.findViewById(R.id.color_picker_view);
 		
-		LinearLayout landscapeLayout = (LinearLayout) layout.findViewById(R.id.dialog_color_picker_extra_layout_landscape);
+		LinearLayout landscapeLayout = layout.findViewById(R.id.dialog_color_picker_extra_layout_landscape);
 		
 		if(landscapeLayout != null) {
 			isLandscapeLayout = true;
 		}
 		
 				
-		mColorPickerView = (ColorPickerView) layout
+		mColorPickerView = layout
 				.findViewById(R.id.color_picker_view);
-		mOldColorView = (ColorPanelView) layout.findViewById(R.id.color_panel_old);
-		mNewColorView = (ColorPanelView) layout.findViewById(R.id.color_panel_new);
+		mOldColorView = layout.findViewById(R.id.color_panel_old);
+		mNewColorView = layout.findViewById(R.id.color_panel_new);
 
 		if(!isLandscapeLayout) {
 			((LinearLayout) mOldColorView.getParent()).setPadding(Math

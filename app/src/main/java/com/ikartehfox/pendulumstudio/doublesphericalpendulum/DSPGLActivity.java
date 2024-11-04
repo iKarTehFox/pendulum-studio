@@ -46,18 +46,16 @@ public class DSPGLActivity extends Activity implements SensorEventListener {
     private boolean isRunning;
     private Display display;
 
-    static int frequency = 1000;
-    static int buttonsFadeOutTime = 4000;
-    static int buttonsFadeAnimationTime = 300;
+    static final int frequency = 1000;
+    static final int buttonsFadeOutTime = 4000;
+    static final int buttonsFadeAnimationTime = 300;
     private boolean paused;
     private long deltaT;
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+    final Handler timerHandler = new Handler();
+    final Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             deltaT = System.currentTimeMillis() - deltaT;
-            //Log.d("PWGLActivity", "dT: " + deltaT);
-            //Log.d("PWGLActivity", "Frames: " + PWGLRenderer.mPendulum.frames);
             float fps = DSPGLRenderer.mPendulum.frames / (float) (deltaT) * 1.e3f;
             ((TextView) findViewById(R.id.fps)).setText("FPS: " + String.format("%.0f", fps));
             DSPGLRenderer.mPendulum.frames = 0;
@@ -67,7 +65,7 @@ public class DSPGLActivity extends Activity implements SensorEventListener {
     };
 
     boolean buttonsAreOff;
-    Runnable timerButtonsOff = new Runnable() {
+    final Runnable timerButtonsOff = new Runnable() {
         @Override
         public void run() {
             if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true))
@@ -87,7 +85,7 @@ public class DSPGLActivity extends Activity implements SensorEventListener {
         }
     };
 
-    Runnable timerButtonsOn = new Runnable() {
+    final Runnable timerButtonsOn = new Runnable() {
         @Override
         public void run() {
             //Log.d("Act","ButtonsOn");
@@ -188,17 +186,11 @@ public class DSPGLActivity extends Activity implements SensorEventListener {
             useDamping = !useDamping;
             if (useDamping) DSPGLRenderer.mPendulum.k = DSPSimulationParameters.simParams.k;
             else DSPGLRenderer.mPendulum.k = 0.;
-//                if (useDynGravity) mSensorManager.registerListener(DSPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
-//                else mSensorManager.unregisterListener(DSPGLActivity.this);
-//                updateDampingStatus();
         });
 
         findViewById(R.id.togglebutton_trace).setOnClickListener(v -> {
             //MPGLRenderer.mPendulum.trmd = !MPGLRenderer.mPendulum.trmd;
             DSPSimulationParameters.simParams.showTrajectory = !DSPSimulationParameters.simParams.showTrajectory;
-//                if (useDynGravity) mSensorManager.registerListener(MPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
-//                else mSensorManager.unregisterListener(MPGLActivity.this);
-//                updateDampingStatus();
             if (DSPSimulationParameters.simParams.showTrajectory) {
                 // This method will be called on the rendering
 // thread:
@@ -285,7 +277,7 @@ public class DSPGLActivity extends Activity implements SensorEventListener {
         makeButtonsVisible();
 
         paused = false;
-        if (isRunning && !paused) {
+        if (isRunning) {
             DSPGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
             timerHandler.postDelayed(timerRunnable, frequency);

@@ -11,18 +11,18 @@ import android.util.Log;
 import com.ikartehfox.pendulumstudio.common.MiscGL;
 
 
-public class SPGLRenderer implements GLSurfaceView.Renderer{
-	private static final String TAG = "SPGLRenderer";
-	public static SphericalPendulum mPendulum = new SphericalPendulum(100., 1., 45. * Math.PI / 180., 90. * Math.PI / 180.,
-    		0. * Math.PI / 180., 0.* Math.PI / 180., 9.81 * 100., 0. /1.e6, true, 3000, true);
-	private int Width, Height;
+public class SPGLRenderer implements GLSurfaceView.Renderer {
+    private static final String TAG = "SPGLRenderer";
+    public static final SphericalPendulum mPendulum = new SphericalPendulum(100., 1., 45. * Math.PI / 180., 90. * Math.PI / 180.,
+            0. * Math.PI / 180., 0. * Math.PI / 180., 9.81 * 100., 0. / 1.e6, true, 3000, true);
+    private int Width, Height;
     private int mProgram, mProgramAccum;
 
     private double mPreviousZoomIn;
 
     private boolean firsttime = true;
-    public static int[] renderTex    = new int[1];
-    public static int[] frameBuffer  = new int[1];
+    public static final int[] renderTex = new int[1];
+    public static final int[] frameBuffer = new int[1];
 
     private void regenerateAccumBuffer() {
         mPreviousZoomIn = mPendulum.zoomIn;
@@ -33,7 +33,7 @@ public class SPGLRenderer implements GLSurfaceView.Renderer{
         GLES20.glGenTextures(1, renderTex, 0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, renderTex[0]);
 
-        Log.d("FBO Create", Integer.toString(Height) + " " + Integer.toString(Width));
+        Log.d("FBO Create", Height + " " + Width);
 
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA,
                 Width, Height, 0,
@@ -51,7 +51,7 @@ public class SPGLRenderer implements GLSurfaceView.Renderer{
                 GLES20.GL_LINEAR);
 
         GLES20.glGenFramebuffers(1, frameBuffer, 0);
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
         GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
                 GLES20.GL_TEXTURE_2D, renderTex[0], 0);
         //GLES20.glFramebufferRenderbuffer( GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GLES20.GL_RENDERBUFFER, renderBuffer[0]);
@@ -60,56 +60,56 @@ public class SPGLRenderer implements GLSurfaceView.Renderer{
         // Check FBO status.
         int status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER);
 
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, 0 );
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
     }
 
 
     public static void resetAccumBuffer() {
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
     }
 
     @Override
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
 
-    	GLES20.glClearColor(0.f, 0.f, 0.f, 1.0f);
-        
-    	GLES20.glClearDepthf(1.0f);
+        GLES20.glClearColor(0.f, 0.f, 0.f, 1.0f);
+
+        GLES20.glClearDepthf(1.0f);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
 
-      GLES20.glEnable(GLES20.GL_BLEND);
-      GLES20.glBlendFunc( GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA );
+        GLES20.glEnable(GLES20.GL_BLEND);
+        GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
-      GLES20.glLineWidth(2.0f);
-      
-      int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode);
-      int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
+        GLES20.glLineWidth(2.0f);
 
-
-      mProgram = GLES20.glCreateProgram();             // create empty OpenGL ES Program
-      GLES20.glAttachShader(mProgram, vertexShader);   // add the vertex shader to program
-      GLES20.glAttachShader(mProgram, fragmentShader); // add the fragment shader to program
-      GLES20.glLinkProgram(mProgram);                  // creates OpenGL ES program executables
-      
-      mPendulum.mProgram = mProgram;
+        int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode);
+        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
 
 
-      int vertexShaderAccum   = loadShader(GLES20.GL_VERTEX_SHADER, MiscGL.SHADER_VERTEX_ACCUM);
-      int fragmentShaderAccum = loadShader(GLES20.GL_FRAGMENT_SHADER, MiscGL.SHADER_FRAGMENT_ACCUM);
-      mProgramAccum = GLES20.glCreateProgram();             // create empty OpenGL ES Program
-      GLES20.glAttachShader(mProgramAccum, vertexShaderAccum);   // add the vertex shader to program
-      GLES20.glAttachShader(mProgramAccum, fragmentShaderAccum); // add the fragment shader to program
-      GLES20.glLinkProgram(mProgramAccum);                  // creates OpenGL ES program executables
+        mProgram = GLES20.glCreateProgram();             // create empty OpenGL ES Program
+        GLES20.glAttachShader(mProgram, vertexShader);   // add the vertex shader to program
+        GLES20.glAttachShader(mProgram, fragmentShader); // add the fragment shader to program
+        GLES20.glLinkProgram(mProgram);                  // creates OpenGL ES program executables
+
+        mPendulum.mProgram = mProgram;
+
+
+        int vertexShaderAccum = loadShader(GLES20.GL_VERTEX_SHADER, MiscGL.SHADER_VERTEX_ACCUM);
+        int fragmentShaderAccum = loadShader(GLES20.GL_FRAGMENT_SHADER, MiscGL.SHADER_FRAGMENT_ACCUM);
+        mProgramAccum = GLES20.glCreateProgram();             // create empty OpenGL ES Program
+        GLES20.glAttachShader(mProgramAccum, vertexShaderAccum);   // add the vertex shader to program
+        GLES20.glAttachShader(mProgramAccum, fragmentShaderAccum); // add the fragment shader to program
+        GLES20.glLinkProgram(mProgramAccum);                  // creates OpenGL ES program executables
 
     }
 
     private void appendAccum() {
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
         GLES20.glUseProgram(mProgram);
 
-        perspectiveGL(mPendulum.mProjMatrix, 45.0f, (float)(Width)/Height,0.1f,1200.0f);
+        perspectiveGL(mPendulum.mProjMatrix, 45.0f, (float) (Width) / Height, 0.1f, 1200.0f);
         mPendulum.translateMVMatrix(mPendulum.mVMatrix, Width, Height);
 
         int tHandle = GLES20.glGetUniformLocation(mProgram, "u_mvpMatrix");
@@ -118,7 +118,7 @@ public class SPGLRenderer implements GLSurfaceView.Renderer{
 
         mPendulum.mTrajectory.drawNext(mProgram, mPendulum.mMVPMatrix);
     }
-    
+
     @Override
     public void onDrawFrame(GL10 unused) {
 
@@ -132,8 +132,8 @@ public class SPGLRenderer implements GLSurfaceView.Renderer{
             appendAccum();
         }
 
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, 0);
-    	GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         //mPendulum.mProgram = mProgramAccum;
         if (SPSimulationParameters.simParams.showTrajectory && SPSimulationParameters.simParams.infiniteTrajectory) {
             GLES20.glUseProgram(mProgramAccum);
@@ -160,24 +160,23 @@ public class SPGLRenderer implements GLSurfaceView.Renderer{
 
         mPendulum.frames++;
     }
-    
+
     @Override
     public void onSurfaceChanged(GL10 unused, int width, int height) {
         // Adjust the viewport based on geometry changes,
         // such as screen rotation
-    	Width = width;
-    	Height = height;
-    	GLES20.glViewport(0, 0, width, height);
+        Width = width;
+        Height = height;
+        GLES20.glViewport(0, 0, width, height);
 
         regenerateAccumBuffer();
     }
-    
-    public static void perspectiveGL(float[] ProjectionMatrix, float fovY, float aspect, float zNear, float zFar)
-    {
-    	final float pi = (float) 3.1415926535897932384626433832795;
+
+    public static void perspectiveGL(float[] ProjectionMatrix, float fovY, float aspect, float zNear, float zFar) {
+        final float pi = (float) 3.1415926535897932384626433832795;
         float fW, fH;
-        fH = (float) (Math.tan( fovY / 360 * pi ) * zNear);
-        fW = (float) (fH * aspect);
+        fH = (float) (Math.tan(fovY / 360 * pi) * zNear);
+        fW = fH * aspect;
         Matrix.frustumM(ProjectionMatrix, 0, -fW, fW, -fH, fH, zNear, zFar);
         //GLES20.glFrustumf( -fW, fW, -fH, fH, zNear, zFar );
     }
@@ -248,8 +247,8 @@ public class SPGLRenderer implements GLSurfaceView.Renderer{
                     "    else if (trajectory>0) gl_FragColor = v_color; \n" +
                     "    else gl_FragColor = color; \n" +
                     "}";
-    
-    public static int loadShader(int type, String shaderCode){
+
+    public static int loadShader(int type, String shaderCode) {
 
         // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
         // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)

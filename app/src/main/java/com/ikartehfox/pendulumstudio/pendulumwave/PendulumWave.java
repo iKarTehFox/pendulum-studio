@@ -28,31 +28,34 @@ public class PendulumWave extends GenericPendulum {
 
     SphereGL mSphere;
     RodGL mRod;
-    private FloatBuffer lineVertexBuffer;
+    private final FloatBuffer lineVertexBuffer;
     long timeInterval;
     public volatile long timeInterval2;
     public volatile float zoomIn;
-    public volatile float moveX;
-    public volatile float moveY;
+    public final float moveX;
+    public final float moveY;
     int coordSystem;
 
     final float[] mRotationMatrix = new float[16];
 
-    private FloatBuffer lightDir, lightHP, lightAC, lightDC, lightSC;
-    private FloatBuffer materialAF, materialDF, materialSF;
-    float materialshin;
-    float scale;
+    private final FloatBuffer lightDir;
+    private final FloatBuffer lightHP;
+    private final FloatBuffer lightAC;
+    private final FloatBuffer lightDC;
+    private final FloatBuffer lightSC;
+    private final FloatBuffer materialSF;
+    final float materialshin;
+    final float scale;
 
     public volatile int NP, NT;
     public volatile double th0;
     public MathematicalPendulum[] Pendulums;
 
-    public static Random generator = new Random();
+    public static final Random generator = new Random();
 
 
     public PendulumWave(int NP, int NT, double l, double m, double th, double gr, double k, boolean trmd, int trLength,
-                                boolean firsttime)
-    {
+                        boolean firsttime) {
         super();
         this.name = "Pendulum Wave Effect (3D)";
         g = gr;
@@ -82,7 +85,7 @@ public class PendulumWave extends GenericPendulum {
         dynamicGravity = false;
         gy = gx = 0.f;
         gz = 981.f;
-        if (this.g<=0.001) this.g = 0.001;
+        if (this.g <= 0.001) this.g = 0.001;
         mTrajectory = new TrajectoryGL(trLength, 0.f, 0.f, 0.f);
         coordSystem = 0;
         lightDir = fill3DVector(0.f, 0.f, 1.0f);
@@ -90,16 +93,16 @@ public class PendulumWave extends GenericPendulum {
         lightAC = fill4DVector(0.3f, 0.3f, 0.3f, 1.0f);
         lightDC = fill4DVector(1.0f, 1.0f, 1.0f, 1.0f);
         lightSC = fill4DVector(1.0f, 1.0f, 1.0f, 1.0f);
-        materialAF = fill4DVector(0.2f, 0.2f, 0.2f, 1.0f);
-        materialDF = fill4DVector(0.8f, 0.8f, 0.8f, 1.0f);
+        FloatBuffer materialAF = fill4DVector(0.2f, 0.2f, 0.2f, 1.0f);
+        FloatBuffer materialDF = fill4DVector(0.8f, 0.8f, 0.8f, 1.0f);
         materialSF = fill4DVector(1.0f, 1.0f, 1.0f, 1.0f);
         materialshin = 40.0f;
 
         th0 = th;
-        double T1 = 2. * Math.PI * Math.sqrt(this.l/this.g) / AGMean(1., Math.cos(th0/2.));
-        for(int i=0;i<NP;++i) {
-            double T2 = T1 * (double)(NT) / (NT+i);
-            double Tl = T2 * AGMean(1., Math.cos(th0/2.)) / 2. / Math.PI;
+        double T1 = 2. * Math.PI * Math.sqrt(this.l / this.g) / AGMean(1., Math.cos(th0 / 2.));
+        for (int i = 0; i < NP; ++i) {
+            double T2 = T1 * (double) (NT) / (NT + i);
+            double Tl = T2 * AGMean(1., Math.cos(th0 / 2.)) / 2. / Math.PI;
             Tl = this.g * Tl * Tl;
             Pendulums[i] = new MathematicalPendulum(Tl * scale, this.m, th0, 0., this.g, this.k, trmd, trLength, true);
         }
@@ -132,10 +135,10 @@ public class PendulumWave extends GenericPendulum {
 
     public double AGMean(double x, double y) {
         double am = (x + y) / 2.;
-        double gm = Math.sqrt(x*y);
-        while ((am-gm)/am>1e-8) {
-            double amt = (am+gm)/2.;
-            double gmt = Math.sqrt(am*gm);
+        double gm = Math.sqrt(x * y);
+        while ((am - gm) / am > 1e-8) {
+            double amt = (am + gm) / 2.;
+            double gmt = Math.sqrt(am * gm);
             am = amt;
             gm = gmt;
         }
@@ -148,10 +151,10 @@ public class PendulumWave extends GenericPendulum {
         firsttime = false;
         this.NP = PWSimulationParameters.simParams.NP;
         this.NT = PWSimulationParameters.simParams.NT;
-        if (NP<1) NP = 1;
-        if (NT<1) NT = 1;
+        if (NP < 1) NP = 1;
+        if (NT < 1) NT = 1;
         this.g = PWSimulationParameters.simParams.g;
-        if (this.g<=0.001) this.g = 0.001;
+        if (this.g <= 0.001) this.g = 0.001;
         this.k = PWSimulationParameters.simParams.k;
         this.l = PWSimulationParameters.simParams.l * 100.;
         this.m = PWSimulationParameters.simParams.m;
@@ -159,13 +162,14 @@ public class PendulumWave extends GenericPendulum {
         mRod = new RodGL(1.f, 0.f, (float) (0.05f * 10.f * Math.pow(m, 1. / 3.)), 30);
         mTrajectory = new TrajectoryGL(10, 0.f, 0.f, 0.f);
         timeInterval = SystemClock.uptimeMillis();
-        if (PWSimulationParameters.simParams.initRandom) th0 = (float)(Math.PI / 1.25 * generator.nextDouble());
+        if (PWSimulationParameters.simParams.initRandom)
+            th0 = (float) (Math.PI / 1.25 * generator.nextDouble());
         else th0 = PWSimulationParameters.simParams.th0;
-        double T1 = 2. * Math.PI * Math.sqrt(this.l/this.g) / AGMean(1., Math.cos(th0/2.));
+        double T1 = 2. * Math.PI * Math.sqrt(this.l / this.g) / AGMean(1., Math.cos(th0 / 2.));
         Pendulums = new MathematicalPendulum[NP];
-        for(int i=0;i<NP;++i) {
-            double T2 = T1 * (double)(NT) / (NT+i);
-            double Tl = T2 * AGMean(1., Math.cos(th0/2.)) / 2. / Math.PI;
+        for (int i = 0; i < NP; ++i) {
+            double T2 = T1 * (double) (NT) / (NT + i);
+            double Tl = T2 * AGMean(1., Math.cos(th0 / 2.)) / 2. / Math.PI;
             Tl = this.g * Tl * Tl;
             Pendulums[i] = new MathematicalPendulum(Tl, this.m, th0, 0., this.g, this.k, false, 100, true);
         }
@@ -177,8 +181,8 @@ public class PendulumWave extends GenericPendulum {
         firsttime = false;
         this.NP = set_np;
         this.NT = set_nt;
-        if (NP<1) NP = 1;
-        if (NT<1) NT = 1;
+        if (NP < 1) NP = 1;
+        if (NT < 1) NT = 1;
         this.g = PWSimulationParameters.simParams.g;
         this.k = PWSimulationParameters.simParams.k;
         this.l = PWSimulationParameters.simParams.l * 100.;
@@ -188,11 +192,11 @@ public class PendulumWave extends GenericPendulum {
         mTrajectory = new TrajectoryGL(10, 0.f, 0.f, 0.f);
         timeInterval = SystemClock.uptimeMillis();
         th0 = PWSimulationParameters.simParams.th0;//set_th0;
-        double T1 = 2. * Math.PI * Math.sqrt(this.l/this.g) / AGMean(1., Math.cos(th0/2.));
+        double T1 = 2. * Math.PI * Math.sqrt(this.l / this.g) / AGMean(1., Math.cos(th0 / 2.));
         Pendulums = new MathematicalPendulum[NP];
-        for(int i=0;i<NP;++i) {
-            double T2 = T1 * (double)(NT) / (NT+i);
-            double Tl = T2 * AGMean(1., Math.cos(th0/2.)) / 2. / Math.PI;
+        for (int i = 0; i < NP; ++i) {
+            double T2 = T1 * (double) (NT) / (NT + i);
+            double Tl = T2 * AGMean(1., Math.cos(th0 / 2.)) / 2. / Math.PI;
             Tl = this.g * Tl * Tl;
             Pendulums[i] = new MathematicalPendulum(Tl, this.m, th0, 0., this.g, this.k, false, 100, true);
         }
@@ -203,8 +207,8 @@ public class PendulumWave extends GenericPendulum {
         fps = 0.f;
         this.NP = PWSimulationParameters.simParams.NP;
         this.NT = PWSimulationParameters.simParams.NT;
-        if (NP<1) NP = 1;
-        if (NT<1) NT = 1;
+        if (NP < 1) NP = 1;
+        if (NT < 1) NT = 1;
         this.g = gr;
         this.k = k;
         this.l = l;
@@ -215,29 +219,26 @@ public class PendulumWave extends GenericPendulum {
         mRod = new RodGL(1.f, 0.f, (float) (0.05f * 10.f * Math.pow(m, 1. / 3.)), 30);
         timeInterval = SystemClock.uptimeMillis();
         coordSystem = 0;
-        th0 = (float)(Math.PI / 1.25 * generator.nextDouble());
-        double T1 = 2. * Math.PI * Math.sqrt(this.l/this.g) / AGMean(1., Math.cos(th0/2.));
+        th0 = (float) (Math.PI / 1.25 * generator.nextDouble());
+        double T1 = 2. * Math.PI * Math.sqrt(this.l / this.g) / AGMean(1., Math.cos(th0 / 2.));
         Pendulums = new MathematicalPendulum[NP];
-        for(int i=0;i<NP;++i) {
-            double T2 = T1 * (double)(NT) / (NT+i);
-            double Tl = T2 * AGMean(1., Math.cos(th0/2.)) / 2. / Math.PI;
+        for (int i = 0; i < NP; ++i) {
+            double T2 = T1 * (double) (NT) / (NT + i);
+            double Tl = T2 * AGMean(1., Math.cos(th0 / 2.)) / 2. / Math.PI;
             Tl = this.g * Tl * Tl;
             Pendulums[i] = new MathematicalPendulum(Tl, this.m, th0, 0., this.g, this.k, false, 100, true);
         }
     }
 
     public void setDamping(double k) {
-        for(int i=0;i<NP;++i) Pendulums[i].k = k;
+        for (int i = 0; i < NP; ++i) Pendulums[i].k = k;
     }
 
     protected void integrate(double dt, int pre) {
-        for(int i=0;i<NP;++i) Pendulums[i].integrate(dt, pre);
+        for (int i = 0; i < NP; ++i) Pendulums[i].integrate(dt, pre);
     }
 
-    public void setCoord(float coordX, float coordY, float dx, float dy, int Width, int Height) {
-    }
-
-    protected void accel(double a[], double qt[], double qvt[]) {
+    protected void accel(double[] a, double[] qt, double[] qvt) {
     }
 
     public void preDraw() {
@@ -253,7 +254,7 @@ public class PendulumWave extends GenericPendulum {
     public void draw(GL10 unused, int Width, int Height) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
-        PWGLRenderer.perspectiveGL(mProjMatrix, 45.0f,(float)(Width)/Height,0.1f,4200.0f);
+        PWGLRenderer.perspectiveGL(mProjMatrix, 45.0f, (float) (Width) / Height, 0.1f, 4200.0f);
         //MPGLRenderer.orthoGL(mProjMatrix, Width, Height);
         Matrix.setIdentityM(mVMatrix, 0);
 
@@ -261,12 +262,12 @@ public class PendulumWave extends GenericPendulum {
         float factor = Height / 450.f;
 
         Matrix.translateM(mVMatrix, 0, 0.f, 0.f, -500.0f / zoomIn);
-        Matrix.translateM(mVMatrix, 0, 0.f, 250.f*Height/3000.f, 0.f);
+        Matrix.translateM(mVMatrix, 0, 0.f, 250.f * Height / 3000.f, 0.f);
         Matrix.translateM(mVMatrix, 0, moveX, moveY, 0.f);
         Matrix.rotateM(mVMatrix, 0, 90.f, 1.0f, 0.0f, 0.0f);
         Matrix.rotateM(mVMatrix, 0, -90.f, 0.0f, 0.0f, 1.0f);
 
-        for(int i=0;i<NP;++i) {
+        for (int i = 0; i < NP; ++i) {
 
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
@@ -296,16 +297,16 @@ public class PendulumWave extends GenericPendulum {
                     0, lineVertexBuffer);
 
             Matrix.rotateM(mVMatrix, 0, (float) (180.f / Math.PI * Math.atan2(y, x)), 0.f, 0.f, 1.f);
-            Matrix.rotateM(mVMatrix, 0, (float) (180.f / Math.PI * Math.acos(z / (float)Math.sqrt(x * x + y * y + z * z))), 0.f, 1.f, 0.f);
-            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, (scale*(float)(Pendulums[i].l)-10.f * (float)Math.pow(m, 1. / 3.)));
+            Matrix.rotateM(mVMatrix, 0, (float) (180.f / Math.PI * Math.acos(z / (float) Math.sqrt(x * x + y * y + z * z))), 0.f, 1.f, 0.f);
+            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, (scale * (float) (Pendulums[i].l) - 10.f * (float) Math.pow(m, 1. / 3.)));
             Matrix.multiplyMM(mMVPMatrix, 0, mProjMatrix, 0, mVMatrix, 0);
             mRod.draw(mProgram, mMVPMatrix, mVMatrix);
-            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, 1.f/(scale*(float)(Pendulums[i].l)-10.f * (float)Math.pow(m, 1. / 3.)));
+            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, 1.f / (scale * (float) (Pendulums[i].l) - 10.f * (float) Math.pow(m, 1. / 3.)));
 
             tHandle = GLES20.glGetUniformLocation(mProgram, "color");
             GLES20.glUniform4f(tHandle, Color1R / 255.f, Color1G / 255.f, Color1B / 255.f, 1.0f);
 
-            Matrix.rotateM(mVMatrix, 0, (float) (180.f / Math.PI * Math.acos(z / (float)Math.sqrt(x * x + y * y + z * z))), 0.f, -1.f, 0.f);
+            Matrix.rotateM(mVMatrix, 0, (float) (180.f / Math.PI * Math.acos(z / (float) Math.sqrt(x * x + y * y + z * z))), 0.f, -1.f, 0.f);
             Matrix.rotateM(mVMatrix, 0, (float) (180.f / Math.PI * Math.atan2(y, x)), 0.f, 0.f, -1.f);
 
 
@@ -347,32 +348,22 @@ public class PendulumWave extends GenericPendulum {
 
             Matrix.translateM(mVMatrix, 0, -x, -y, -z);
             Matrix.rotateM(mVMatrix, 0, (float) (-180.f / Math.PI * Math.atan2(y, x)), 0.f, 0.f, -1.f);
-            Matrix.rotateM(mVMatrix, 0, (float) (-180.f / Math.PI * Math.acos(z / (float)Math.sqrt(x * x + y * y + z * z))), 0.f, -1.f, 0.f);
+            Matrix.rotateM(mVMatrix, 0, (float) (-180.f / Math.PI * Math.acos(z / (float) Math.sqrt(x * x + y * y + z * z))), 0.f, -1.f, 0.f);
 
-            Matrix.rotateM(mVMatrix, 0, (float) (-180.f / Math.PI * Math.acos(z / (float)Math.sqrt(x * x + y * y + z * z))), 0.f, 1.f, 0.f);
+            Matrix.rotateM(mVMatrix, 0, (float) (-180.f / Math.PI * Math.acos(z / (float) Math.sqrt(x * x + y * y + z * z))), 0.f, 1.f, 0.f);
             Matrix.rotateM(mVMatrix, 0, (float) (-180.f / Math.PI * Math.atan2(y, x)), 0.f, 0.f, 1.f);
 
             Matrix.translateM(mVMatrix, 0, -30.f * i, 0.f, 0.f);
         }
 
-        if (NP>1) {
+        if (NP > 1) {
             Matrix.rotateM(mVMatrix, 0, 90.f, 0.0f, 0.0f, 1.0f);
             Matrix.rotateM(mVMatrix, 0, 90.f, 1.0f, 0.0f, 0.0f);
-            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, 30.f*(NP-1));
+            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, 30.f * (NP - 1));
             Matrix.multiplyMM(mMVPMatrix, 0, mProjMatrix, 0, mVMatrix, 0);
             mRod.draw(mProgram, mMVPMatrix, mVMatrix);
-            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, 1.f/(30.f*(NP-1)));
+            Matrix.scaleM(mVMatrix, 0, 1.0f, 1.0f, 1.f / (30.f * (NP - 1)));
         }
-    }
-
-    public void toggleGravity() {
-        dynamicGravity = !dynamicGravity;
-    }
-
-    public void setGravity(float ggx, float ggy, float ggz) {
-        gx = 100.f * (ggz);
-        gy = 100.f * (-ggx);
-        gz = 100.f * (ggy);
     }
 
     public void clearTrajectory() {
@@ -383,8 +374,7 @@ public class PendulumWave extends GenericPendulum {
         if (enabled) {
             this.k = PWSimulationParameters.simParams.k;
             setDamping(PWSimulationParameters.simParams.k);
-        }
-        else {
+        } else {
             this.k = 0.;
             setDamping(0.);
         }

@@ -19,13 +19,12 @@ public class SPGLSurfaceView extends GLSurfaceView {
 
         init();
     }
-    
-    public SPGLSurfaceView(Context context, AttributeSet attrs) 
-	{
-		super(context, attrs);
-		
-		init();
-	}
+
+    public SPGLSurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        init();
+    }
 
     public void init() {
         // Create an OpenGL ES 2.0 context.
@@ -41,7 +40,7 @@ public class SPGLSurfaceView extends GLSurfaceView {
         mTapDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                final SPGLActivity act = (SPGLActivity)getContext();
+                final SPGLActivity act = (SPGLActivity) getContext();
                 act.runOnUiThread(() -> {
                     if (act.buttonsAreOff)
                         act.timerHandler.post(act.timerButtonsOn);
@@ -59,8 +58,6 @@ public class SPGLSurfaceView extends GLSurfaceView {
     }
 
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
-    private float mPreviousX;
-    private float mPreviousY;
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
@@ -71,22 +68,20 @@ public class SPGLSurfaceView extends GLSurfaceView {
         float x = e.getX();
         float y = e.getY();
 
-        mPreviousX = x;
-        mPreviousY = y;
-    	mScaleDetector.onTouchEvent(e);
+        mScaleDetector.onTouchEvent(e);
         mTapDetector.onTouchEvent(e);
         return true;
     }
-    
+
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            float mScaleFactor = SPGLRenderer.mPendulum.zoomIn; 
+            float mScaleFactor = SPGLRenderer.mPendulum.zoomIn;
             mScaleFactor *= detector.getScaleFactor();
 
             // Don't let the object get too small or too large.
             mScaleFactor = Math.max(0.35f, Math.min(mScaleFactor, 6.0f));
-            
+
             SPGLRenderer.mPendulum.zoomIn = mScaleFactor;
 
 

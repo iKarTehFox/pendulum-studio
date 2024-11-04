@@ -39,8 +39,7 @@ public class WallpaperSettings extends PreferenceActivity implements SharedPrefe
         String pendulum = PreferenceManager.getDefaultSharedPreferences(
                 this).getString("pendulum_selection", "5");
 
-        if (pendulum.equals("0") || pendulum.equals("1") || pendulum.equals("2") || pendulum.equals("3") || pendulum.equals("8")) return false;
-        else return true;
+        return !pendulum.equals("0") && !pendulum.equals("1") && !pendulum.equals("2") && !pendulum.equals("3") && !pendulum.equals("8");
     }
 
     @Override
@@ -50,17 +49,15 @@ public class WallpaperSettings extends PreferenceActivity implements SharedPrefe
 
         if (key.equals("pendulum_selection")) {
             cleanAndPopulate();
-            if (pendulum.equals("8")) {
-            }
         }
 
         if (pendulum.equals("8")) {
             if (key.equals("pref_NP")) {
-                if (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("pref_NP", "12"))<=0) {
-                    PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pref_NP", "12").commit();
+                if (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("pref_NP", "12")) <= 0) {
+                    PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pref_NP", "12").apply();
                 }
-                if (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("pref_NP", "12"))>100) {
-                    PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pref_NP", "100").commit();
+                if (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("pref_NP", "12")) > 100) {
+                    PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pref_NP", "100").apply();
                     Context context = getApplicationContext();
                     CharSequence text = getString(R.string.PWLimit);//"Trace too long! Setting to 100000...";
                     int duration = Toast.LENGTH_SHORT;
@@ -72,11 +69,11 @@ public class WallpaperSettings extends PreferenceActivity implements SharedPrefe
 
             }
             if (key.equals("pref_NT"))
-                if (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("pref_NT", "40"))<=0) {
-                    PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pref_NT", "40").commit();
+                if (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("pref_NT", "40")) <= 0) {
+                    PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pref_NT", "40").apply();
                 }
-                getPreferenceScreen().findPreference("pref_NT").setSummary(PreferenceManager.getDefaultSharedPreferences(
-                        this).getString("pref_NT", "40"));
+            getPreferenceScreen().findPreference("pref_NT").setSummary(PreferenceManager.getDefaultSharedPreferences(
+                    this).getString("pref_NT", "40"));
         }
 
     }
@@ -105,8 +102,7 @@ public class WallpaperSettings extends PreferenceActivity implements SharedPrefe
                     this).getString("pref_NP", "12"));
             getPreferenceScreen().findPreference("pref_NT").setSummary(PreferenceManager.getDefaultSharedPreferences(
                     this).getString("pref_NT", "40"));
-        }
-        else {
+        } else {
             pref = getPreferenceManager().findPreference("pref_NP");
             screen.removePreference(pref);
             pref = getPreferenceManager().findPreference("pref_NT");

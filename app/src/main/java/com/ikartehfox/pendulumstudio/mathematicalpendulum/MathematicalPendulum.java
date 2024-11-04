@@ -22,24 +22,28 @@ public class MathematicalPendulum extends GenericPendulum {
     public double l;
     double m, g, ken, pen, pp;
     public volatile double k;
-    double qo[];
+    final double[] qo;
     SphereGL mSphere;
     public RodGL mRod;
-    private FloatBuffer lineVertexBuffer;
+    private final FloatBuffer lineVertexBuffer;
     long timeInterval;
     public volatile long timeInterval2;
     public volatile float zoomIn;
-    public volatile float moveX;
-    public volatile float moveY;
+    public final float moveX;
+    public final float moveY;
     int coordSystem;
 
     final float[] mRotationMatrix = new float[16];
 
-    private FloatBuffer lightDir, lightHP, lightAC, lightDC, lightSC;
-    private FloatBuffer materialAF, materialDF, materialSF;
-    float materialshin;
+    private final FloatBuffer lightDir;
+    private final FloatBuffer lightHP;
+    private final FloatBuffer lightAC;
+    private final FloatBuffer lightDC;
+    private final FloatBuffer lightSC;
+    private final FloatBuffer materialSF;
+    final float materialshin;
 
-    public static Random generator = new Random();
+    public static final Random generator = new Random();
 
     public MathematicalPendulum(double l, double m, double th, double thv, double gr, double k, boolean trmd, int trLength,
                          boolean firsttime)
@@ -93,8 +97,8 @@ public class MathematicalPendulum extends GenericPendulum {
         lightAC = fill4DVector(0.3f, 0.3f, 0.3f, 1.0f);
         lightDC = fill4DVector(1.0f, 1.0f, 1.0f, 1.0f);
         lightSC = fill4DVector(1.0f, 1.0f, 1.0f, 1.0f);
-        materialAF = fill4DVector(0.2f, 0.2f, 0.2f, 1.0f);
-        materialDF = fill4DVector(0.8f, 0.8f, 0.8f, 1.0f);
+        FloatBuffer materialAF = fill4DVector(0.2f, 0.2f, 0.2f, 1.0f);
+        FloatBuffer materialDF = fill4DVector(0.8f, 0.8f, 0.8f, 1.0f);
         materialSF = fill4DVector(1.0f, 1.0f, 1.0f, 1.0f);
         materialshin = 40.0f;
 
@@ -167,16 +171,16 @@ public class MathematicalPendulum extends GenericPendulum {
     }
 
 
-    protected void accel(double a[], double qt[], double qvt[]) {
+    protected void accel(double[] a, double[] qt, double[] qvt) {
         if (!dynamicGravity) accel1(a, qt, qvt);
         else accel2(a, qt, qvt);
     }
 
-    void accel1(double a[], double qt[], double qvt[]) {
+    void accel1(double[] a, double[] qt, double[] qvt) {
         a[0] = -g * Math.sin(qt[0]) / l - k * qvt[0] / m;
     }
 
-    void accel2(double a[], double qt[], double qvt[]) {
+    void accel2(double[] a, double[] qt, double[] qvt) {
         a[0] = gy * Math.cos(qt[0]) / l - gz * Math.sin(qt[0]) / l - k * qvt[0] / m;
     }
 
@@ -359,16 +363,6 @@ public class MathematicalPendulum extends GenericPendulum {
         tHandle = GLES20.glGetUniformLocation(mProgram, "light");
         GLES20.glUniform1i(tHandle, 0);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
-    }
-
-    public void toggleGravity() {
-        dynamicGravity = !dynamicGravity;
-    }
-
-    public void setGravity(float ggx, float ggy, float ggz) {
-        gx = 100.f * (ggz);
-        gy = 100.f * (-ggx);
-        gz = 100.f * (ggy);
     }
 
     public void clearTrajectory() {

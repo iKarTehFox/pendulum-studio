@@ -10,7 +10,7 @@ import android.view.ScaleGestureDetector;
 
 public class SP2DGLSurfaceView extends GLSurfaceView {
 
-	SP2DGLRenderer mRenderer;
+    SP2DGLRenderer mRenderer;
     private ScaleGestureDetector mScaleDetector;
     private GestureDetector mTapDetector;
     private int count;
@@ -20,13 +20,12 @@ public class SP2DGLSurfaceView extends GLSurfaceView {
 
         init();
     }
-    
-    public SP2DGLSurfaceView(Context context, AttributeSet attrs) 
-	{
-		super(context, attrs);
-		
-		init();
-	}
+
+    public SP2DGLSurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        init();
+    }
 
     public void init() {
         // Create an OpenGL ES 2.0 context.
@@ -42,7 +41,7 @@ public class SP2DGLSurfaceView extends GLSurfaceView {
         mTapDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                final SP2DGLActivity act = (SP2DGLActivity)getContext();
+                final SP2DGLActivity act = (SP2DGLActivity) getContext();
                 act.runOnUiThread(() -> {
                     if (act.buttonsAreOff)
                         act.timerHandler.post(act.timerButtonsOn);
@@ -73,45 +72,45 @@ public class SP2DGLSurfaceView extends GLSurfaceView {
 
         float x = e.getX();
         float y = e.getY();
-        
+
         count++;
 
-        if (e.getPointerCount()<2)
-        {
-        switch (e.getAction()) {
-        	case MotionEvent.ACTION_UP:
-        		SP2DGLRenderer.mPendulum.moved = false;
-        		SP2DGLRenderer.mPendulum.timeInterval2 = -1;
-        		count = 0;
-        		break;
-            case MotionEvent.ACTION_MOVE:
+        if (e.getPointerCount() < 2) {
+            switch (e.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    SP2DGLRenderer.mPendulum.moved = false;
+                    SP2DGLRenderer.mPendulum.timeInterval2 = -1;
+                    count = 0;
+                    break;
+                case MotionEvent.ACTION_MOVE:
 
-                float dx = x - mPreviousX;
-                float dy = y - mPreviousY;
-                
-                if (count>2) SP2DGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
+                    float dx = x - mPreviousX;
+                    float dy = y - mPreviousY;
 
-                requestRender();
-        }
+                    if (count > 2)
+                        SP2DGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
+
+                    requestRender();
+            }
         }
 
         mPreviousX = x;
         mPreviousY = y;
-    	mScaleDetector.onTouchEvent(e);
+        mScaleDetector.onTouchEvent(e);
         mTapDetector.onTouchEvent(e);
         return true;
     }
-    
+
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-        	count = 0;
-            float mScaleFactor = SP2DGLRenderer.mPendulum.zoomIn; 
+            count = 0;
+            float mScaleFactor = SP2DGLRenderer.mPendulum.zoomIn;
             mScaleFactor *= detector.getScaleFactor();
 
             // Don't let the object get too small or too large.
             mScaleFactor = Math.max(0.35f, Math.min(mScaleFactor, 6.0f));
-            
+
             SP2DGLRenderer.mPendulum.zoomIn = mScaleFactor;
 
             invalidate();

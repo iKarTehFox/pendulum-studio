@@ -273,13 +273,11 @@ public class ColorPickerView extends View{
 		 */
 
 		final RectF	rect = mSatValRect;
-				
-		if(BORDER_WIDTH_PX > 0){			
-			mBorderPaint.setColor(mBorderColor);
-			canvas.drawRect(mDrawingRect.left, mDrawingRect.top, rect.right + BORDER_WIDTH_PX, rect.bottom + BORDER_WIDTH_PX, mBorderPaint);		
-		}
-			
-		if(mValShader == null) {
+
+        mBorderPaint.setColor(mBorderColor);
+        canvas.drawRect(mDrawingRect.left, mDrawingRect.top, rect.right + BORDER_WIDTH_PX, rect.bottom + BORDER_WIDTH_PX, mBorderPaint);
+
+        if(mValShader == null) {
 			//Black gradient has either not been created or the view has been resized.			
 			mValShader = new LinearGradient(rect.left, rect.top, rect.left, rect.bottom, 
 					0xffffffff, 0xff000000, TileMode.CLAMP);
@@ -331,7 +329,7 @@ public class ColorPickerView extends View{
 		Point p = satValToPoint(mSat, mVal);
 			
 		mSatValTrackerPaint.setColor(0xff000000);
-		canvas.drawCircle(p.x, p.y, PALETTE_CIRCLE_TRACKER_RADIUS - 1f * mDensity, mSatValTrackerPaint);
+		canvas.drawCircle(p.x, p.y, PALETTE_CIRCLE_TRACKER_RADIUS - mDensity, mSatValTrackerPaint);
 				
 		mSatValTrackerPaint.setColor(0xffdddddd);
 		canvas.drawCircle(p.x, p.y, PALETTE_CIRCLE_TRACKER_RADIUS, mSatValTrackerPaint);
@@ -346,17 +344,15 @@ public class ColorPickerView extends View{
 		//long start = SystemClock.elapsedRealtime();
 		
 		final RectF rect = mHueRect;
-		
-		if(BORDER_WIDTH_PX > 0) {
-			mBorderPaint.setColor(mBorderColor);
-			canvas.drawRect(rect.left - BORDER_WIDTH_PX, 
-					rect.top - BORDER_WIDTH_PX, 
-					rect.right + BORDER_WIDTH_PX, 
-					rect.bottom + BORDER_WIDTH_PX, 
-					mBorderPaint);		
-		}
 
-		if (mHueShader == null) {
+        mBorderPaint.setColor(mBorderColor);
+        canvas.drawRect(rect.left - BORDER_WIDTH_PX,
+                rect.top - BORDER_WIDTH_PX,
+                rect.right + BORDER_WIDTH_PX,
+                rect.bottom + BORDER_WIDTH_PX,
+                mBorderPaint);
+
+        if (mHueShader == null) {
 			//The hue shader has either not yet been created or the view has been resized.
 			mHueShader = new LinearGradient(0, 0, 0, rect.height(), buildHueColorArray(), null, TileMode.CLAMP);
 			mHuePaint.setShader(mHueShader);			
@@ -389,18 +385,16 @@ public class ColorPickerView extends View{
 		if(!mShowAlphaPanel || mAlphaRect == null || mAlphaPattern == null) return;
 
 		final RectF rect = mAlphaRect;
-		
-		if(BORDER_WIDTH_PX > 0){
-			mBorderPaint.setColor(mBorderColor);
-			canvas.drawRect(rect.left - BORDER_WIDTH_PX, 
-					rect.top - BORDER_WIDTH_PX, 
-					rect.right + BORDER_WIDTH_PX, 
-					rect.bottom + BORDER_WIDTH_PX, 
-					mBorderPaint);		
-		}
-		
-		
-		mAlphaPattern.draw(canvas);
+
+        mBorderPaint.setColor(mBorderColor);
+        canvas.drawRect(rect.left - BORDER_WIDTH_PX,
+                rect.top - BORDER_WIDTH_PX,
+                rect.right + BORDER_WIDTH_PX,
+                rect.bottom + BORDER_WIDTH_PX,
+                mBorderPaint);
+
+
+        mAlphaPattern.draw(canvas);
 		
 		float[] hsv = new float[]{mHue,mSat,mVal};
 		int color = Color.HSVToColor(hsv);
@@ -414,7 +408,7 @@ public class ColorPickerView extends View{
 		
 		canvas.drawRect(rect, mAlphaPaint);
 		
-		if(mAlphaSliderText != null && !mAlphaSliderText.equals("")){
+		if(mAlphaSliderText != null && !mAlphaSliderText.isEmpty()){
 			canvas.drawText(mAlphaSliderText, rect.centerX(), rect.centerY() + 4 * mDensity, mAlphaTextPaint);
 		}
 		
@@ -744,36 +738,26 @@ public class ColorPickerView extends View{
 				int h = (int) (widthAllowed - PANEL_SPACING - HUE_PANEL_WIDTH);
 				
 				if(mShowAlphaPanel) {
-					h += PANEL_SPACING + ALPHA_PANEL_HEIGHT;
+					h += (int) (PANEL_SPACING + ALPHA_PANEL_HEIGHT);
 				}
-				
-				if(h > heightAllowed) {
-					//We can't fit the view in this container, set the size to whatever was allowed.
-					finalHeight = heightAllowed;
-				}
-				else {
-					finalHeight = h;
-				}
+
+                //We can't fit the view in this container, set the size to whatever was allowed.
+                finalHeight = Math.min(h, heightAllowed);
 				
 				finalWidth = widthAllowed;			
 				
 			}
-			else if(heightMode == MeasureSpec.EXACTLY && widthMode != MeasureSpec.EXACTLY) {
+			else if(widthMode != MeasureSpec.EXACTLY) {
 				//The height has been specified exactly, we need to stay within this height and adopt the width.
 				
 				int w = (int) (heightAllowed + PANEL_SPACING + HUE_PANEL_WIDTH);
 				
 				if(mShowAlphaPanel) {
-					w -= PANEL_SPACING - ALPHA_PANEL_HEIGHT;
+					w -= (int) (PANEL_SPACING - ALPHA_PANEL_HEIGHT);
 				}
-				
-				if(w > widthAllowed) {
-					//we can't fit within this container, set the size to whatever was allowed.
-					finalWidth = widthAllowed;
-				}
-				else {
-					finalWidth = w;
-				}
+
+                //we can't fit within this container, set the size to whatever was allowed.
+                finalWidth = Math.min(w, widthAllowed);
 				
 				finalHeight = heightAllowed;			
 				
@@ -799,8 +783,8 @@ public class ColorPickerView extends View{
 			int heightNeeded = (int) (widthAllowed - PANEL_SPACING - HUE_PANEL_WIDTH);
 				
 			if(mShowAlphaPanel) {
-				widthNeeded -= (PANEL_SPACING + ALPHA_PANEL_HEIGHT);
-				heightNeeded += PANEL_SPACING + ALPHA_PANEL_HEIGHT;
+				widthNeeded -= (int) (PANEL_SPACING + ALPHA_PANEL_HEIGHT);
+				heightNeeded += (int) (PANEL_SPACING + ALPHA_PANEL_HEIGHT);
 			}
 				
 				
@@ -843,7 +827,7 @@ public class ColorPickerView extends View{
 		int height = (int)(200 * mDensity);
 		
 		if(mShowAlphaPanel){
-			height += PANEL_SPACING + ALPHA_PANEL_HEIGHT;
+			height += (int) (PANEL_SPACING + ALPHA_PANEL_HEIGHT);
 		}
 		return height;
 	}

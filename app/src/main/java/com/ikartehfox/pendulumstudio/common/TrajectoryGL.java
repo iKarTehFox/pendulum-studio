@@ -7,12 +7,15 @@ import java.nio.FloatBuffer;
 import android.opengl.GLES20;
 
 public class TrajectoryGL {
-    private FloatBuffer vertexBuffer, colorBuffer;
+    private final FloatBuffer vertexBuffer;
+    private final FloatBuffer colorBuffer;
     static final int COORDS_PER_VERTEX = 3;
     private int st, fin;
-    public int trajectoryPoints;
+    public final int trajectoryPoints;
     public int mProgram;
-    public float mColorRed, mColorBlue, mColorGreen;
+    public final float mColorRed;
+    public final float mColorBlue;
+    public final float mColorGreen;
 
     public TrajectoryGL(int pointsNumber, float x, float y, float z) {
         trajectoryPoints = pointsNumber;

@@ -1,80 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_launcher"
+            android:layout_marginBottom="5dp"
             android:scaleType="fitXY"
-            android:layout_marginBottom="5dp" />
+            android:src="@drawable/ic_launcher" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/about_text_1a"
-            android:textSize="20dp"
-            android:textStyle="bold"
             android:gravity="center_horizontal"
             android:paddingBottom="3dip"
-            />
+            android:text="@string/about_text_1a"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/version_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/version"
             android:gravity="center_horizontal"
             android:paddingBottom="3dip"
-            />
+            android:text="@string/version" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/about_text_2"
             android:gravity="center_horizontal"
             android:paddingBottom="3dip"
-            />
+            android:text="@string/about_text_2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/about_text_3"
             android:gravity="center_horizontal"
             android:paddingBottom="20dip"
-            />
+            android:text="@string/about_text_3" />
 
         <ScrollView
             android:id="@+id/SCROLLER_ID"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:scrollbars="vertical"
+            android:layout_weight="1"
             android:fillViewport="true"
-            android:layout_weight="1" >
+            android:scrollbars="vertical">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/description"
-                    android:text="@string/help_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:text="@string/help_description" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -86,14 +82,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginRight="5dp"
                         android:drawableLeft="@android:drawable/ic_menu_share"
                         android:drawablePadding="5dp"
                         android:gravity="center"
-                        android:text="@string/share"
-                        android:background="?android:selectableItemBackground"
-                        />
+                        android:text="@string/share" />
 
                 </LinearLayout>
 
@@ -122,14 +116,12 @@
                         android:id="@+id/github"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:drawableLeft="@drawable/ic_action_rate"
                         android:drawablePadding="5dp"
-                        android:drawableStart="@drawable/ic_action_rate"
                         android:gravity="center"
                         android:linksClickable="true"
-                        android:background="?android:selectableItemBackground"
                         android:text="@string/github"
                         android:textSize="16dp" />
                 </LinearLayout>

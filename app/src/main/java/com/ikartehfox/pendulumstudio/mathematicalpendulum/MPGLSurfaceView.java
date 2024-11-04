@@ -20,15 +20,14 @@ public class MPGLSurfaceView extends GLSurfaceView {
 
         init();
     }
-    
-    public MPGLSurfaceView(Context context, AttributeSet attrs) 
-	{
-		super(context, attrs);
-		
-		init();
-	}
 
-	public void init() {
+    public MPGLSurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        init();
+    }
+
+    public void init() {
         // Create an OpenGL ES 2.0 context.
         setEGLContextClientVersion(2);
 
@@ -43,7 +42,7 @@ public class MPGLSurfaceView extends GLSurfaceView {
         mTapDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                final MPGLActivity act = (MPGLActivity)getContext();
+                final MPGLActivity act = (MPGLActivity) getContext();
                 act.runOnUiThread(() -> {
                     if (act.buttonsAreOff)
                         act.timerHandler.post(act.timerButtonsOn);
@@ -73,47 +72,47 @@ public class MPGLSurfaceView extends GLSurfaceView {
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
 
-    	float x = e.getX();
+        float x = e.getX();
         float y = e.getY();
-        
+
         count++;
 
-        if (e.getPointerCount()<2)
-        {
-        switch (e.getAction()) {
-        	case MotionEvent.ACTION_UP:
-        		MPGLRenderer.mPendulum.moved = false;
-        		MPGLRenderer.mPendulum.timeInterval2 = -1;
-        		count = 0;
-        		break;
-            case MotionEvent.ACTION_MOVE:
+        if (e.getPointerCount() < 2) {
+            switch (e.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    MPGLRenderer.mPendulum.moved = false;
+                    MPGLRenderer.mPendulum.timeInterval2 = -1;
+                    count = 0;
+                    break;
+                case MotionEvent.ACTION_MOVE:
 
-                float dx = x - mPreviousX;
-                float dy = y - mPreviousY;
+                    float dx = x - mPreviousX;
+                    float dy = y - mPreviousY;
 
-                
-                if (count>2) MPGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
 
-                requestRender();
-        }
+                    if (count > 2)
+                        MPGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
+
+                    requestRender();
+            }
         }
 
         mPreviousX = x;
         mPreviousY = y;
-    	mScaleDetector.onTouchEvent(e);
+        mScaleDetector.onTouchEvent(e);
         mTapDetector.onTouchEvent(e);
         return true;
     }
-    
+
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            float mScaleFactor = MPGLRenderer.mPendulum.zoomIn; 
+            float mScaleFactor = MPGLRenderer.mPendulum.zoomIn;
             mScaleFactor *= detector.getScaleFactor();
 
             // Don't let the object get too small or too large.
             mScaleFactor = Math.max(0.35f, Math.min(mScaleFactor, 6.0f));
-            
+
             MPGLRenderer.mPendulum.zoomIn = mScaleFactor;
 
             invalidate();

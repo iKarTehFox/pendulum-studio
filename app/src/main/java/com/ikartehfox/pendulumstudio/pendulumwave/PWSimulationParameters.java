@@ -8,16 +8,16 @@ import android.content.SharedPreferences;
 public class PWSimulationParameters {
     public static final String PREFS_NAME = "PWPrefsFile";
 
-    public static PWSimulationParameters simParams = new PWSimulationParameters(12, 40, 1.f, 1.f, 981.f, 0.020f, true,
-            (float)(30. * Math.PI / 180.));
+    public static final PWSimulationParameters simParams = new PWSimulationParameters(12, 40, 1.f, 1.f, 981.f, 0.020f, true,
+            (float) (30. * Math.PI / 180.));
     public volatile int NP, NT;
     public volatile float l, m, g, k;
     public volatile boolean initRandom;
     public volatile float th0;
     public volatile int pendulumColor;
+
     PWSimulationParameters(int set_np, int set_nt, float set_l, float set_m, float set_g, float set_k,
-                           boolean set_random, float set_th0)
-    {
+                           boolean set_random, float set_th0) {
         NP = set_np;
         NT = set_nt;
         l = set_l;
@@ -27,32 +27,32 @@ public class PWSimulationParameters {
         initRandom = set_random;
         th0 = set_th0;
     }
-    PWSimulationParameters()
-    {
+
+    PWSimulationParameters() {
         initRandom = true;
     }
 
     public void readSettings(SharedPreferences settings) {
 
         NP = settings.getInt("NP", 12);
-        if (NP<=0)  NP = 12;
-        if (NP>100) NP = 100;
+        if (NP <= 0) NP = 12;
+        if (NP > 100) NP = 100;
         NT = settings.getInt("NT", 40);
-        if (NT<=0) NT = 40;
+        if (NT <= 0) NT = 40;
 
         l = settings.getFloat("l", 1.f);
         m = settings.getFloat("m", 1.f);
         g = settings.getFloat("g", 981.f);
         k = settings.getFloat("k", 0.020f);
 
-        if (l  <= 0.) l  = 1.f;
-        if (m  <= 0.) m  = 1.f;
-        if (g  < 0.)  g  = 981.f;
-        if (k  < 0.)  k  = 0.020f;
+        if (l <= 0.) l = 1.f;
+        if (m <= 0.) m = 1.f;
+        if (g < 0.) g = 981.f;
+        if (k < 0.) k = 0.020f;
 
         initRandom = settings.getBoolean("initRandom", true);
 
-        th0 = settings.getFloat("th0", (float)(30. * Math.PI / 180.));
+        th0 = settings.getFloat("th0", (float) (30. * Math.PI / 180.));
 
         pendulumColor = settings.getInt("pendulumColor", 0xFF0000FF);
 
@@ -70,14 +70,14 @@ public class PWSimulationParameters {
         editor.putFloat("th0", th0);
         editor.putInt("pendulumColor", pendulumColor);
 
-        editor.commit();
+        editor.apply();
     }
 
     public void clearSettings(SharedPreferences settings) {
 
         SharedPreferences.Editor editor = settings.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
         readSettings(settings);
 
     }

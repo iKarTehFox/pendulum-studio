@@ -23,8 +23,7 @@ public class PWGLSurfaceView extends GLSurfaceView {
         init();
     }
 
-    public PWGLSurfaceView(Context context, AttributeSet attrs)
-    {
+    public PWGLSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         init();
@@ -44,13 +43,13 @@ public class PWGLSurfaceView extends GLSurfaceView {
         mTapDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                final PWGLActivity act = (PWGLActivity)getContext();
+                final PWGLActivity act = (PWGLActivity) getContext();
                 act.runOnUiThread(() -> {
                     if (act.buttonsAreOff)
                         act.timerHandler.post(act.timerButtonsOn);
                     else {
                         act.timerHandler.removeCallbacks(act.timerButtonsOff);
-                        act.timerHandler.postDelayed(act.timerButtonsOff, act.buttonsFadeOutTime);
+                        act.timerHandler.postDelayed(act.timerButtonsOff, PWGLActivity.buttonsFadeOutTime);
                     }
                 });
                 return true;
@@ -79,8 +78,7 @@ public class PWGLSurfaceView extends GLSurfaceView {
 
         count++;
 
-        if (e.getPointerCount()<2)
-        {
+        if (e.getPointerCount() < 2) {
             switch (e.getAction()) {
                 case MotionEvent.ACTION_UP:
                     PWGLRenderer.mPendulum.moved = false;

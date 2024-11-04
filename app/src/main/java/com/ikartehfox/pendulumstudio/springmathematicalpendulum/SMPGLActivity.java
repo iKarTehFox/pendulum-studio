@@ -46,13 +46,13 @@ public class SMPGLActivity extends Activity implements SensorEventListener {
     private boolean isRunning;
     private Display display;
 
-    static int frequency = 1000;
-    static int buttonsFadeOutTime = 4000;
-    static int buttonsFadeAnimationTime = 300;
+    static final int frequency = 1000;
+    static final int buttonsFadeOutTime = 4000;
+    static final int buttonsFadeAnimationTime = 300;
     private boolean paused;
     private long deltaT;
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+    final Handler timerHandler = new Handler();
+    final Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             deltaT = System.currentTimeMillis() - deltaT;
@@ -65,7 +65,7 @@ public class SMPGLActivity extends Activity implements SensorEventListener {
     };
 
     boolean buttonsAreOff;
-    Runnable timerButtonsOff = new Runnable() {
+    final Runnable timerButtonsOff = new Runnable() {
         @Override
         public void run() {
             if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true))
@@ -85,7 +85,7 @@ public class SMPGLActivity extends Activity implements SensorEventListener {
         }
     };
 
-    Runnable timerButtonsOn = new Runnable() {
+    final Runnable timerButtonsOn = new Runnable() {
         @Override
         public void run() {
             //Log.d("Act","ButtonsOn");
@@ -275,7 +275,7 @@ public class SMPGLActivity extends Activity implements SensorEventListener {
         makeButtonsVisible();
 
         paused = false;
-        if (isRunning && !paused) {
+        if (isRunning) {
             SMPGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
             timerHandler.postDelayed(timerRunnable, frequency);

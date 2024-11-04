@@ -9,7 +9,6 @@ import android.opengl.GLES20;
 
 public class SpringGL {
     private final FloatBuffer vertexBuffer;
-    private final FloatBuffer normalBuffer;
     static final int COORDS_PER_VERTEX = 3;
     private final int vertexCount;
     private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
@@ -34,7 +33,7 @@ public class SpringGL {
                 iters * 10 * 6 * 3 * 4);
         // use the device hardware's native byte order
         bbn.order(ByteOrder.nativeOrder());
-        normalBuffer = bbn.asFloatBuffer();
+        FloatBuffer normalBuffer = bbn.asFloatBuffer();
         // add the coordinates to the FloatBuffer
         float stz = 0.f;
         float dz = 0.9f / iters;

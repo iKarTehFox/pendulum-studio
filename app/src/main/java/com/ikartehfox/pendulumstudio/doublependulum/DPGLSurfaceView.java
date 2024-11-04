@@ -20,15 +20,14 @@ public class DPGLSurfaceView extends GLSurfaceView {
 
         init();
     }
-    
-    public DPGLSurfaceView(Context context, AttributeSet attrs) 
-	{
-		super(context, attrs);
-		
-		init();
-	}
 
-	public void init() {
+    public DPGLSurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        init();
+    }
+
+    public void init() {
         // Create an OpenGL ES 2.0 context.
         setEGLContextClientVersion(2);
 
@@ -43,13 +42,13 @@ public class DPGLSurfaceView extends GLSurfaceView {
         mTapDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                final DPGLActivity act = (DPGLActivity)getContext();
+                final DPGLActivity act = (DPGLActivity) getContext();
                 act.runOnUiThread(() -> {
                     if (act.buttonsAreOff)
                         act.timerHandler.post(act.timerButtonsOn);
                     else {
                         act.timerHandler.removeCallbacks(act.timerButtonsOff);
-                        act.timerHandler.postDelayed(act.timerButtonsOff, act.buttonsFadeOutTime);
+                        act.timerHandler.postDelayed(act.timerButtonsOff, DPGLActivity.buttonsFadeOutTime);
                     }
                 });
                 return true;
@@ -72,52 +71,52 @@ public class DPGLSurfaceView extends GLSurfaceView {
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
 
-    	float x = e.getX();
+        float x = e.getX();
         float y = e.getY();
-        
-        
 
-        if (e.getPointerCount()<2)
-        {
-        switch (e.getAction()) {
-        	case MotionEvent.ACTION_UP:
-        		DPGLRenderer.mPendulum.moved = false;
-        		DPGLRenderer.mPendulum.moveIndex = 0;
-        		DPGLRenderer.mPendulum.timeInterval2 = -1;
-        		count = 0;
-        		break;
-            case MotionEvent.ACTION_MOVE:
-            	
-            	count++;
 
-                float dx = x - mPreviousX;
-                float dy = y - mPreviousY;
+        if (e.getPointerCount() < 2) {
+            switch (e.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    DPGLRenderer.mPendulum.moved = false;
+                    DPGLRenderer.mPendulum.moveIndex = 0;
+                    DPGLRenderer.mPendulum.timeInterval2 = -1;
+                    count = 0;
+                    break;
+                case MotionEvent.ACTION_MOVE:
 
-                
-                if (count<=1) DPGLRenderer.mPendulum.SetPendulumIndex(x, y, mRenderer.Width, mRenderer.Height);
-                
-                if (count>2) DPGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
+                    count++;
 
-                requestRender();
-        }
+                    float dx = x - mPreviousX;
+                    float dy = y - mPreviousY;
+
+
+                    if (count <= 1)
+                        DPGLRenderer.mPendulum.SetPendulumIndex(x, y, mRenderer.Width, mRenderer.Height);
+
+                    if (count > 2)
+                        DPGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
+
+                    requestRender();
+            }
         }
 
         mPreviousX = x;
         mPreviousY = y;
-    	mScaleDetector.onTouchEvent(e);
+        mScaleDetector.onTouchEvent(e);
         mTapDetector.onTouchEvent(e);
         return true;
     }
-    
+
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            float mScaleFactor = DPGLRenderer.mPendulum.zoomIn; 
+            float mScaleFactor = DPGLRenderer.mPendulum.zoomIn;
             mScaleFactor *= detector.getScaleFactor();
 
             // Don't let the object get too small or too large.
             mScaleFactor = Math.max(0.35f, Math.min(mScaleFactor, 6.0f));
-            
+
             DPGLRenderer.mPendulum.zoomIn = mScaleFactor;
 
             invalidate();

@@ -35,7 +35,7 @@ public class ColorPickerDialog extends AlertDialog implements
 	private ColorPanelView mOldColor;
 	private ColorPanelView mNewColor;
 
-	private OnColorChangedListener mListener;
+	private final OnColorChangedListener mListener;
 
 	public ColorPickerDialog(Context context, int initialColor) {
 		this(context, initialColor, null);
@@ -67,17 +67,17 @@ public class ColorPickerDialog extends AlertDialog implements
 		setTitle("Pick a Color");
 		// setIcon(android.R.drawable.ic_dialog_info);
 			
-		LinearLayout landscapeLayout = (LinearLayout) layout.findViewById(R.id.dialog_color_picker_extra_layout_landscape);
+		LinearLayout landscapeLayout = layout.findViewById(R.id.dialog_color_picker_extra_layout_landscape);
 		
 		if(landscapeLayout != null) {
 			isLandscapeLayout = true;
 		}
 		
 				
-		mColorPicker = (ColorPickerView) layout
+		mColorPicker = layout
 				.findViewById(R.id.color_picker_view);
-		mOldColor = (ColorPanelView) layout.findViewById(R.id.color_panel_old);
-		mNewColor = (ColorPanelView) layout.findViewById(R.id.color_panel_new);
+		mOldColor = layout.findViewById(R.id.color_panel_old);
+		mNewColor = layout.findViewById(R.id.color_panel_new);
 
 		if(!isLandscapeLayout) {
 			((LinearLayout) mOldColor.getParent()).setPadding(Math

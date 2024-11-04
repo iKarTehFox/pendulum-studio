@@ -39,27 +39,25 @@ public class SPGLActivity extends Activity implements SensorEventListener {
 
     private static final String TAG = "SPGLActivity";
     private SPGLSurfaceView mGLView;
-	private SensorManager mSensorManager;
-	private Sensor mGravity;
-	private boolean useDynGravity;
-	private boolean useDamping;
+    private SensorManager mSensorManager;
+    private Sensor mGravity;
+    private boolean useDynGravity;
+    private boolean useDamping;
     private boolean isRunning;
-	private Display display;
+    private Display display;
 
-    static int frequency = 1000;
-    static int buttonsFadeOutTime = 4000;
-    static int buttonsFadeAnimationTime = 300;
+    static final int frequency = 1000;
+    static final int buttonsFadeOutTime = 4000;
+    static final int buttonsFadeAnimationTime = 300;
     private boolean paused;
     private long deltaT;
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+    final Handler timerHandler = new Handler();
+    final Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             deltaT = System.currentTimeMillis() - deltaT;
-            //Log.d("PWGLActivity", "dT: " + deltaT);
-            //Log.d("PWGLActivity", "Frames: " + PWGLRenderer.mPendulum.frames);
-            float fps = SPGLRenderer.mPendulum.frames / (float)(deltaT) * 1.e3f;
-            ((TextView)findViewById(R.id.fps)).setText("FPS: " + String.format("%.0f", fps));
+            float fps = SPGLRenderer.mPendulum.frames / (float) (deltaT) * 1.e3f;
+            ((TextView) findViewById(R.id.fps)).setText("FPS: " + String.format("%.0f", fps));
             SPGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
             if (isRunning && !paused) timerHandler.postDelayed(this, frequency);
@@ -67,10 +65,11 @@ public class SPGLActivity extends Activity implements SensorEventListener {
     };
 
     boolean buttonsAreOff;
-    Runnable timerButtonsOff = new Runnable() {
+    final Runnable timerButtonsOff = new Runnable() {
         @Override
         public void run() {
-            if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true)) return;
+            if (paused || !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("pref_buttons_fade", true))
+                return;
 
             findViewById(R.id.SP_buttons).animate()
                     .alpha(0f)
@@ -86,7 +85,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         }
     };
 
-    Runnable timerButtonsOn = new Runnable() {
+    final Runnable timerButtonsOn = new Runnable() {
         @Override
         public void run() {
             //Log.d("Act","ButtonsOn");
@@ -109,26 +108,24 @@ public class SPGLActivity extends Activity implements SensorEventListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getResources().getBoolean(R.bool.portrait_only)){
+        if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-        else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.sphericalpendulum_gl);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setFullScreenMode();
         setFpsMode();
-        
+
         mGLView = findViewById(R.id.gl_surface_view);
-        
-        
-        
+
+
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         useDynGravity = SPGLRenderer.mPendulum.dynamicGravity;
-        
+
         display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
         useDamping = Math.abs(SPGLRenderer.mPendulum.k) > 1.e-7;
@@ -143,11 +140,15 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         }));
 
         isRunning = !SPGLRenderer.mPendulum.paused;
-        if (!isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-        else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+        if (!isRunning)
+            ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+        else
+            ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
         findViewById(R.id.button_playpause).setOnClickListener(v -> {
-            if (isRunning) ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
-            else ((ImageButton)findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
+            if (isRunning)
+                ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_play);
+            else
+                ((ImageButton) findViewById(R.id.button_playpause)).setImageResource(R.drawable.ic_action_pause);
             isRunning = !isRunning;
             // This method will be called on the rendering
 // thread:
@@ -173,7 +174,8 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         findViewById(R.id.togglebutton_sensor_gravity).setOnClickListener(v -> {
             SPGLRenderer.mPendulum.toggleGravity();
             useDynGravity = !useDynGravity;
-            if (useDynGravity) mSensorManager.registerListener(SPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
+            if (useDynGravity)
+                mSensorManager.registerListener(SPGLActivity.this, mGravity, SensorManager.SENSOR_DELAY_GAME);
             else mSensorManager.unregisterListener(SPGLActivity.this);
         });
 
@@ -196,11 +198,11 @@ public class SPGLActivity extends Activity implements SensorEventListener {
             }
         });
 
-        ((ToggleButton)findViewById(R.id.togglebutton_sensor_gravity)).setChecked(useDynGravity);
+        ((ToggleButton) findViewById(R.id.togglebutton_sensor_gravity)).setChecked(useDynGravity);
 
-        ((ToggleButton)findViewById(R.id.togglebutton_damping)).setChecked(useDamping);
+        ((ToggleButton) findViewById(R.id.togglebutton_damping)).setChecked(useDamping);
 
-        ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(SPSimulationParameters.simParams.showTrajectory);
+        ((ToggleButton) findViewById(R.id.togglebutton_trace)).setChecked(SPSimulationParameters.simParams.showTrajectory);
 
         paused = false;
 
@@ -210,21 +212,25 @@ public class SPGLActivity extends Activity implements SensorEventListener {
 
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
-      // Do something here if sensor accuracy changes.
+        // Do something here if sensor accuracy changes.
     }
 
     @Override
     public final void onSensorChanged(SensorEvent event) {
-      // The light sensor returns a single value.
-      // Many sensors return 3 values, one for each axis.
-      int rotmode = display.getRotation();
-      if (rotmode==Surface.ROTATION_0) SPGLRenderer.mPendulum.setGravity(event.values[0], event.values[1], event.values[2]);
-      else if (rotmode==Surface.ROTATION_90) SPGLRenderer.mPendulum.setGravity(-event.values[1], event.values[0], event.values[2]);
-      else if (rotmode==Surface.ROTATION_180) SPGLRenderer.mPendulum.setGravity(event.values[0], -event.values[1], event.values[2]);
-      else if (rotmode==Surface.ROTATION_270) SPGLRenderer.mPendulum.setGravity(event.values[1], -event.values[0], event.values[2]);
-      // Do something with this sensor value.
+        // The light sensor returns a single value.
+        // Many sensors return 3 values, one for each axis.
+        int rotmode = display.getRotation();
+        if (rotmode == Surface.ROTATION_0)
+            SPGLRenderer.mPendulum.setGravity(event.values[0], event.values[1], event.values[2]);
+        else if (rotmode == Surface.ROTATION_90)
+            SPGLRenderer.mPendulum.setGravity(-event.values[1], event.values[0], event.values[2]);
+        else if (rotmode == Surface.ROTATION_180)
+            SPGLRenderer.mPendulum.setGravity(event.values[0], -event.values[1], event.values[2]);
+        else if (rotmode == Surface.ROTATION_270)
+            SPGLRenderer.mPendulum.setGravity(event.values[1], -event.values[0], event.values[2]);
+        // Do something with this sensor value.
     }
-    
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -237,7 +243,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         paused = true;
         makeButtonsVisible();
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -245,11 +251,11 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         setFullScreenMode();
         setFpsMode();
 
-        if (SPSimulationParameters.simParams.showTrajectory && !((ToggleButton)findViewById(R.id.togglebutton_trace)).isChecked())
+        if (SPSimulationParameters.simParams.showTrajectory && !((ToggleButton) findViewById(R.id.togglebutton_trace)).isChecked())
             // This method will be called on the rendering
 // thread:
             mGLView.queueEvent(() -> SPGLRenderer.mPendulum.clearTrajectory());
-        ((ToggleButton)findViewById(R.id.togglebutton_trace)).setChecked(SPSimulationParameters.simParams.showTrajectory);
+        ((ToggleButton) findViewById(R.id.togglebutton_trace)).setChecked(SPSimulationParameters.simParams.showTrajectory);
 
         // This method will be called on the rendering
 // thread:
@@ -259,12 +265,13 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         // If you de-allocated graphic objects for onPause()
         // this is a good place to re-allocate them.
         mGLView.onResume();
-        if (useDynGravity) mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_GAME);
+        if (useDynGravity)
+            mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_GAME);
 
         makeButtonsVisible();
 
         paused = false;
-        if (isRunning && !paused) {
+        if (isRunning) {
             SPGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
             timerHandler.postDelayed(timerRunnable, frequency);
@@ -282,13 +289,13 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         inflater.inflate(R.menu.sphericalpendulum, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.SP_parameters:
-            	Intent intentParam = new Intent(SPGLActivity.this, SPParametersActivity.class);
+                Intent intentParam = new Intent(SPGLActivity.this, SPParametersActivity.class);
                 startActivity(intentParam);
                 return true;
             case R.id.action_information:
@@ -301,20 +308,17 @@ public class SPGLActivity extends Activity implements SensorEventListener {
     }
 
     @Override
-    public boolean onMenuOpened(int featureId, Menu menu)
-    {
-        if(featureId == Window.FEATURE_ACTION_BAR && menu != null){
-            if(menu.getClass().getSimpleName().equals("MenuBuilder")){
-                try{
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
                     Method m = menu.getClass().getDeclaredMethod(
                             "setOptionalIconsVisible", Boolean.TYPE);
                     m.setAccessible(true);
                     m.invoke(menu, true);
-                }
-                catch(NoSuchMethodException e){
+                } catch (NoSuchMethodException e) {
                     Log.e(TAG, "onMenuOpened", e);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -345,8 +349,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
                 ActionBar actionBar = getActionBar();
                 actionBar.hide();
             }
-        }
-        else {
+        } else {
             if (Build.VERSION.SDK_INT < 16) { //old method
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             } else { // Jellybean and up, new hotness

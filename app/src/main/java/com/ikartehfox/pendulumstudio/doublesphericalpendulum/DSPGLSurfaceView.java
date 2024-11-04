@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
 
-
 public class DSPGLSurfaceView extends GLSurfaceView {
 
     DSPGLRenderer mRenderer;
@@ -20,13 +19,12 @@ public class DSPGLSurfaceView extends GLSurfaceView {
 
         init();
     }
-    
-    public DSPGLSurfaceView(Context context, AttributeSet attrs) 
-	{
-		super(context, attrs);
-		
-		init();
-	}
+
+    public DSPGLSurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        init();
+    }
 
     public void init() {
         // Create an OpenGL ES 2.0 context.
@@ -43,7 +41,7 @@ public class DSPGLSurfaceView extends GLSurfaceView {
         mTapDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                final DSPGLActivity act = (DSPGLActivity)getContext();
+                final DSPGLActivity act = (DSPGLActivity) getContext();
                 act.runOnUiThread(() -> {
                     if (act.buttonsAreOff)
                         act.timerHandler.post(act.timerButtonsOn);
@@ -61,8 +59,6 @@ public class DSPGLSurfaceView extends GLSurfaceView {
     }
 
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
-    private float mPreviousX;
-    private float mPreviousY;
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
@@ -73,27 +69,25 @@ public class DSPGLSurfaceView extends GLSurfaceView {
         float x = e.getX();
         float y = e.getY();
 
-        mPreviousX = x;
-        mPreviousY = y;
-    	mScaleDetector.onTouchEvent(e);
+        mScaleDetector.onTouchEvent(e);
         mTapDetector.onTouchEvent(e);
         return true;
     }
-    
+
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            float mScaleFactor = DSPGLRenderer.mPendulum.zoomIn; 
+            float mScaleFactor = DSPGLRenderer.mPendulum.zoomIn;
             mScaleFactor *= detector.getScaleFactor();
 
             // Don't let the object get too small or too large.
             mScaleFactor = Math.max(0.35f, Math.min(mScaleFactor, 6.0f));
-            
+
             DSPGLRenderer.mPendulum.zoomIn = mScaleFactor;
 
             invalidate();
             return true;
         }
     }
-    
+
 }

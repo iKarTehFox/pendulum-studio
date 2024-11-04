@@ -15,6 +15,7 @@ public class AboutActivity extends Activity {
 
     /**
      * Callback method defined by the View
+     *
      * @param v
      */
     public void finishDialog(View v) {

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2010 Daniel Nilsson
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2010 Daniel Nilsson
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,55 +14,51 @@
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="5dp"
+    android:orientation="vertical"
     android:paddingLeft="16dp"
+    android:paddingTop="5dp"
     android:paddingRight="16dp"
     android:paddingBottom="12dp">
-		
-	<afzkl.development.colorpickerview.view.ColorPickerView
-		android:id="@id/color_picker_view"
-		android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true"
-		style="@style/dialog_color_pciker_view_portrait"
-	/>
-		
-	<LinearLayout
-	android:layout_width="wrap_content"
-	android:layout_height="40dp"
-	android:orientation="horizontal"
-	android:layout_marginTop="10dp"
-	android:layout_below="@id/color_picker_view"
-	android:layout_alignLeft="@id/color_picker_view"
-	android:layout_alignRight="@id/color_picker_view">
-	
-		<afzkl.development.colorpickerview.view.ColorPanelView
-			android:id="@id/color_panel_old"
-			android:layout_width="0px"
-			android:layout_height="fill_parent"
-			android:layout_weight="0.5"
-		/>
-	
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="fill_parent"	
-			android:text="→"
-			android:textSize="20sp"
-			android:gravity="center"
-			android:textColor="#ffffff"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp"
-		/>
-	
-		<afzkl.development.colorpickerview.view.ColorPanelView
-			android:id="@id/color_panel_new"
-			android:layout_width="0px"
-			android:layout_height="fill_parent"
-			android:layout_weight="0.5"
-		/>
-	
-	</LinearLayout>
-	
+
+    <afzkl.development.colorpickerview.view.ColorPickerView
+        android:id="@id/color_picker_view"
+        style="@style/dialog_color_pciker_view_portrait"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/color_picker_view"
+        android:layout_alignLeft="@id/color_picker_view"
+        android:layout_alignRight="@id/color_picker_view"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <afzkl.development.colorpickerview.view.ColorPanelView
+            android:id="@id/color_panel_old"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="→"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <afzkl.development.colorpickerview.view.ColorPanelView
+            android:id="@id/color_panel_new"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+
+    </LinearLayout>
+
 </RelativeLayout>

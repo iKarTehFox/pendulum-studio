@@ -79,13 +79,11 @@ public class ColorPanelView extends View{
 	protected void onDraw(Canvas canvas) {
 		
 		final RectF	rect = mColorRect;
-				
-		if(BORDER_WIDTH_PX > 0){
-			mBorderPaint.setColor(mBorderColor);
-			canvas.drawRect(mDrawingRect, mBorderPaint);		
-		}
-		
-		if(mAlphaPattern != null){
+
+        mBorderPaint.setColor(mBorderColor);
+        canvas.drawRect(mDrawingRect, mBorderPaint);
+
+        if(mAlphaPattern != null){
 			mAlphaPattern.draw(canvas);
 		}
 					
