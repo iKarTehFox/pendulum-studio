@@ -51,7 +51,7 @@ public class MiscGL {
         GLES20.glGenTextures(1, renderTexture, 0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, renderTexture[0]);
 
-        Log.d("FBO Create", Integer.toString(Height) + " " + Integer.toString(Width));
+        Log.d("FBO Create", Height + " " + Width);
 
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA,
                 Width, Height, 0,
@@ -69,7 +69,7 @@ public class MiscGL {
                 GLES20.GL_LINEAR);
 
         GLES20.glGenFramebuffers(1, frameBuffer, 0);
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
         GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
                 GLES20.GL_TEXTURE_2D, renderTexture[0], 0);
         //GLES20.glFramebufferRenderbuffer( GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GLES20.GL_RENDERBUFFER, renderBuffer[0]);
@@ -78,20 +78,18 @@ public class MiscGL {
         // Check FBO status.
         int status = GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER);
 
-        if ( status == GLES20.GL_FRAMEBUFFER_COMPLETE )
-        {
+        if (status == GLES20.GL_FRAMEBUFFER_COMPLETE) {
             Log.d("FBO Create", "Framebuffer complete");
-        }
-        else {
-            Log.d("FBO Create", "Framebuffer failed: " + Integer.toString(status));
+        } else {
+            Log.d("FBO Create", "Framebuffer failed: " + status);
         }
 
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, 0 );
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
     }
 
     public static void resetBuffer(int[] frameBuffer) {
-        GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffer[0]);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
     }
 
