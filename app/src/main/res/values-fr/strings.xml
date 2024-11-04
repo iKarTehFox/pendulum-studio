@@ -17,14 +17,14 @@
     <string name="label_param">Paramètres</string>
 
     <string name="information">Information</string>
-	
-	<string name="button_ok">OK</string>
+
+    <string name="button_ok">OK</string>
     <string name="button_cancel">Annuler</string>
     <string name="button_reset">Réinitialiser</string>
-	
-	<string name="dsp">Double pendule sphérique (3D)</string>
+
+    <string name="dsp">Double pendule sphérique (3D)</string>
     <string name="dsp_subtitle">Double pendule en trois dimensions produisant un mouvement encore plus chaotique!</string>
-    
+
     <string name="DSP_label_l">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
     <string name="DSP_label_l2">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
     <string name="DSP_label_m">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
@@ -44,11 +44,11 @@
     <string name="DSP_label_phv0">φ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="DSP_label_phv2">φ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="DSP_label_trlength">Longueur de la trajectoire </string>
-	
-	<string name="sp">Pendule sphérique (3D)</string>
+
+    <string name="sp">Pendule sphérique (3D)</string>
     <string name="sp_subtitle">Une généralisation du pendule mathématique à trois dimensions produisant un mouvement un peu plus compliqué.</string>
-	
-	<string name="SP_label_l">l (m) =</string>
+
+    <string name="SP_label_l">l (m) =</string>
     <string name="SP_label_m">m (kg) =</string>
     <string name="SP_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SP_label_k">γ (mg/s) =</string>
@@ -61,12 +61,12 @@
     <string name="SP_label_ph0">φ&lt;sub&gt;&lt;small&gt;&lt;small&gt;0&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
     <string name="SP_label_phv0">φ&lt;sub&gt;&lt;small&gt;&lt;small&gt;0 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SP_label_trlength">Longueur de la trajectoire</string>
-	
-	
-	<string name="mp">Pendule simple (2D)</string>
+
+
+    <string name="mp">Pendule simple (2D)</string>
     <string name="mp_subtitle">Le pendule simple.</string>
-	
-	<string name="MP_label_l">l (m) =</string>
+
+    <string name="MP_label_l">l (m) =</string>
     <string name="MP_label_m">m (kg) =</string>
     <string name="MP_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="MP_label_k">γ (mg/s) =</string>
@@ -77,11 +77,11 @@
     <string name="MP_label_th0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;0&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
     <string name="MP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;0 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="MP_label_trlength">Longueur de la trajectoire</string>
-	
-	
-	<string name="dp">Double pendule (2D)</string>
+
+
+    <string name="dp">Double pendule (2D)</string>
     <string name="dp_subtitle">Le pendule double est l\'exemple le plus simple d\'un système présentant un mouvement chaotique et une grande sensibilité aux conditions initiales.</string>
-    
+
     <string name="DP_label_l">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
     <string name="DP_label_l2">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
     <string name="DP_label_m">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
@@ -96,86 +96,86 @@
     <string name="DP_label_th2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
     <string name="DP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="DP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
-	<string name="DP_label_trlength">Longueur de la trajectoire</string>
-	
-	<string name="sp3d">Pendule à ressort (3D)</string>
+    <string name="DP_label_trlength">Longueur de la trajectoire</string>
+
+    <string name="sp3d">Pendule à ressort (3D)</string>
     <string name="sp3d_subtitle">Une masse reliée à un ressort, se déplaçant en trois dimensions.</string>
-    
+
     <string name="SP3D_label_aa">a (m) =</string>
     <string name="SP3D_label_m">m (kg) =</string>
     <string name="SP3D_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SP3D_label_k">k (kg/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
-	<string name="SP3D_label_gam">γ (mg/s) =</string>
+    <string name="SP3D_label_gam">γ (mg/s) =</string>
     <string name="SP3D_init">Conditions initiales</string>
     <string name="SP3D_init_rand">Aléatoire</string>
     <string name="SP3D_init_fixed">Fixé</string>
     <string name="SP3D_trajectory">Trajectoire</string>
-	<string name="SP3D_label_x0">x (m) =</string>
+    <string name="SP3D_label_x0">x (m) =</string>
     <string name="SP3D_label_xv0">x&lt;sub&gt;&lt;small&gt;&lt;small&gt;t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s) =</string>
     <string name="SP3D_label_y0">y (m) =</string>
     <string name="SP3D_label_yv0">y&lt;sub&gt;&lt;small&gt;&lt;small&gt;t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s) =</string>
     <string name="SP3D_label_z0">z (m) =</string>
     <string name="SP3D_label_zv0">z&lt;sub&gt;&lt;small&gt;&lt;small&gt;t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s) =</string>
-	<string name="SP3D_label_trlength">Longueur de la trajectoire</string>
-	
-	
-	<string name="sp2d">Pendule à ressort (2D)</string>
+    <string name="SP3D_label_trlength">Longueur de la trajectoire</string>
+
+
+    <string name="sp2d">Pendule à ressort (2D)</string>
     <string name="sp2d_subtitle">Une masse reliée à un ressort, se déplaçant en deux dimensions.</string>
-    
+
     <string name="SP2D_label_aa">a (m) =</string>
     <string name="SP2D_label_m">m (kg) =</string>
     <string name="SP2D_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SP2D_label_k">k (kg/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
-	<string name="SP2D_label_gam">γ (mg/s) =</string>
+    <string name="SP2D_label_gam">γ (mg/s) =</string>
     <string name="SP2D_init">Conditions initiales</string>
     <string name="SP2D_init_rand">Aléatoire</string>
     <string name="SP2D_init_fixed">Fixé</string>
     <string name="SP2D_trajectory">Trajectoire</string>
-	<string name="SP2D_label_x0">x (m) =</string>
+    <string name="SP2D_label_x0">x (m) =</string>
     <string name="SP2D_label_xv0">x&lt;sub&gt;&lt;small&gt;&lt;small&gt;t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s) =</string>
     <string name="SP2D_label_y0">y (m) =</string>
     <string name="SP2D_label_yv0">y&lt;sub&gt;&lt;small&gt;&lt;small&gt;t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s) =</string>
-	<string name="SP2D_label_trlength">Longueur de la trajectoire</string>
-	
-	
-	<string name="smp">Pendule à ressort mathématique (2D)</string>
+    <string name="SP2D_label_trlength">Longueur de la trajectoire</string>
+
+
+    <string name="smp">Pendule à ressort mathématique (2D)</string>
     <string name="smp_subtitle">Voyez ce qui se passe lorsque la tige est attachée à un ressort.</string>
-    
+
     <string name="SMP_label_aa">a (m) =</string>
     <string name="SMP_label_l">l (m) =</string>
     <string name="SMP_label_m1">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
     <string name="SMP_label_m2">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
     <string name="SMP_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SMP_label_k">k (kg/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
-	<string name="SMP_label_gam">γ (mg/s) =</string>
+    <string name="SMP_label_gam">γ (mg/s) =</string>
     <string name="SMP_init">Conditions initiales</string>
     <string name="SMP_init_rand">Aléatoire</string>
     <string name="SMP_init_fixed">Fixé</string>
     <string name="SMP_trajectory">Trajectoire</string>
-	<string name="SMP_label_s">s (m) =</string>
+    <string name="SMP_label_s">s (m) =</string>
     <string name="SMP_label_sv">s&lt;sub&gt;&lt;small&gt;&lt;small&gt;t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s) =</string>
     <string name="SMP_label_th0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
     <string name="SMP_label_th2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
     <string name="SMP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SMP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
-	<string name="SMP_label_trlength">Longueur de la trajectoire</string>
-	
-	
-	<string name="ssp">Pendule sphérique à ressort (3D)</string>
+    <string name="SMP_label_trlength">Longueur de la trajectoire</string>
+
+
+    <string name="ssp">Pendule sphérique à ressort (3D)</string>
     <string name="ssp_subtitle">Un pendule sphérique relié à un ressort, en trois dimensions.</string>
-    
+
     <string name="SSP_label_a">a (m) =</string>
     <string name="SSP_label_l">l (m) =</string>
     <string name="SSP_label_m">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
     <string name="SSP_label_m2">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
     <string name="SSP_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SSP_label_k">k (kg/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
-	<string name="SSP_label_gam">γ (mg/s) =</string>
+    <string name="SSP_label_gam">γ (mg/s) =</string>
     <string name="SSP_init">Conditions initiales</string>
     <string name="SSP_init_rand">Aléatoire</string>
     <string name="SSP_init_fixed">Fixé</string>
     <string name="SSP_trajectory">Trajectoire</string>
-	<string name="SSP_label_x0">x&lt;sub&gt;&lt;small&gt;&lt;small&gt;0&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
+    <string name="SSP_label_x0">x&lt;sub&gt;&lt;small&gt;&lt;small&gt;0&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
     <string name="SSP_label_xv0">x&lt;sub&gt;&lt;small&gt;&lt;small&gt;0 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="SSP_label_y0">y&lt;sub&gt;&lt;small&gt;&lt;small&gt;0&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
     <string name="SSP_label_yv0">y&lt;sub&gt;&lt;small&gt;&lt;small&gt;0 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
@@ -212,8 +212,7 @@
 
     <string name="pick_color">Choisissez une couleur</string>
 
-    <string name="google_play">Évaluer l\'application</string>
-    <string name="more_apps">Plus d\'applications</string>
+    <string name="github">Voir sur GitHub</string>
 
     <string name="pw">Effet de l\'onde pendulaire (3D)</string>
     <string name="pw_subtitle">L\'effet de l\'onde pendulaire apparaît lorsque plusieurs pendules sont combinés!</string>
@@ -231,10 +230,10 @@
     <string name="PW_label_NP2">Nombre de pendules</string>
     <string name="PW_label_NT2">Nombre de periodes</string>
 
-    <string name="TraceTooLong">Trace trop longue! Réglage à 100000...</string>
-    <string name="TraceInvalid">Trace trop longue! Revenir à l\'ancienne valeur...</string>
+    <string name="TraceTooLong">Trace trop longue! Réglage à 100000…</string>
+    <string name="TraceInvalid">Trace trop longue! Revenir à l\'ancienne valeur…</string>
 
-    <string name="PWLimit">Trop de pendules! Réglage à 100...</string>
+    <string name="PWLimit">Trop de pendules! Réglage à 100…</string>
 
     <string name="pref_fullscreen">Plein écran</string>
     <string name="pref_fullscreen_summary">Visiualiser la simulation en mode plein écran</string>
@@ -244,12 +243,13 @@
 
     <string name="settings">Parametres</string>
     <string name="share">Partager</string>
-    <string name="share_text">Simulation and visualization of motion of various pendulum systems in real-time\nhttps://play.google.com/store/apps/details?id=com.ikartehfox.pendulumstudio</string>
+    <string name="share_text">Simulation and visualization of motion of various pendulum systems in real-time\nhttps://github.com/iKarTehFox/pendulum-studio</string>
     <string name="share_subject">Application Pendulum Studio pour Android</string>
-    <string name="share_via" >Partager l\'application via</string>
-    <string name="PWg" >g trop petit! Réglage à la valeur minimale...</string>
-   <string name="SP_trajectory_infinite">Infini</string>
-   <string name="trajectory_infinite">Infini</string>
+    <string name="share_via">Partager l\'application via</string>
+    <string name="PWg">g trop petit! Réglage à la valeur minimale…</string>
+    <string name="SP_trajectory_infinite">Infini</string>
+    <string name="trajectory_infinite">Infini</string>
     <string name="pref_buttons_fade">Boutons auto-hide</string>
+    <string name="pref_buttons_fade_summary">Cacher automatiquement les boutons après une inactivité</string>
 
 </resources>

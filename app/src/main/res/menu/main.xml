@@ -17,7 +17,7 @@
         android:id="@+id/action_rate"
         android:orderInCategory="100"
         android:icon="@drawable/ic_action_rate"
-        android:title="@string/google_play"
+        android:title="@string/github"
         pendulumstudio:showAsAction="never"/>
     <item
         android:id="@+id/action_information"

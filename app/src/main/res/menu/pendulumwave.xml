@@ -1,34 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
-    <!--    <item android:id="@+id/SMP_restart"
-              android:title="@string/restart"
-              android:showAsAction="ifRoom"/> -->
-    <!--  <item android:id="@+id/toggleGravity"
-              android:title="@string/toggle_gravity"
-              android:showAsAction="ifRoom"/>  -->
-    <!--   <item android:id="@+id/play"
-           android:title="@string/play"
-           android:icon="@drawable/ic_action_play"
-           yourapp:showAsAction="always"/>
-       <item android:id="@+id/pause"
-           android:title="@string/pause"
-           android:icon="@drawable/ic_action_pause"
-           yourapp:showAsAction="always"/> -->
-    <item android:id="@+id/PW_parameters"
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/PW_parameters"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/label_param"/>
-    <!-- <item android:id="@+id/settings"
-        android:title="@string/settings"/> -->
+        android:title="@string/label_param" />
     <item
         android:id="@+id/action_rate"
         android:icon="@drawable/ic_action_rate"
-        android:title="@string/google_play"/>
+        android:title="@string/github" />
     <item
         android:id="@+id/action_information"
         android:icon="@android:drawable/ic_menu_info_details"
-        android:title="@string/information"/>
-    <!--            android:showAsAction="ifRoom" -->
-    <!--  <item android:id="@+id/about"
-              android:title="@string/about" /> -->
+        android:title="@string/information" />
 </menu>
