@@ -244,7 +244,7 @@
 
     <string name="settings">Parametres</string>
     <string name="share">Partager</string>
-    <string name="share_text">Simulation and visualization of motion of various pendulum systems in real-time\nhttps://play.google.com/store/apps/details?id=com.vlvolad.pendulumstudio</string>
+    <string name="share_text">Simulation and visualization of motion of various pendulum systems in real-time\nhttps://play.google.com/store/apps/details?id=com.ikartehfox.pendulumstudio</string>
     <string name="share_subject">Application Pendulum Studio pour Android</string>
     <string name="share_via" >Partager l\'application via</string>
     <string name="PWg" >g trop petit! Réglage à la valeur minimale...</string>

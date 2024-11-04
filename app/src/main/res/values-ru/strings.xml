@@ -237,7 +237,7 @@
 
     <string name="settings">Настройки</string>
     <string name="share">Поделиться</string>
-    <string name="share_text">Моделирование и визуализицая движения различных маятниковых систем в режиме реального времени\nhttps://play.google.com/store/apps/details?id=com.vlvolad.pendulumstudio</string>
+    <string name="share_text">Моделирование и визуализицая движения различных маятниковых систем в режиме реального времени\nhttps://play.google.com/store/apps/details?id=com.ikartehfox.pendulumstudio</string>
     <string name="version">Версия:</string>
     <string name="PWLimit">Слишком много маятников! Ставим 100...</string>
     <string name="TraceInvalid">Слишком длинная траектория! Ставим 100000...</string>

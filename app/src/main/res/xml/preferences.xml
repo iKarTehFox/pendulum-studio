@@ -13,5 +13,6 @@
     <CheckBoxPreference
         android:key="pref_buttons_fade"
         android:title="@string/pref_buttons_fade"
+        android:summary="@string/pref_buttons_fade_summary"
         android:defaultValue="true" />
 </PreferenceScreen>

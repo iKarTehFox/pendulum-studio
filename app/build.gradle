@@ -2,15 +2,23 @@ apply plugin: 'com.android.application'
 //apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdk 34 // Android 14
+    namespace = "com.ikartehfox.pendulumstudio"
 
     defaultConfig {
-        applicationId "com.vlvolad.pendulumstudio"
-        minSdkVersion 9
-        targetSdkVersion 28
-        versionCode 17
-        versionName "1.4.2"
+        applicationId "com.ikartehfox.pendulumstudio"
+        minSdkVersion 15 // Android 4.0.3
+        targetSdkVersion 34 // Android 14
+        versionCode 18
+        versionName "2.0.0"
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22'
+        }
     }
 
     signingConfigs {
@@ -35,16 +43,15 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
-            signingConfig signingConfigs.release
+            // Remove this line to use default debug signing
+            // signingConfig signingConfigs.release
         }
     }
+    namespace 'com.ikartehfox.pendulumstudio'
 }
 
 dependencies {
-    //compile 'com.android.support:support-v4:28.0.0'
-    //compile 'com.google.android.gms:play-services:+'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile project(':ColorPickerLibrary') // Needed for API level < 15 support
-    //compile "com.github.danielnilsson9:color-picker-view:1.4.0@aar"
-    //compile 'com.google.android.gms:play-services-oss-licenses:16.0.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation project(':ColorPickerLibrary')
 }

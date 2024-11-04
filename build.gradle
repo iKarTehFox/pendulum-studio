@@ -7,10 +7,10 @@ buildscript {
             name 'Google'
         }
 
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:8.5.1' // Modern gradle plugin
         //classpath 'com.google.android.gms:oss-licenses-plugin:0.9.3'
     }
 }
@@ -24,6 +24,6 @@ allprojects {
             name 'Google'
         }
 
-        jcenter()
+        mavenCentral()
     }
 }
