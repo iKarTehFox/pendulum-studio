@@ -1,34 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:pendulumstudio="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/menu_item_share"
-        android:title="@string/share"
         android:icon="@android:drawable/ic_menu_share"
-        pendulumstudio:showAsAction="ifRoom"/>
+        android:title="@string/share"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
         android:icon="@android:drawable/ic_menu_preferences"
+        android:orderInCategory="100"
         android:title="@string/settings"
-        pendulumstudio:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_rate"
-        android:orderInCategory="100"
         android:icon="@drawable/ic_action_rate"
+        android:orderInCategory="100"
         android:title="@string/github"
-        pendulumstudio:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_information"
-        android:orderInCategory="100"
         android:icon="@android:drawable/ic_menu_info_details"
+        android:orderInCategory="100"
         android:title="@string/information"
-        pendulumstudio:showAsAction="never"/>
-    <!--    android:showAsAction="never"  -->
-    <!--   <item
-           android:id="@+id/action_about"
-           android:orderInCategory="100"
-           android:title="@string/about"/> -->
+        app:showAsAction="never" />
 
-   </menu>
+</menu>
