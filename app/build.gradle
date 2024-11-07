@@ -24,10 +24,10 @@ android {
     signingConfigs {
         release {
             Properties properties = new Properties()
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            if (properties != null && properties.containsKey('storeFile') && properties.containsKey('keyAlias') &&
+            properties.load(rootProject.file('local.properties').newDataInputStream())
+            if (properties.containsKey('storeFile') && properties.containsKey('keyAlias') &&
                     properties.containsKey('storePassword') && properties.containsKey('keyPassword')) {
-                storeFile file(properties.getProperty('storeFile'))
+                storeFile rootProject.file(properties.getProperty('storeFile'))
                 keyAlias properties.getProperty('keyAlias')
                 storePassword properties.getProperty('storePassword')
                 keyPassword properties.getProperty('keyPassword')
@@ -47,6 +47,14 @@ android {
             // signingConfig signingConfigs.release
         }
     }
+
+    tasks.register('buildReleaseApk', Exec) {
+        group = 'build' // Categorize the task under the 'build' group
+        description = 'Builds the release APK'
+        commandLine 'gradlew', 'assembleRelease' // Or './gradlew' for Linux/Mac
+    }
+
+
     namespace 'com.ikartehfox.pendulumstudio'
 }
 
