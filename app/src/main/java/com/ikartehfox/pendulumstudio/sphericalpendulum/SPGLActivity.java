@@ -348,12 +348,8 @@ public class SPGLActivity extends Activity implements SensorEventListener {
             }
 
             // Full screen logic
-            if (Build.VERSION.SDK_INT == 16) { // API 16 (Jellybean)
-                // Old method for API 16
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            } else if (Build.VERSION.SDK_INT >= 17 && Build.VERSION.SDK_INT <= 18) { // API 17 and 18 (Jellybean MR1, MR2)
-                // Original code for API 17-18
+            if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT <= 18) { // API 16 - 18 (Jellybean)
+                // Original code for API 16-18
                 uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
                 decorView.setSystemUiVisibility(uiOptions);
             } else if (Build.VERSION.SDK_INT >= 19) { // API 19 and above (KitKat and newer)
@@ -374,11 +370,8 @@ public class SPGLActivity extends Activity implements SensorEventListener {
             }
 
             // Full screen logic
-            if (Build.VERSION.SDK_INT == 16) { // API 16 (Jellybean)
-                // Old method for disabling full screen in API 16
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            } else if (Build.VERSION.SDK_INT >= 17 && Build.VERSION.SDK_INT <= 18) { // API 17 and 18 (Jellybean MR1, MR2)
-                // Original code for disabling full screen in API 17-18
+            if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT <= 18) { // API 16 - 18 (Jellybean)
+                // Original code for disabling full screen in API 16-18
                 uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
                 decorView.setSystemUiVisibility(uiOptions);
             } else if (Build.VERSION.SDK_INT >= 19) { // API 19 and above (KitKat and newer)
