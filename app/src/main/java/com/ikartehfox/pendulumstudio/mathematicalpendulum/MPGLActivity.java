@@ -353,7 +353,10 @@ public class MPGLActivity extends Activity implements SensorEventListener {
             }
 
             // Full screen logic
-            if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT <= 18) { // API 16 - 18 (Jellybean)
+            if (Build.VERSION.SDK_INT == 15) { // Old method for API 15 (Ice Cream Sandwich)
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT <= 18) { // API 16 - 18 (Jellybean)
                 // Original code for API 16-18
                 uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
                 decorView.setSystemUiVisibility(uiOptions);
@@ -375,7 +378,9 @@ public class MPGLActivity extends Activity implements SensorEventListener {
             }
 
             // Full screen logic
-            if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT <= 18) { // API 16 - 18 (Jellybean)
+            if (Build.VERSION.SDK_INT == 15) { // Old method for API 15 (Ice Cream Sandwich)
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT <= 18) { // API 16 - 18 (Jellybean)
                 // Original code for disabling full screen in API 16-18
                 uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
                 decorView.setSystemUiVisibility(uiOptions);
