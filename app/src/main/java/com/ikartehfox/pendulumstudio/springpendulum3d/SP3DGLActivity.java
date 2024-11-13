@@ -341,32 +341,60 @@ public class SP3DGLActivity extends Activity implements SensorEventListener {
     protected void setFullScreenMode() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean full_screen = sharedPref.getBoolean("pref_fullscreen", false);
+        View decorView = getWindow().getDecorView();
+        int uiOptions;
+
+        // Common logic for hiding/showing action bar
+        ActionBar actionBar = getActionBar();
+
         if (full_screen) {
-            if (Build.VERSION.SDK_INT < 16) { //old method
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            } else { // Jellybean and up, new hotness
-                View decorView = getWindow().getDecorView();
-                // Hide the status bar.
-                int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-                decorView.setSystemUiVisibility(uiOptions);
-                // Remember that you should never show the action bar if the
-                // status bar is hidden, so hide that too if necessary.
-                ActionBar actionBar = getActionBar();
+            // Hide action bar
+            if (actionBar != null) {
                 actionBar.hide();
             }
-        } else {
-            if (Build.VERSION.SDK_INT < 16) { //old method
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            } else { // Jellybean and up, new hotness
-                View decorView = getWindow().getDecorView();
-                // Hide the status bar.
-                int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
+
+            // Full screen logic
+            if (Build.VERSION.SDK_INT == 16) { // API 16 (Jellybean)
+                // Old method for API 16
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else if (Build.VERSION.SDK_INT >= 17 && Build.VERSION.SDK_INT <= 18) { // API 17 and 18 (Jellybean MR1, MR2)
+                // Original code for API 17-18
+                uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
                 decorView.setSystemUiVisibility(uiOptions);
-                // Remember that you should never show the action bar if the
-                // status bar is hidden, so hide that too if necessary.
-                ActionBar actionBar = getActionBar();
+            } else if (Build.VERSION.SDK_INT >= 19) { // API 19 and above (KitKat and newer)
+                // New method for API 19 and above
+                uiOptions = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN;
+                decorView.setSystemUiVisibility(uiOptions);
+
+                // Adjust GLSurfaceView's boundaries
+                SP3DGLSurfaceView glSurfaceView = findViewById(R.id.gl_surface_view);
+                glSurfaceView.setSystemUiVisibility(uiOptions);
+            }
+        } else {
+            // Show action bar
+            if (actionBar != null) {
                 actionBar.show();
+            }
+
+            // Full screen logic
+            if (Build.VERSION.SDK_INT == 16) { // API 16 (Jellybean)
+                // Old method for disabling full screen in API 16
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else if (Build.VERSION.SDK_INT >= 17 && Build.VERSION.SDK_INT <= 18) { // API 17 and 18 (Jellybean MR1, MR2)
+                // Original code for disabling full screen in API 17-18
+                uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
+                decorView.setSystemUiVisibility(uiOptions);
+            } else if (Build.VERSION.SDK_INT >= 19) { // API 19 and above (KitKat and newer)
+                // New method for disabling full screen in API 19 and above
+                uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
+                decorView.setSystemUiVisibility(uiOptions);
+
+                // Reset GLSurfaceView's boundaries
+                SP3DGLSurfaceView glSurfaceView = findViewById(R.id.gl_surface_view);
+                glSurfaceView.setSystemUiVisibility(uiOptions);
             }
         }
     }
