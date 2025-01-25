@@ -21,9 +21,6 @@ local.properties
 .idea/
 *.iml
 
-.idea/gradle.xml
-.idea/runConfigurations.xml
-
 .navigation/
 
 # OS-specific files
