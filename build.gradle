@@ -10,7 +10,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.8.0' // Modern gradle plugin
+        classpath 'com.android.tools.build:gradle:8.8.2' // Modern gradle plugin
         //classpath 'com.google.android.gms:oss-licenses-plugin:0.9.3'
     }
 }
