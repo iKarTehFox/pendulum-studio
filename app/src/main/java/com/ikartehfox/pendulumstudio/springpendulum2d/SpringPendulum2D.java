@@ -138,6 +138,10 @@ public class SpringPendulum2D extends GenericPendulum {
         return buf;
     }
 
+    public void resetZoom() {
+        zoomIn = 1.f;
+    }
+
     public void restart() {
         frames = 0;
         fps = 0.f;

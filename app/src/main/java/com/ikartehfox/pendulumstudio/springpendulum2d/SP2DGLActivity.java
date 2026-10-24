@@ -99,7 +99,9 @@ public class SP2DGLActivity extends AppCompatActivity implements SensorEventList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getResources().getBoolean(R.bool.portrait_only)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_landscape", false)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.springpendulum2d_gl);
@@ -158,6 +160,11 @@ public class SP2DGLActivity extends AppCompatActivity implements SensorEventList
         findViewById(R.id.button_settings).setOnClickListener(v -> mGLView.queueEvent(() -> {
             Intent intentParam = new Intent(SP2DGLActivity.this, SP2DParametersActivity.class);
             startActivity(intentParam);
+        }));
+
+        findViewById(R.id.button_reset_zoom).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            SP2DGLRenderer.mPendulum.resetZoom();
+            SP2DGLRenderer.resetAccumBuffer();
         }));
 
         findViewById(R.id.togglebutton_sensor_gravity).setOnClickListener(v -> {

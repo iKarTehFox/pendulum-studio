@@ -9,8 +9,8 @@ android {
         applicationId "com.ikartehfox.pendulumstudio"
         minSdkVersion 15 // Android 4.0.3
         targetSdkVersion 34 // Android 14
-        versionCode 19
-        versionName "2.1.0"
+        versionCode 20
+        versionName "2.2.0"
     }
 
     configurations.configureEach {

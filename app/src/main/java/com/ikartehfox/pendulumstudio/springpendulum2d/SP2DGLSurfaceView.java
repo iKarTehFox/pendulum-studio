@@ -2,6 +2,7 @@ package com.ikartehfox.pendulumstudio.springpendulum2d;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -87,7 +88,7 @@ public class SP2DGLSurfaceView extends GLSurfaceView {
                     float dx = x - mPreviousX;
                     float dy = y - mPreviousY;
 
-                    if (count > 2)
+                    if (count > 2 && PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("pref_touch", true))
                         SP2DGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
 
                     requestRender();

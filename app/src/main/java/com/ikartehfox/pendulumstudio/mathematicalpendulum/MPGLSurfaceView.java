@@ -2,6 +2,7 @@ package com.ikartehfox.pendulumstudio.mathematicalpendulum;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -90,7 +91,7 @@ public class MPGLSurfaceView extends GLSurfaceView {
                     float dy = y - mPreviousY;
 
 
-                    if (count > 2)
+                    if (count > 2 && PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("pref_touch", true))
                         MPGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
 
                     requestRender();

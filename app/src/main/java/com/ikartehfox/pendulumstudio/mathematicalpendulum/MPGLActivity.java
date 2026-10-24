@@ -103,7 +103,9 @@ public class MPGLActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getResources().getBoolean(R.bool.portrait_only)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_landscape", false)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -167,6 +169,11 @@ public class MPGLActivity extends AppCompatActivity implements SensorEventListen
         findViewById(R.id.button_settings).setOnClickListener(v -> mGLView.queueEvent(() -> {
             Intent intentParam = new Intent(MPGLActivity.this, MPParametersActivity.class);
             startActivity(intentParam);
+        }));
+
+        findViewById(R.id.button_reset_zoom).setOnClickListener(v -> mGLView.queueEvent(() -> {
+            MPGLRenderer.mPendulum.resetZoom();
+            MPGLRenderer.resetAccumBuffer();
         }));
 
         findViewById(R.id.togglebutton_sensor_gravity).setOnClickListener(v -> {

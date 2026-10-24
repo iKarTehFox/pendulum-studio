@@ -93,6 +93,10 @@ public class SP2DParametersActivity extends AppCompatActivity {
         boolean fade = sharedPref.getBoolean("pref_buttons_fade", true);
         CheckBox checkFade = findViewById(R.id.pref_buttons_fade_loc);
         checkFade.setChecked(fade);
+
+        boolean touch = sharedPref.getBoolean("pref_touch", true);
+        CheckBox checkTouch = findViewById(R.id.pref_touch_loc);
+        checkTouch.setChecked(touch);
     }
 
     public void okButton(View v) {
@@ -170,6 +174,8 @@ public class SP2DParametersActivity extends AppCompatActivity {
         editor.putBoolean("pref_fps", checkFps.isChecked());
         CheckBox checkFade = findViewById(R.id.pref_buttons_fade_loc);
         editor.putBoolean("pref_buttons_fade", checkFade.isChecked());
+        CheckBox checkTouch = findViewById(R.id.pref_touch_loc);
+        editor.putBoolean("pref_touch", checkTouch.isChecked());
         editor.apply();
 
         SP2DParametersActivity.this.finish();

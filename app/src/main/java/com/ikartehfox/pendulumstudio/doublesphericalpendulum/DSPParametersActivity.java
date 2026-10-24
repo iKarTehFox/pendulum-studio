@@ -110,6 +110,7 @@ public class DSPParametersActivity extends AppCompatActivity {
         boolean fade = sharedPref.getBoolean("pref_buttons_fade", true);
         CheckBox checkFade = findViewById(R.id.pref_buttons_fade_loc);
         checkFade.setChecked(fade);
+
     }
 
     public void okButton(View v) {

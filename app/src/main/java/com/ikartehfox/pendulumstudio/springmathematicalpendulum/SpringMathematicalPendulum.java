@@ -148,6 +148,10 @@ public class SpringMathematicalPendulum extends GenericPendulum {
         return buf;
     }
 
+    public void resetZoom() {
+        zoomIn = 0.6f;
+    }
+
     public void restart() {
         frames = 0;
         fps = 0.f;

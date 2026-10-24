@@ -12,6 +12,7 @@
     <string name="button_trace">Trace</string>
     <string name="button_trace_off">Trace</string>
     <string name="restart">Redémarrer</string>
+    <string name="button_reset_zoom">Réinitialiser le zoom</string>
     <string name="label_param">Paramètres</string>
 
     <string name="information">Information</string>
@@ -194,11 +195,11 @@
     <string name="wallpaper_damping">Amortissement</string>
     <string name="wallpaper_trace">Afficher trace</string>
 
-    <string name="help_description">Cette application simule le mouvement de différents systèmes de pendules en temps réel et l\'affiche sur l\'écran en utilisant OpenGL.\n\nLes équations de mouvement de Lagrange pour le système choisi sont résolues numériquement en appliquant la méthode de Runge-Kutta-Fehlberg pour chaque pas de temps.\n\nCaractéristiques:\n- Utilisez l\'accéléromètre de l\'appareil pour introduire la force de gravité\n- Utilisez vos doigts pour changer de façon interactive les positions des pendules dans le cas de  2D\n- Activer la force d\'amortissement pour simuler le frottement\n- Utilisez le bouton de redémarrage pour répéter la simulation avec différentes conditions initiales\n- Modifier les paramètres pour chaque système au choix\n- Utiliser comme fond d\'écran en direct\n\nL\'application utilise la bibliothèque <a href="https://github.com/danielnilsson9/color-picker-view">ColorPickerView</a> sous licence <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a></string>
+    <string name="help_description">Cette application simule le mouvement de différents systèmes de pendules en temps réel et l\'affiche sur l\'écran en utilisant OpenGL.\n\nLes équations de mouvement de Lagrange pour le système choisi sont résolues numériquement en appliquant la méthode de Runge-Kutta-Fehlberg pour chaque pas de temps.\n\nCaractéristiques:\n- Utilisez l\'accéléromètre de l\'appareil pour introduire la force de gravité\n- Utilisez vos doigts pour changer de façon interactive les positions des pendules dans le cas de  2D\n- Activer la force d\'amortissement pour simuler le frottement\n- Utilisez le bouton de redémarrage pour répéter la simulation avec différentes conditions initiales\n- Modifier les paramètres pour chaque système au choix\n- Utiliser comme fond d\'écran en direct\n\nL\'application utilise la bibliothèque <a href="https://github.com/danielnilsson9/color-picker-view">ColorPickerView</a> sous licence <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a>\n\nLes icônes utilisent <a href="https://github.com/google/material-design-icons">Material Design Icons</a> de Google sous licence <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a></string>
 
     <string name="about">À propos</string>
     <string name="about_text_1a">Pendulum Studio</string>
-    <string name="about_text_1b">Version: 1.4</string>
+
     <string name="version">Version:</string>
     <string name="btn_finish_about_label">Fermer</string>
     <string name="about_text_2">© Volodymyr Vovchenko, Hamda Cherif</string>
@@ -249,5 +250,9 @@
     <string name="trajectory_infinite">Infini</string>
     <string name="pref_buttons_fade">Boutons auto-hide</string>
     <string name="pref_buttons_fade_summary">Cacher automatiquement les boutons après une inactivité</string>
+    <string name="pref_landscape">Mode paysage</string>
+    <string name="pref_landscape_summary">Toujours ouvrir les simulations de pendule en orientation paysage</string>
+    <string name="pref_touch">Interaction tactile</string>
+    <string name="pref_touch_summary">Autoriser le glissement pour modifier la position et la longueur des pendules et ressorts</string>
 
 </resources>

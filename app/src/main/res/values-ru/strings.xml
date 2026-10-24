@@ -12,6 +12,7 @@
     <string name="button_trace">След</string>
     <string name="button_trace_off">След</string>
     <string name="restart">Рестарт</string>
+    <string name="button_reset_zoom">Сбросить масштаб</string>
     <string name="label_param">Параметры</string>
 
     <string name="information">Информация</string>
@@ -194,11 +195,10 @@
     <string name="wallpaper_damping">Трение</string>
     <string name="wallpaper_trace">Показывать след</string>
 
-    <string name="help_description">Это приложение моделирует и визуализирует (OpenGL) движение различных маятниковых систем в режиме реального времени.\n\nДля заданной системы на каждом временном шаге проводится численное решение уравнений движений Лагранжа с помощью метода Рунге-Кутта-Фельберга.\n\nОсобенности:\n- Используйте акселерометр Вашего устройства для динамического определения силы гравитации\n- Меняйте положение маятников с помощью пальцев в случае 2D систем\n- Учитывайте силу трения для моделирования затухания колебаний маятника\n- Используйте кнопку рестарта для повторного моделирования с другими начальными условиями\n- Меняйте любые параметры в настройках\n- Живые обои\n\nПриложение использует библиотеку <a href="https://github.com/danielnilsson9/color-picker-view">ColorPickerView</a> под лицензией <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a></string>
+    <string name="help_description">Это приложение моделирует и визуализирует (OpenGL) движение различных маятниковых систем в режиме реального времени.\n\nДля заданной системы на каждом временном шаге проводится численное решение уравнений движений Лагранжа с помощью метода Рунге-Кутта-Фельберга.\n\nОсобенности:\n- Используйте акселерометр Вашего устройства для динамического определения силы гравитации\n- Меняйте положение маятников с помощью пальцев в случае 2D систем\n- Учитывайте силу трения для моделирования затухания колебаний маятника\n- Используйте кнопку рестарта для повторного моделирования с другими начальными условиями\n- Меняйте любые параметры в настройках\n- Живые обои\n\nПриложение использует библиотеку <a href="https://github.com/danielnilsson9/color-picker-view">ColorPickerView</a> под лицензией <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a>\n\nИконки используют <a href="https://github.com/google/material-design-icons">Material Design Icons</a> от Google под лицензией <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a></string>
 
     <string name="about">About</string>
     <string name="about_text_1a">Pendulum Studio</string>
-    <string name="about_text_1b">Версия: 1.4</string>
     <string name="btn_finish_about_label">Закрыть</string>
     <string name="about_text_2">© Volodymyr Vovchenko</string>
 
@@ -246,5 +246,9 @@
     <string name="trajectory_infinite">Безконечн.</string>
     <string name="pref_buttons_fade">Автоскрытие кнопок</string>
     <string name="pref_buttons_fade_summary">Автоматически скрывать кнопки после отсутствия активности</string>
+    <string name="pref_landscape">Альбомный режим</string>
+    <string name="pref_landscape_summary">Всегда открывать симуляции маятников в альбомной ориентации</string>
+    <string name="pref_touch">Сенсорное управление</string>
+    <string name="pref_touch_summary">Разрешить перетаскивание для изменения положения и длины маятников и пружин</string>
 
 </resources>

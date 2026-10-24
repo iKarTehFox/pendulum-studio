@@ -2,6 +2,7 @@ package com.ikartehfox.pendulumstudio.doublependulum;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -90,11 +91,12 @@ public class DPGLSurfaceView extends GLSurfaceView {
                     float dx = x - mPreviousX;
                     float dy = y - mPreviousY;
 
+                    boolean touchEnabled = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("pref_touch", true);
 
-                    if (count <= 1)
+                    if (count <= 1 && touchEnabled)
                         DPGLRenderer.mPendulum.SetPendulumIndex(x, y, mRenderer.Width, mRenderer.Height);
 
-                    if (count > 2)
+                    if (count > 2 && touchEnabled)
                         DPGLRenderer.mPendulum.setCoord(x, y, dx, dy, mRenderer.Width, mRenderer.Height);
 
                     requestRender();

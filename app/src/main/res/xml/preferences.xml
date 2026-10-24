@@ -15,4 +15,14 @@
         android:title="@string/pref_buttons_fade"
         android:summary="@string/pref_buttons_fade_summary"
         android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="pref_landscape"
+        android:title="@string/pref_landscape"
+        android:summary="@string/pref_landscape_summary"
+        android:defaultValue="false" />
+    <CheckBoxPreference
+        android:key="pref_touch"
+        android:title="@string/pref_touch"
+        android:summary="@string/pref_touch_summary"
+        android:defaultValue="true" />
 </PreferenceScreen>

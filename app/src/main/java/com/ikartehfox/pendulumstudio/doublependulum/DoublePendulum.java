@@ -141,6 +141,10 @@ public class DoublePendulum extends GenericPendulum {
         return buf;
     }
 
+    public void resetZoom() {
+        zoomIn = 0.80f;
+    }
+
     public void restart() {
         frames = 0;
         fps = 0.f;

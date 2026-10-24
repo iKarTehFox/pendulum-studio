@@ -3,19 +3,19 @@
 
     <item
         android:id="@+id/menu_item_share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/ic_action_share"
         android:title="@string/share"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_settings"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_settings"
         android:orderInCategory="100"
         android:title="@string/settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_information"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/ic_action_info"
         android:orderInCategory="100"
         android:title="@string/information"
         app:showAsAction="never" />

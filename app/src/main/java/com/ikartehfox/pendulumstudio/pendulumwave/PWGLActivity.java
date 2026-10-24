@@ -103,7 +103,9 @@ public class PWGLActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getResources().getBoolean(R.bool.portrait_only)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_landscape", false)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
@@ -164,6 +166,9 @@ public class PWGLActivity extends AppCompatActivity implements SensorEventListen
             Intent intentParam = new Intent(PWGLActivity.this, PWParametersActivity.class);
             startActivity(intentParam);
         }));
+
+        findViewById(R.id.button_reset_zoom).setOnClickListener(v -> mGLView.queueEvent(() ->
+                PWGLRenderer.mPendulum.resetZoom()));
 
         findViewById(R.id.togglebutton_damping).setOnClickListener(v -> {
 

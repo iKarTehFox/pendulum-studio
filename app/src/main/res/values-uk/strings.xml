@@ -12,6 +12,7 @@
     <string name="button_trace">Слід</string>
     <string name="button_trace_off">Слід</string>
     <string name="restart">Рестарт</string>
+    <string name="button_reset_zoom">Скинути масштаб</string>
     <string name="label_param">Параметри</string>
 
     <string name="information">Інформація</string>
@@ -194,11 +195,10 @@
     <string name="wallpaper_damping">Тертя</string>
     <string name="wallpaper_trace">Показувати слід</string>
 
-    <string name="help_description">У цьому додатку проводиться моделювання та візуалізація (OpenGL) руху різних маятникових систем у режимі реального часу.\n\nДля заданої системи на кожному кроці проводиться чисельних розв\'язок рівнянь руху Лагранжа за допомогою методу Рунге-Кутта-Фельберга.\n\nОсобливості:\n- Використовуйте акселерометр Вашого пристрою для динамічного визначення сили гравітації\n- Змінюйте положення маятників за допомогою пальців у випадку 2D систем\n- Враховуйте силу тертя для моделювання затухання коливань маятника\n- Використовуйте кнопку рестарту для повторного моделювання із інших початкових умов\n- Змінюйте будь-які параметри у налаштуваннях\n- Живі шпалери\n\nДодаток використовує бібліотеку <a href="https://github.com/danielnilsson9/color-picker-view">ColorPickerView</a> під ліцензією <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a></string>
+    <string name="help_description">У цьому додатку проводиться моделювання та візуалізація (OpenGL) руху різних маятникових систем у режимі реального часу.\n\nДля заданої системи на кожному кроці проводиться чисельних розв\'язок рівнянь руху Лагранжа за допомогою методу Рунге-Кутта-Фельберга.\n\nОсобливості:\n- Використовуйте акселерометр Вашого пристрою для динамічного визначення сили гравітації\n- Змінюйте положення маятників за допомогою пальців у випадку 2D систем\n- Враховуйте силу тертя для моделювання затухання коливань маятника\n- Використовуйте кнопку рестарту для повторного моделювання із інших початкових умов\n- Змінюйте будь-які параметри у налаштуваннях\n- Живі шпалери\n\nДодаток використовує бібліотеку <a href="https://github.com/danielnilsson9/color-picker-view">ColorPickerView</a> під ліцензією <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a>\n\nІконки використовують <a href="https://github.com/google/material-design-icons">Material Design Icons</a> від Google під ліцензією <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a></string>
 
     <string name="about">About</string>
     <string name="about_text_1a">Pendulum Studio</string>
-    <string name="about_text_1b">Версія: 1.4</string>
     <string name="btn_finish_about_label">Закрити</string>
     <string name="about_text_2">© Volodymyr Vovchenko</string>
 
@@ -246,5 +246,9 @@
     <string name="trajectory_infinite">Безмежн.</string>
     <string name="pref_buttons_fade">Автоприховання кнопок</string>
     <string name="pref_buttons_fade_summary">Автоматично приховувати кнопки після відсутності активності</string>
+    <string name="pref_landscape">Альбомний режим</string>
+    <string name="pref_landscape_summary">Завжди відкривати симуляції маятників в альбомній орієнтації</string>
+    <string name="pref_touch">Сенсорне керування</string>
+    <string name="pref_touch_summary">Дозволити перетягування для зміни положення та довжини маятників і пружин</string>
 
 </resources>
