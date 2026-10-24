@@ -6,10 +6,8 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
         <ScrollView
@@ -21,103 +19,131 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="12dip">
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingBottom="16dp">
 
+                <!-- ================= Parameters ================= -->
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_param"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/label_param" />
 
                 <LinearLayout
-                    android:layout_width="140dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
 
                     <TextView
-                        android:layout_width="0dip"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MP_label_l" />
 
                     <EditText
                         android:id="@+id/MP_editl"
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:inputType="numberDecimal"></EditText>
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
                 </LinearLayout>
 
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
                 <LinearLayout
-                    android:layout_width="140dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
 
                     <TextView
-                        android:layout_width="0dip"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MP_label_m" />
 
                     <EditText
                         android:id="@+id/MP_editm"
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:inputType="numberDecimal"></EditText>
-
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
                 </LinearLayout>
 
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
                 <LinearLayout
-                    android:layout_width="140dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
 
                     <TextView
                         android:id="@+id/MP_labelg"
-                        android:layout_width="0dip"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MP_label_g" />
 
                     <EditText
                         android:id="@+id/MP_editg"
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:inputType="numberDecimal"></EditText>
-
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
                 </LinearLayout>
 
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
                 <LinearLayout
-                    android:layout_width="140dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
 
                     <TextView
-                        android:layout_width="0dip"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MP_label_k" />
 
                     <EditText
                         android:id="@+id/MP_editk"
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:inputType="numberDecimal"></EditText>
-
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
                 </LinearLayout>
 
+                <!-- ================= Initial conditions ================= -->
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/MP_init"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/MP_init" />
 
                 <RadioGroup
                     android:id="@+id/MP_radioGroupInit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -125,150 +151,186 @@
                         android:id="@+id/MP_radioRand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
                         android:text="@string/MP_init_rand" />
 
                     <RadioButton
                         android:id="@+id/MP_radioFixed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
                         android:text="@string/MP_init_fixed" />
 
                 </RadioGroup>
 
-
                 <LinearLayout
-                    android:layout_width="140dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
 
                     <TextView
                         android:id="@+id/MP_label_th0"
-                        android:layout_width="0dip"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MP_label_th0" />
 
                     <EditText
                         android:id="@+id/MP_editth0"
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:inputType="numberDecimal"></EditText>
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
                 </LinearLayout>
 
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
                 <LinearLayout
-                    android:layout_width="140dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
 
                     <TextView
                         android:id="@+id/MP_label_thv0"
-                        android:layout_width="0dip"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MP_label_thv0" />
 
                     <EditText
                         android:id="@+id/MP_editthv0"
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:inputType="numberDecimal"></EditText>
-
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="15dp" />
+                <!-- ================= Appearance ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/appearance" />
 
                 <LinearLayout
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:minHeight="48dp">
 
                     <TextView
-                        android:layout_width="0dip"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/pendulum_color" />
 
-                    <Button
-                        android:id="@+id/MP_PendulumColor"
-                        android:layout_width="wrap_content"
+                    <FrameLayout
+                        android:layout_width="72dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/parameter_color_border"
+                        android:padding="1dp">
 
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:onClick="PendulumColor" />
-
+                        <Button
+                            android:id="@+id/MP_PendulumColor"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:onClick="PendulumColor" />
+                    </FrameLayout>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="15dp" />
+                <!-- ================= Trajectory ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/MP_trajectory" />
 
                 <CheckBox
                     android:id="@+id/MP_checkBoxTraj"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:text="@string/MP_trajectory" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MP_label_trlength" />
 
                     <EditText
                         android:id="@+id/MP_edittrajle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:inputType="number"></EditText>
-
-                    <CheckBox
-                        android:id="@+id/MP_checkBoxTrajInfinite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/trajectory_infinite" />
-
+                        android:inputType="number"
+                        android:gravity="end" />
                 </LinearLayout>
 
                 <CheckBox
-                    android:id="@+id/pref_fullscreen_loc"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/MP_checkBoxTrajInfinite"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/trajectory_infinite" />
+
+                <!-- ================= Display ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/settings" />
+
+                <CheckBox
+                    android:id="@+id/pref_fullscreen_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:text="@string/pref_fullscreen" />
 
                 <CheckBox
                     android:id="@+id/pref_fps_loc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:text="@string/pref_fps" />
 
                 <CheckBox
                     android:id="@+id/pref_buttons_fade_loc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:text="@string/pref_buttons_fade" />
-
-                <!-- <com.larswerkman.holocolorpicker.ColorPicker
-                    android:id="@+id/picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/> -->
 
             </LinearLayout>
 
         </ScrollView>
 
         <LinearLayout
-            style="@android:style/ButtonBar"
+            style="?attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -276,31 +338,25 @@
             <Button
                 android:id="@+id/SP_okButton"
                 android:layout_width="0dip"
-
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="okButton"
-
                 android:text="@string/button_ok" />
 
             <Button
                 android:id="@+id/SP_cancelButton"
                 android:layout_width="0dip"
-
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="cancelButton"
-
                 android:text="@string/button_cancel" />
 
             <Button
                 android:id="@+id/SP_resetButton"
                 android:layout_width="0dip"
-
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="resetButton"
-
                 android:text="@string/button_reset" />
 
         </LinearLayout>

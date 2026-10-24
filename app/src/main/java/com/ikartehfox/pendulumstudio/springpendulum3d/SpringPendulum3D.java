@@ -180,7 +180,6 @@ public class SpringPendulum3D extends GenericPendulum {
                        int trLength) {
         frames = 0;
         fps = 0.f;
-        g = gr;
         g = SP3DSimulationParameters.simParams.g;
         this.k = SP3DSimulationParameters.simParams.k;
         this.aa = SP3DSimulationParameters.simParams.aa * 100.;

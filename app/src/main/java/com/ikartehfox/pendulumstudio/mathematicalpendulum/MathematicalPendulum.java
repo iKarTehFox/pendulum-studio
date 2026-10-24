@@ -164,7 +164,7 @@ public class MathematicalPendulum extends GenericPendulum {
         q[0] = (float) (2. * Math.PI * generator.nextDouble());
         qv[0] = (float) (Math.PI * generator.nextDouble());
         qo[0] = q[0];
-        mSphere = new SphereGL((float) (10. * m / 2.), 50, 50);
+        mSphere = new SphereGL((float) (10. * Math.pow(m, 1. / 3.)), 30, 30);
         mTrajectory = new TrajectoryGL(trLength, (float) getx(), (float) gety(), (float) getz());
         timeInterval = SystemClock.uptimeMillis();
         coordSystem = 0;
@@ -250,9 +250,15 @@ public class MathematicalPendulum extends GenericPendulum {
         float xv = dx / factor / elap * 1000.f;
         float yv = dy / factor / elap * 1000.f;
         double ll = Math.sqrt(x * x + y * y);
-        l = ll;
+        // Guard against a touch landing exactly on the anchor (ll == 0), which
+        // would otherwise divide by zero and permanently poison the state with NaN.
+        l = Math.max(ll, 1e-6);
         q[0] = Math.atan2(x, y);
-        qv[0] = y * (xv - yv * x / y) / l / l;
+        // Velocity of the angle: theta_dot = (x_dot * cos(theta) + y_dot * sin(theta)) / l,
+        // expressed without dividing by y (which may be zero).
+        double sint = Math.sin(q[0]);
+        double cost = Math.cos(q[0]);
+        qv[0] = (yv * sint - xv * cost) / l;
         timeInterval2 = SystemClock.uptimeMillis();
         moved = true;
         mTrajectory.addPointToTrajectory((float) getx(), (float) gety(), (float) getz());

@@ -4,8 +4,6 @@
     <string name="app_name">Pendulum Studio</string>
     <string name="action_settings">Paramètres</string>
     <string name="tocHeader">Bienvenue au Pendulum Studio! Découvrez le mouvement de différents systèmes pendulaires en 2D et en 3D!</string>
-    <string name="tocHeaderold">Bienvenue au Pendulum Studio! Découvrez le mouvement de différents systèmes pendulaires en 2D et en 3D!\nUtilisez vos doigts pour changer de manière interactive les positions des pendules dans le cas 2D.
- Utilisez également l\'accéléromètre pour définir la force de gravité et permettre à la force d\'amortissement de simuler le frottement.</string>
     <string name="toc">Pendulum Studio</string>
     <string name="button_sensor_gravity">Accéléromètre</string>
     <string name="button_damping">Friction</string>
@@ -72,7 +70,7 @@
     <string name="MP_label_k">γ (mg/s) =</string>
     <string name="MP_init">Conditions initiales</string>
     <string name="MP_init_rand">Aléatoire</string>
-    <string name="MP_init_fixed">Fixed</string>
+    <string name="MP_init_fixed">Fixé</string>
     <string name="MP_trajectory">Trajectoire</string>
     <string name="MP_label_th0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;0&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
     <string name="MP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;0 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
@@ -198,7 +196,7 @@
 
     <string name="help_description">Cette application simule le mouvement de différents systèmes de pendules en temps réel et l\'affiche sur l\'écran en utilisant OpenGL.\n\nLes équations de mouvement de Lagrange pour le système choisi sont résolues numériquement en appliquant la méthode de Runge-Kutta-Fehlberg pour chaque pas de temps.\n\nCaractéristiques:\n- Utilisez l\'accéléromètre de l\'appareil pour introduire la force de gravité\n- Utilisez vos doigts pour changer de façon interactive les positions des pendules dans le cas de  2D\n- Activer la force d\'amortissement pour simuler le frottement\n- Utilisez le bouton de redémarrage pour répéter la simulation avec différentes conditions initiales\n- Modifier les paramètres pour chaque système au choix\n- Utiliser comme fond d\'écran en direct\n\nL\'application utilise la bibliothèque <a href="https://github.com/danielnilsson9/color-picker-view">ColorPickerView</a> sous licence <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache-2.0</a></string>
 
-    <string name="about">About</string>
+    <string name="about">À propos</string>
     <string name="about_text_1a">Pendulum Studio</string>
     <string name="about_text_1b">Version: 1.4</string>
     <string name="version">Version:</string>
@@ -238,7 +236,7 @@
     <string name="pref_fullscreen">Plein écran</string>
     <string name="pref_fullscreen_summary">Visiualiser la simulation en mode plein écran</string>
     <string name="pref_fps">FPS</string>
-    <string name="pref_fps_summary">Show frames per second</string>
+    <string name="pref_fps_summary">Afficher les images par seconde</string>
 
 
     <string name="settings">Parametres</string>

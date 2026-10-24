@@ -20,60 +20,87 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <activity
             android:name=".mathematicalpendulum.MPGLActivity"
             android:label="@string/mp"
-            android:logo="@drawable/ic_mp_logo" />
-        <activity android:name=".mathematicalpendulum.MPParametersActivity"/>
+            android:logo="@drawable/ic_mp_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".mathematicalpendulum.MPParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
 
         <activity
             android:name=".pendulumwave.PWGLActivity"
             android:label="@string/pw"
-            android:logo="@drawable/ic_pw_logo" />
-        <activity android:name=".pendulumwave.PWParametersActivity"/>
-        
+            android:logo="@drawable/ic_pw_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".pendulumwave.PWParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
         <activity
             android:name=".sphericalpendulum.SPGLActivity"
-            android:label="@string/sp" 
-            android:logo="@drawable/ic_sp_logo" />
-        <activity android:name=".sphericalpendulum.SPParametersActivity"/>
-        
+            android:label="@string/sp"
+            android:logo="@drawable/ic_sp_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".sphericalpendulum.SPParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
         <activity
             android:name=".springpendulum2d.SP2DGLActivity"
-            android:label="@string/sp2d" 
-            android:logo="@drawable/ic_sp2d_logo" />
-        <activity android:name=".springpendulum2d.SP2DParametersActivity"/>
-        
+            android:label="@string/sp2d"
+            android:logo="@drawable/ic_sp2d_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".springpendulum2d.SP2DParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
         <activity
             android:name=".springpendulum3d.SP3DGLActivity"
-            android:label="@string/sp3d" 
-            android:logo="@drawable/ic_sp3d_logo" />
-        <activity android:name=".springpendulum3d.SP3DParametersActivity"/>
-        
+            android:label="@string/sp3d"
+            android:logo="@drawable/ic_sp3d_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".springpendulum3d.SP3DParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
         <activity
             android:name=".doublependulum.DPGLActivity"
-            android:label="@string/dp" 
-            android:logo="@drawable/ic_dp_logo" />
-        <activity android:name=".doublependulum.DPParametersActivity"/>
-        
+            android:label="@string/dp"
+            android:logo="@drawable/ic_dp_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".doublependulum.DPParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
         <activity
             android:name=".doublesphericalpendulum.DSPGLActivity"
-            android:label="@string/dsp" 
-            android:logo="@drawable/ic_dsp_logo" />
-        <activity android:name=".doublesphericalpendulum.DSPParametersActivity"/>
-        
+            android:label="@string/dsp"
+            android:logo="@drawable/ic_dsp_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".doublesphericalpendulum.DSPParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
         <activity
             android:name=".springmathematicalpendulum.SMPGLActivity"
-            android:label="@string/smp" 
-            android:logo="@drawable/ic_smp_logo" />
-        <activity android:name=".springmathematicalpendulum.SMPParametersActivity"/>
-        
+            android:label="@string/smp"
+            android:logo="@drawable/ic_smp_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".springmathematicalpendulum.SMPParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
         <activity
             android:name=".springsphericalpendulum.SSPGLActivity"
-            android:label="@string/ssp" 
-            android:logo="@drawable/ic_ssp3d_logo" />
-        <activity android:name=".springsphericalpendulum.SSPParametersActivity"/>
+            android:label="@string/ssp"
+            android:logo="@drawable/ic_ssp3d_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".springsphericalpendulum.SSPParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
 
         <service
             android:name=".livewallpaper.PendulumStudioWallpaperService"
@@ -92,7 +119,6 @@
             android:name=".livewallpaper.WallpaperSettings"
             android:exported="true"
             android:label="@string/spherical_pendulum_wallpaper"
-            android:permission="android.permission.BIND_WALLPAPER"
             android:theme="@style/WallpaperSettings" >
         </activity>
 
@@ -104,14 +130,6 @@
             android:theme="@style/AppThemeNoTitle" >
         </activity>
 
-     <!--   <activity android:name=".AboutActivity"
-            android:theme="@android:style/Theme.Dialog">
-        </activity>  -->
-
-     <!--   <activity android:name=".ColorPickerDialog"
-            android:theme="@android:style/Theme.Dialog">
-        </activity>  -->
-        
     </application>
 
 </manifest>

@@ -171,7 +171,7 @@ public class PendulumWave extends GenericPendulum {
             double T2 = T1 * (double) (NT) / (NT + i);
             double Tl = T2 * AGMean(1., Math.cos(th0 / 2.)) / 2. / Math.PI;
             Tl = this.g * Tl * Tl;
-            Pendulums[i] = new MathematicalPendulum(Tl, this.m, th0, 0., this.g, this.k, false, 100, true);
+            Pendulums[i] = new MathematicalPendulum(Tl * scale, this.m, th0, 0., this.g, this.k, false, 100, true);
         }
     }
 
@@ -184,6 +184,7 @@ public class PendulumWave extends GenericPendulum {
         if (NP < 1) NP = 1;
         if (NT < 1) NT = 1;
         this.g = PWSimulationParameters.simParams.g;
+        if (this.g <= 0.001) this.g = 0.001;
         this.k = PWSimulationParameters.simParams.k;
         this.l = PWSimulationParameters.simParams.l * 100.;
         this.m = PWSimulationParameters.simParams.m;
@@ -198,7 +199,7 @@ public class PendulumWave extends GenericPendulum {
             double T2 = T1 * (double) (NT) / (NT + i);
             double Tl = T2 * AGMean(1., Math.cos(th0 / 2.)) / 2. / Math.PI;
             Tl = this.g * Tl * Tl;
-            Pendulums[i] = new MathematicalPendulum(Tl, this.m, th0, 0., this.g, this.k, false, 100, true);
+            Pendulums[i] = new MathematicalPendulum(Tl * scale, this.m, th0, 0., this.g, this.k, false, 100, true);
         }
     }
 
@@ -210,11 +211,12 @@ public class PendulumWave extends GenericPendulum {
         if (NP < 1) NP = 1;
         if (NT < 1) NT = 1;
         this.g = gr;
+        if (this.g <= 0.001) this.g = 0.001;
         this.k = k;
         this.l = l;
         this.m = m;
         coordSystem = 0;
-        mSphere = new SphereGL((float) (10. * m / 2.), 50, 50);
+        mSphere = new SphereGL((float) (10. * Math.pow(m, 1. / 3.)), 30, 30);
         mTrajectory = new TrajectoryGL(trLength, 0.f, 0.f, 0.f);
         mRod = new RodGL(1.f, 0.f, (float) (0.05f * 10.f * Math.pow(m, 1. / 3.)), 30);
         timeInterval = SystemClock.uptimeMillis();
@@ -226,7 +228,7 @@ public class PendulumWave extends GenericPendulum {
             double T2 = T1 * (double) (NT) / (NT + i);
             double Tl = T2 * AGMean(1., Math.cos(th0 / 2.)) / 2. / Math.PI;
             Tl = this.g * Tl * Tl;
-            Pendulums[i] = new MathematicalPendulum(Tl, this.m, th0, 0., this.g, this.k, false, 100, true);
+            Pendulums[i] = new MathematicalPendulum(Tl * scale, this.m, th0, 0., this.g, this.k, false, 100, true);
         }
     }
 

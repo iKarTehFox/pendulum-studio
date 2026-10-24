@@ -1,10 +1,12 @@
 <resources>
 
     <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        Base application theme. A real AppCompat theme (not a ThemeOverlay,
+        which only carries attribute overrides and no window/actionbar
+        machinery). Applied to the <application> and the AppCompat
+        activities (MainActivity, SettingsActivity).
     -->
-    <style name="AppBaseTheme" parent="ThemeOverlay.AppCompat.Dark">
+    <style name="AppBaseTheme" parent="Theme.AppCompat">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">false</item>
         <item name="colorPrimary">@color/primary</item>
@@ -12,27 +14,44 @@
         <item name="colorAccent">@color/accent</item>
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <!--
+        Theme for the OpenGL simulation screens. They draw their own fullscreen
+        UI, so the action bar is suppressed; everything else inherits from the
+        real AppCompat theme.
+    -->
+    <style name="AppTheme.GL" parent="AppBaseTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
+
+    <!-- No action bar (used by the About/Information screen). -->
     <style name="AppThemeNoTitle" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--
+        Theme for the parameter screens. They keep the action bar (used as the
+        screen title) but tint the form widgets with the app accent.
+    -->
+    <style name="AppTheme.Parameters" parent="AppBaseTheme">
+    </style>
+
+    <!-- ===== Parameter-form styles (shared by all 9 <P>ParametersActivity) ===== -->
+
+    <!-- Section header, e.g. "Parameters" / "Initial conditions".
+         Note: layout_* params are supplied inline in the layout — a style cannot
+         reliably carry layout params for the element that references it. -->
+    <style name="ParameterHeader" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Thin divider between rows. -->
+    <style name="ParameterDivider">
+        <item name="android:background">#1F000000</item>
     </style>
 
     <style name="WallpaperSettings" parent="Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@android:drawable/screen_background_dark_transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
-    </style>
-
-    <!--
-         Theme for a wallpaper's setting activity that is designed to be on
-         top of a light background.
-    -->
-    <style name="WallpaperSettingsLight" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:windowBackground">@android:drawable/screen_background_light_transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>

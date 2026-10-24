@@ -117,6 +117,10 @@ public class TrajectoryGL {
 
     public void addPointToTrajectory(float x, float y, float z) {
         if (fin >= 2 * trajectoryPoints) {
+            // Compact the vertex ring: only the vertex buffer needs shifting when
+            // it wraps. The colour buffer holds one gradient colour per *visible*
+            // point and is indexed positionally (never shifted), so it is left
+            // untouched here.
             float arr[] = new float[3 * (fin - st - 1)];
             vertexBuffer.position(3 * (st + 1));
             for (int i = 0; i < (fin - st - 1) * 3; ++i)
@@ -165,6 +169,9 @@ public class TrajectoryGL {
         mProgram = prog;
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         vertexBuffer.position(3 * st);
+        // Set the colour buffer position explicitly rather than relying on whatever
+        // offset the last addPointToTrajectory left behind.
+        colorBuffer.position(4 * (trajectoryPoints - (fin - st)));
         int tHandle = GLES20.glGetAttribLocation(mProgram, "u_mvpMatrix");
         GLES20.glUniformMatrix4fv(tHandle, 1, false, mvpMatrix, 0);
         tHandle = GLES20.glGetAttribLocation(mProgram, "a_position");

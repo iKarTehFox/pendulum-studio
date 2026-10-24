@@ -12,12 +12,9 @@ public class SpringGL {
     static final int COORDS_PER_VERTEX = 3;
     private final int vertexCount;
     private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
-    private float rad;
 
     public SpringGL(float aa, int iters) {
         // initialize vertex byte buffer for shape coordinates
-        int iterZ = 1;
-        //rad = Radius;
         vertexCount = iters * 10 * 6;
         ByteBuffer bb = ByteBuffer.allocateDirect(
                 // (number of coordinate values * 4 bytes per float)

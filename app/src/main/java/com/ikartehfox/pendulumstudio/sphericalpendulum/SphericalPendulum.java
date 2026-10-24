@@ -192,24 +192,28 @@ public class SphericalPendulum extends GenericPendulum {
     }
 
     void accel1(double[] a, double[] qt, double[] qvt) {
+        // Clamp sin(theta) away from zero: at the poles (theta -> 0 or pi) the
+        // azimuthal equation is singular and would produce +/-Inf / NaN.
+        double sinth = Math.sin(qt[0]);
+        if (Math.abs(sinth) < 1e-6) sinth = (sinth < 0. ? -1e-6 : 1e-6);
         if (coordSystem == 0) {
             a[0] = -g * Math.sin(qt[0]) / l + 0.5 * Math.sin(2 * qt[0]) * qvt[1] * qvt[1] - k * qvt[0] / m;
-            a[1] = -2 * Math.cos(qt[0]) * qvt[0] * qvt[1] / Math.sin(qt[0]) - k * qvt[1] / m;
+            a[1] = -2 * Math.cos(qt[0]) * qvt[0] * qvt[1] / sinth - k * qvt[1] / m;
         } else {
             a[0] = g * Math.cos(qt[1]) * Math.cos(qt[0]) / l + 0.5 * Math.sin(2 * qt[0]) * qvt[1] * qvt[1] - k * qvt[0] / m;
-            a[1] = -g * Math.sin(qt[1]) / Math.sin(qt[0]) / l - 2 * Math.cos(qt[0]) * qvt[0] * qvt[1] / Math.sin(qt[0]) - k * qvt[1] / m;
+            a[1] = -g * Math.sin(qt[1]) / sinth / l - 2 * Math.cos(qt[0]) * qvt[0] * qvt[1] / sinth - k * qvt[1] / m;
         }
     }
 
     void accel2(double[] a, double[] qt, double[] qvt) {
-        a[0] = gx * Math.cos(qt[1]) * Math.cos(qt[0]) / l + gy * Math.sin(qt[1]) * Math.cos(qt[0]) / l - gz * Math.sin(qt[0]) / l + 0.5 * Math.sin(2 * qt[0]) * qvt[1] * qvt[1] - k * qvt[0] / m;
-        a[1] = (-gx * Math.sin(qt[1]) / l + gy * Math.cos(qt[1]) / l - 2 * Math.cos(qt[0]) * qvt[0] * qvt[1]) / Math.sin(qt[0]) - k * qvt[1] / m;
+        double sinth = Math.sin(qt[0]);
+        if (Math.abs(sinth) < 1e-6) sinth = (sinth < 0. ? -1e-6 : 1e-6);
         if (coordSystem == 0) {
             a[0] = gx * Math.cos(qt[1]) * Math.cos(qt[0]) / l + gy * Math.sin(qt[1]) * Math.cos(qt[0]) / l - gz * Math.sin(qt[0]) / l + 0.5 * Math.sin(2 * qt[0]) * qvt[1] * qvt[1] - k * qvt[0] / m;
-            a[1] = (-gx * Math.sin(qt[1]) / l + gy * Math.cos(qt[1]) / l - 2 * Math.cos(qt[0]) * qvt[0] * qvt[1]) / Math.sin(qt[0]) - k * qvt[1] / m;
+            a[1] = (-gx * Math.sin(qt[1]) / l + gy * Math.cos(qt[1]) / l - 2 * Math.cos(qt[0]) * qvt[0] * qvt[1]) / sinth - k * qvt[1] / m;
         } else {
             a[0] = gz * Math.cos(qt[1]) * Math.cos(qt[0]) / l + gx * Math.sin(qt[1]) * Math.cos(qt[0]) / l - gy * Math.sin(qt[0]) / l + 0.5 * Math.sin(2 * qt[0]) * qvt[1] * qvt[1] - k * qvt[0] / m;
-            a[1] = (-gz * Math.sin(qt[1]) / l + gx * Math.cos(qt[1]) / l - 2 * Math.cos(qt[0]) * qvt[0] * qvt[1]) / Math.sin(qt[0]) - k * qvt[1] / m;
+            a[1] = (-gz * Math.sin(qt[1]) / l + gx * Math.cos(qt[1]) / l - 2 * Math.cos(qt[0]) * qvt[0] * qvt[1]) / sinth - k * qvt[1] / m;
         }
     }
 
@@ -236,7 +240,9 @@ public class SphericalPendulum extends GenericPendulum {
         double th, ph, thv, phv;
         th = Math.acos(tz / l);
         ph = Math.atan2(ty, tx);
-        thv = -tzv / l / Math.sin(th);
+        double sinth = Math.sin(th);
+        if (Math.abs(sinth) < 1e-6) sinth = (sinth < 0. ? -1e-6 : 1e-6);
+        thv = -tzv / l / sinth;
         phv = (tx * tyv - ty * txv) / (tx * tx + ty * ty);
         q[0] = th;
         q[1] = ph;

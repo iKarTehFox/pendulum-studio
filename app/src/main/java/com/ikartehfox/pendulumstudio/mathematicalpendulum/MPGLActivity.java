@@ -1,12 +1,9 @@
 package com.ikartehfox.pendulumstudio.mathematicalpendulum;
 
-import com.ikartehfox.pendulumstudio.InformationActivity;
 import com.ikartehfox.pendulumstudio.R;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,26 +16,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
-import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.WindowManager;
 
-import java.lang.reflect.Method;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MPGLActivity extends Activity implements SensorEventListener {
 
-    private static final String TAG = "MPGLActivity";
+public class MPGLActivity extends AppCompatActivity implements SensorEventListener {
     private MPGLSurfaceView mGLView;
     private SensorManager mSensorManager;
     private Sensor mGravity;
@@ -287,48 +281,6 @@ public class MPGLActivity extends Activity implements SensorEventListener {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mathematicalpendulum, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.MP_parameters:
-                Intent intentParam = new Intent(MPGLActivity.this, MPParametersActivity.class);
-                startActivity(intentParam);
-                return true;
-            case R.id.action_information:
-                Intent intent = new Intent(MPGLActivity.this, InformationActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public boolean onMenuOpened(int featureId, Menu menu) {
-        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
-            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
-                try {
-                    Method m = menu.getClass().getDeclaredMethod(
-                            "setOptionalIconsVisible", Boolean.TYPE);
-                    m.setAccessible(true);
-                    m.invoke(menu, true);
-                } catch (NoSuchMethodException e) {
-                    Log.e(TAG, "onMenuOpened", e);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        return super.onMenuOpened(featureId, menu);
-    }
 
 
     @Override
@@ -342,15 +294,9 @@ public class MPGLActivity extends Activity implements SensorEventListener {
         boolean full_screen = sharedPref.getBoolean("pref_fullscreen", false);
         View decorView = getWindow().getDecorView();
         int uiOptions;
-
-        // Common logic for hiding/showing action bar
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
 
         if (full_screen) {
-            // Hide action bar
-            if (actionBar != null) {
-                actionBar.hide();
-            }
 
             // Full screen logic
             if (Build.VERSION.SDK_INT == 15) { // Old method for API 15 (Ice Cream Sandwich)
@@ -372,10 +318,6 @@ public class MPGLActivity extends Activity implements SensorEventListener {
                 glSurfaceView.setSystemUiVisibility(uiOptions);
             }
         } else {
-            // Show action bar
-            if (actionBar != null) {
-                actionBar.show();
-            }
 
             // Full screen logic
             if (Build.VERSION.SDK_INT == 15) { // Old method for API 15 (Ice Cream Sandwich)

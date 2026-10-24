@@ -4,8 +4,6 @@
     <string name="app_name">Pendulum Studio</string>
     <string name="action_settings">Settings</string>
     <string name="tocHeader">Welcome to Pendulum Studio! Discover the motion of various pendulum systems in both 2D and 3D!</string>
-    <string name="tocHeaderold">Welcome to Pendulum Studio! Discover the motion of various pendulum systems in both 2D and 3D!\nUse your fingers to interactively change the positions of the pendulums in 2D case.
- Also use the accelerometer to define the gravity force and enable the damping force to simulate friction.</string>
     <string name="toc">Pendulum Studio</string>
     <string name="button_sensor_gravity">Accelerometer on</string>
     <string name="button_damping">Damping on</string>
@@ -210,6 +208,7 @@
     <string name="pendulum_color">Pendulum color:</string>
     <string name="pendulum_color_1">Pendulum 1 color:</string>
     <string name="pendulum_color_2">Pendulum 2 color:</string>
+    <string name="appearance">Appearance</string>
     <string name="pendulum_color_wave">Pendulum wave color:</string>
 
     <string name="pick_color">Pick a color</string>

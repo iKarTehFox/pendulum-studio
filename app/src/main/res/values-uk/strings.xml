@@ -4,8 +4,6 @@
     <string name="app_name">Pendulum Studio</string>
     <string name="action_settings">Налаштування</string>
     <string name="tocHeader">Вітаємо у Pendulum Studio! Вивчайте рух різних систем із маятниками в 2D та 3D!</string>
-    <string name="tocHeaderold">Welcome to Pendulum Studio! Discover the motion of various pendulum systems in both 2D and 3D!\nUse your fingers to interactively change the positions of the pendulums in 2D case.
- Also use the accelerometer to define the gravity force and enable the damping force to simulate friction.</string>
     <string name="toc">Pendulum Studio</string>
     <string name="button_sensor_gravity">Aкселерометр вкл.</string>
     <string name="button_damping">Тертя</string>

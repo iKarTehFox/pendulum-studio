@@ -157,6 +157,12 @@ public abstract class MechSystemrkf45 {
             for (int i = 0; i < 2 * sz - 1; ++i)
                 if (err < Math.abs(r1 * k1[i + 1] + r3 * k3[i + 1] + r4 * k4[i + 1] + r5 * k5[i + 1] + r6 * k6[i + 1]))
                     err = Math.abs(r1 * k1[i + 1] + r3 * k3[i + 1] + r4 * k4[i + 1] + r5 * k5[i + 1] + r6 * k6[i + 1]);
+            // A NaN error estimate (e.g. from a singular linear solve) must not be
+            // allowed to silently corrupt h and the accepted state.
+            if (Double.isNaN(err)) {
+                h = hmin;
+                break;
+            }
             if (err < eps || h < 2 * hmin) {
                 for (int i = 0; i < sz; ++i) {
                     q[i] += n1 * k1[i] + n3 * k3[i] + n4 * k4[i] + n5 * k5[i];
@@ -164,7 +170,13 @@ public abstract class MechSystemrkf45 {
                 }
                 t += h;
             }
-            s = Math.sqrt(Math.sqrt(eps * h / 2 / err));
+            // Guard err == 0 (division by zero -> s = +Inf). Clamp the growth factor
+            // to [0.5, 2.0] so it cannot oscillate against the hmin/hmax clamps.
+            double s;
+            if (err <= 0. || Double.isInfinite(err)) s = 2.0;
+            else s = Math.sqrt(Math.sqrt(eps * h / 2 / err));
+            if (Double.isNaN(s) || s > 2.0) s = 2.0;
+            else if (s < 0.5) s = 0.5;
             h *= s;
             if (h > hmax) h = hmax;
             if (h < hmin) h = hmin;

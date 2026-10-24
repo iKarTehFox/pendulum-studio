@@ -1,6 +1,5 @@
 package com.ikartehfox.pendulumstudio.pendulumwave;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -17,12 +16,14 @@ import android.widget.Toast;
 
 import com.ikartehfox.pendulumstudio.R;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import afzkl.development.colorpickerview.dialog.ColorPickerDialog;
 
 /**
  * Created by Volodymyr on 26.05.2015.
  */
-public class PWParametersActivity extends Activity {
+public class PWParametersActivity extends AppCompatActivity {
     private int settingsEvent, pendulumColor;
 
     @Override

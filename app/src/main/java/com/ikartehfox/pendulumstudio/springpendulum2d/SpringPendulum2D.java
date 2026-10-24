@@ -175,7 +175,6 @@ public class SpringPendulum2D extends GenericPendulum {
                        int trLength) {
         frames = 0;
         fps = 0.f;
-        g = gr;
         g = SP2DSimulationParameters.simParams.g;
         this.k = SP2DSimulationParameters.simParams.k;
         this.aa = SP2DSimulationParameters.simParams.aa * 100.;
@@ -186,7 +185,7 @@ public class SpringPendulum2D extends GenericPendulum {
         float tphi = (float) (2. * Math.PI * generator.nextDouble());
         q[0] = tr * Math.cos(tphi);// * Math.sin(tth);
         q[1] = tr * Math.sin(tphi);// * Math.sin(tth);
-        qv[0] = qv[1] = qv[2] = 0.;
+        qv[0] = qv[1] = 0.;
         qo[0] = q[0];
         qo[1] = q[1];
         mSphere = new SphereGL((float) (10. * Math.pow(m, 1 / 3.)), 30, 30);

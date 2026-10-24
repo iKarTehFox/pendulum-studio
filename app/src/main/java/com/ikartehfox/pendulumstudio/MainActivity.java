@@ -8,7 +8,6 @@ import java.util.Map;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.util.Log;
 import android.util.SparseArray;
@@ -16,7 +15,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ikartehfox.pendulumstudio.mathematicalpendulum.MPGLActivity;
 import com.ikartehfox.pendulumstudio.mathematicalpendulum.MPGLRenderer;
@@ -46,7 +48,7 @@ import com.ikartehfox.pendulumstudio.doublesphericalpendulum.DSPGLActivity;
 import com.ikartehfox.pendulumstudio.doublesphericalpendulum.DSPGLRenderer;
 import com.ikartehfox.pendulumstudio.doublesphericalpendulum.DSPSimulationParameters;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final String ITEM_IMAGE = "item_image";
@@ -185,9 +187,10 @@ public class MainActivity extends ListActivity {
         }
 
         final SimpleAdapter dataAdapter = new SimpleAdapter(this, data, R.layout.toc_item, new String[]{ITEM_IMAGE, ITEM_TITLE, ITEM_SUBTITLE}, new int[]{R.id.Image, R.id.Title, R.id.SubTitle});
-        setListAdapter(dataAdapter);
 
-        getListView().setOnItemClickListener((parent, view, position, id) -> {
+        final ListView listView = findViewById(android.R.id.list);
+        listView.setAdapter(dataAdapter);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
             final Class<? extends Activity> activityToLaunch = activityMapping.get(position);
 
             if (activityToLaunch != null) {

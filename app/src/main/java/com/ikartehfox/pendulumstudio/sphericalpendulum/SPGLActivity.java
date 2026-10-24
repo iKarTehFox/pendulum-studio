@@ -1,12 +1,9 @@
 package com.ikartehfox.pendulumstudio.sphericalpendulum;
 
-import com.ikartehfox.pendulumstudio.InformationActivity;
 import com.ikartehfox.pendulumstudio.R;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,25 +16,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
-import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.WindowManager;
 import android.widget.ImageButton;
 
-import java.lang.reflect.Method;
 
-public class SPGLActivity extends Activity implements SensorEventListener {
-
-    private static final String TAG = "SPGLActivity";
+public class SPGLActivity extends AppCompatActivity implements SensorEventListener {
     private SPGLSurfaceView mGLView;
     private SensorManager mSensorManager;
     private Sensor mGravity;
@@ -283,48 +274,6 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.sphericalpendulum, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.SP_parameters:
-                Intent intentParam = new Intent(SPGLActivity.this, SPParametersActivity.class);
-                startActivity(intentParam);
-                return true;
-            case R.id.action_information:
-                Intent intent = new Intent(SPGLActivity.this, InformationActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public boolean onMenuOpened(int featureId, Menu menu) {
-        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
-            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
-                try {
-                    Method m = menu.getClass().getDeclaredMethod(
-                            "setOptionalIconsVisible", Boolean.TYPE);
-                    m.setAccessible(true);
-                    m.invoke(menu, true);
-                } catch (NoSuchMethodException e) {
-                    Log.e(TAG, "onMenuOpened", e);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        return super.onMenuOpened(featureId, menu);
-    }
 
     @Override
     protected void onStop() {
@@ -338,14 +287,7 @@ public class SPGLActivity extends Activity implements SensorEventListener {
         View decorView = getWindow().getDecorView();
         int uiOptions;
 
-        // Common logic for hiding/showing action bar
-        ActionBar actionBar = getActionBar();
-
         if (full_screen) {
-            // Hide action bar
-            if (actionBar != null) {
-                actionBar.hide();
-            }
 
             // Full screen logic
             if (Build.VERSION.SDK_INT == 15) { // Old method for API 15 (Ice Cream Sandwich)
@@ -367,10 +309,6 @@ public class SPGLActivity extends Activity implements SensorEventListener {
                 glSurfaceView.setSystemUiVisibility(uiOptions);
             }
         } else {
-            // Show action bar
-            if (actionBar != null) {
-                actionBar.show();
-            }
 
             // Full screen logic
             if (Build.VERSION.SDK_INT == 15) { // Old method for API 15 (Ice Cream Sandwich)

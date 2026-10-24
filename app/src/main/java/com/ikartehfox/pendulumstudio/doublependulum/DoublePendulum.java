@@ -255,7 +255,7 @@ public class DoublePendulum extends GenericPendulum {
             a[0] = -g * Math.sin(qt[0]) / l1 - k * qvt[0] / m1;
             a[1] = 0.;
         } else {
-            a[1] = -g * Math.sin(qt[1]) / l2 - k * qvt[0] / m2;
+            a[1] = -g * Math.sin(qt[1]) / l2 - k * qvt[1] / m2;
             a[0] = 0.;
         }
     }

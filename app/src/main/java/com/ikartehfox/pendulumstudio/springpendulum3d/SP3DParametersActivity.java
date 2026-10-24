@@ -2,7 +2,6 @@ package com.ikartehfox.pendulumstudio.springpendulum3d;
 
 import com.ikartehfox.pendulumstudio.R;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -17,9 +16,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import afzkl.development.colorpickerview.dialog.ColorPickerDialog;
 
-public class SP3DParametersActivity extends Activity {
+public class SP3DParametersActivity extends AppCompatActivity {
     private int settingsEvent, pendulumColor;
 
     @Override
