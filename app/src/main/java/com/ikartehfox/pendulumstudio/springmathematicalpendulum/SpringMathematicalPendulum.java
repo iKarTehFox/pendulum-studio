@@ -639,4 +639,18 @@ public class SpringMathematicalPendulum extends GenericPendulum {
     public void setTraceMode(boolean enabled) {
         SMPSimulationParameters.simParams.showTrajectory = enabled;
     }
+
+    // Coordinates 0 and 1 are the Cartesian position (x, y) of the spring's
+    // mass; coordinate 2 is the pendulum angle. Label them accordingly.
+    @Override
+    public boolean isCoordinateAngular(int index) {
+        return index == 2;
+    }
+
+    @Override
+    public String getCoordinateName(int index) {
+        if (index == 0) return "x1";
+        if (index == 1) return "y1";
+        return "θ" + (index + 1);
+    }
 }

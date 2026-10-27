@@ -370,20 +370,27 @@ public class DPGLActivity extends AppCompatActivity implements SensorEventListen
     }
 
     /**
-     * Builds a multi-line string with the angle (deg) and angular velocity (deg/s)
-     * of each mass, shown alongside the FPS counter.
+     * Builds a multi-line string describing each generalized coordinate of the
+     * system, shown alongside the FPS counter. Angular coordinates are shown in
+     * degrees (normalized to [0, 360)), linear coordinates in centimeters.
      */
     protected String buildStateInfo(com.ikartehfox.pendulumstudio.common.GenericPendulum pendulum) {
         StringBuilder sb = new StringBuilder();
         int n = pendulum.getNumMasses();
         for (int i = 0; i < n; ++i) {
             if (i > 0) sb.append('\n');
-            double angleDeg = pendulum.getAngle(i) * 180. / Math.PI;
-            // Normalize into [0, 360) so the displayed angle stays within bounds.
-            angleDeg = ((angleDeg % 360.) + 360.) % 360.;
-            sb.append(String.format("θ%d: %.1f°  ω%d: %.1f°/s", i + 1,
-                    angleDeg,
-                    i + 1, pendulum.getAngularVelocity(i) * 180. / Math.PI));
+            String name = pendulum.getCoordinateName(i);
+            if (pendulum.isCoordinateAngular(i)) {
+                double angleDeg = pendulum.getAngle(i) * 180. / Math.PI;
+                // Normalize into [0, 360) so the displayed angle stays within bounds.
+                angleDeg = ((angleDeg % 360.) + 360.) % 360.;
+                sb.append(String.format("%s: %.1f°  ω%d: %.1f°/s", name, angleDeg,
+                        i + 1, pendulum.getAngularVelocity(i) * 180. / Math.PI));
+            } else {
+                sb.append(String.format("%s: %.1f cm  v%d: %.1f cm/s", name,
+                        pendulum.getAngle(i),
+                        i + 1, pendulum.getAngularVelocity(i)));
+            }
         }
         return sb.toString();
     }

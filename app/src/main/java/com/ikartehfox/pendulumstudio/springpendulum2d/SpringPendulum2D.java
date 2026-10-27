@@ -433,4 +433,16 @@ public class SpringPendulum2D extends GenericPendulum {
     public void setTraceMode(boolean enabled) {
         SP2DSimulationParameters.simParams.showTrajectory = enabled;
     }
+
+    // The generalized coordinates of this system are Cartesian positions (x, y),
+    // not angles, so the on-screen readout must label them accordingly.
+    @Override
+    public boolean isCoordinateAngular(int index) {
+        return false;
+    }
+
+    @Override
+    public String getCoordinateName(int index) {
+        return (index == 0 ? "x" : "y") + (index + 1);
+    }
 }

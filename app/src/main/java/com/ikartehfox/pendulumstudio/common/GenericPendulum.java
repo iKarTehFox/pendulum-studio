@@ -134,4 +134,21 @@ public abstract class GenericPendulum extends MechSystemrkf45 {
         if (qv == null || index < 0 || index >= sz) return 0.;
         return qv[index];
     }
+
+    /**
+     * Whether the generalized coordinate at the given index is an angle (radians)
+     * rather than a linear position (cm). Pendulum systems use angles; spring
+     * systems use Cartesian coordinates. Used to format the on-screen readout.
+     */
+    public boolean isCoordinateAngular(int index) {
+        return true;
+    }
+
+    /**
+     * Short display name for the generalized coordinate at the given index,
+     * e.g. "θ1" for an angle or "x1" for a linear position.
+     */
+    public String getCoordinateName(int index) {
+        return (isCoordinateAngular(index) ? "θ" : "x") + (index + 1);
+    }
 }
