@@ -97,6 +97,29 @@
     <string name="DP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="DP_label_trlength">Longueur de la trajectoire</string>
 
+    <string name="tp">Triple pendule (2D)</string>
+    <string name="tp_subtitle">Trois pendules couplés en chaîne produisent un mouvement chaotique encore plus riche que le pendule double.</string>
+
+    <string name="TP_label_l">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
+    <string name="TP_label_l2">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
+    <string name="TP_label_l3">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
+    <string name="TP_label_m">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
+    <string name="TP_label_m2">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
+    <string name="TP_label_m3">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
+    <string name="TP_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_k">γ (mg/s) =</string>
+    <string name="TP_init">Conditions initiales</string>
+    <string name="TP_init_rand">Aléatoire</string>
+    <string name="TP_init_fixed">Fixé</string>
+    <string name="TP_trajectory">Trajectoire</string>
+    <string name="TP_label_th0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_th2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_th3">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_thv3">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;3 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_trlength">Longueur de la trajectoire</string>
+
     <string name="sp3d">Pendule à ressort (3D)</string>
     <string name="sp3d_subtitle">Une masse reliée à un ressort, se déplaçant en trois dimensions.</string>
 
@@ -207,6 +230,7 @@
     <string name="pendulum_color">Couleur du pendule:</string>
     <string name="pendulum_color_1">Couleur du pendule 1:</string>
     <string name="pendulum_color_2">Couleur du pendule 2:</string>
+    <string name="pendulum_color_3">Couleur du pendule 3:</string>
     <string name="pendulum_color_wave">Couleur de l\'onde pendulaire:</string>
 
     <string name="pick_color">Choisissez une couleur</string>

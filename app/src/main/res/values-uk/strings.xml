@@ -97,6 +97,29 @@
     <string name="DP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (с&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="DP_label_trlength">Довжина сліду</string>
 
+    <string name="tp">Потрійний маятник (2D)</string>
+    <string name="tp_subtitle">Три зв\'язаних маятники в ланцюжку демонструють ще багатший хаотичний рух, ніж подвійний маятник.</string>
+
+    <string name="TP_label_l">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (м) =</string>
+    <string name="TP_label_l2">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (м) =</string>
+    <string name="TP_label_l3">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (м) =</string>
+    <string name="TP_label_m">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (кг) =</string>
+    <string name="TP_label_m2">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (кг) =</string>
+    <string name="TP_label_m3">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (кг) =</string>
+    <string name="TP_label_g">g (м/с&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_k">γ (мг/с) =</string>
+    <string name="TP_init">Початкові умови</string>
+    <string name="TP_init_rand">Випадкові</string>
+    <string name="TP_init_fixed">Фіксовані</string>
+    <string name="TP_trajectory">Траекторія</string>
+    <string name="TP_label_th0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_th2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_th3">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (с&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (с&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_thv3">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;3 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (с&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_trlength">Довжина сліду</string>
+
     <string name="sp3d">Пружинний маятник (3D)</string>
     <string name="sp3d_subtitle">Тягар, який під\'єднано до пружини. Рух у 3D просторі.</string>
 
@@ -205,6 +228,7 @@
     <string name="pendulum_color">Колір маятнику:</string>
     <string name="pendulum_color_1">Колір 1-го маятнику:</string>
     <string name="pendulum_color_2">Колір 2-го маятнику:</string>
+    <string name="pendulum_color_3">Колір 3-го маятнику:</string>
     <string name="pendulum_color_wave">Колір хвилі маятників:</string>
 
     <string name="pick_color">Виберіть колір</string>

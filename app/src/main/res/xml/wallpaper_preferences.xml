@@ -31,6 +31,11 @@
         android:summary=""
         android:title="@string/pendulum_color_2" />
     <afzkl.development.colorpickerview.preference.ColorPickerPreference
+        android:defaultValue="0xFFFF0000"
+        android:key="wallpaper_pendulum_color_3"
+        android:summary=""
+        android:title="@string/pendulum_color_3" />
+    <afzkl.development.colorpickerview.preference.ColorPickerPreference
         android:defaultValue="0xFF0000FF"
         android:key="wallpaper_pendulum_color_wave"
         android:summary=""

@@ -20,8 +20,9 @@ public abstract class GenericPendulum extends MechSystemrkf45 {
 
     public volatile int Color1R, Color1G, Color1B;
     public volatile int Color2R, Color2G, Color2B;
+    public volatile int Color3R, Color3G, Color3B;
 
-    public TrajectoryGL mTrajectory, mTrajectory2;
+    public TrajectoryGL mTrajectory, mTrajectory2, mTrajectory3;
 
     public String name;
 
@@ -79,13 +80,28 @@ public abstract class GenericPendulum extends MechSystemrkf45 {
         if (mTrajectory2 != null) mTrajectory2.setColor(r / 255.f, g / 255.f, b / 255.f);
     }
 
+    public void setColorPendulum3(int color) {
+        int b = (color) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int r = (color >> 16) & 0xFF;
+        int a = (color >> 24) & 0xFF;
+        Color3B = b;
+        Color3G = g;
+        Color3R = r;
+
+        if (mTrajectory3 != null) mTrajectory3.setColor(r / 255.f, g / 255.f, b / 255.f);
+    }
+
     public GenericPendulum() {
         Color1R = 255;
         Color1G = Color1B = 0;
         Color2B = 255;
         Color2G = Color2R = 0;
+        Color3R = 255;
+        Color3G = Color3B = 0;
         mTrajectory = null;
         mTrajectory2 = null;
+        mTrajectory3 = null;
         fps = 0.f;
         frames = 0;
     }
@@ -93,4 +109,29 @@ public abstract class GenericPendulum extends MechSystemrkf45 {
     public abstract void setDampingMode(boolean enabled);
 
     public abstract void setTraceMode(boolean enabled);
+
+    /**
+     * Number of generalized coordinates (masses) in this system.
+     */
+    public int getNumMasses() {
+        return sz;
+    }
+
+    /**
+     * Generalized coordinate (angle, in radians) of the mass at the given index.
+     * Returns 0 for out-of-range indices.
+     */
+    public double getAngle(int index) {
+        if (q == null || index < 0 || index >= sz) return 0.;
+        return q[index];
+    }
+
+    /**
+     * Generalized velocity (angular velocity, in rad/s) of the mass at the given index.
+     * Returns 0 for out-of-range indices.
+     */
+    public double getAngularVelocity(int index) {
+        if (qv == null || index < 0 || index >= sz) return 0.;
+        return qv[index];
+    }
 }

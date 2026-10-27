@@ -44,6 +44,9 @@ import com.ikartehfox.pendulumstudio.springsphericalpendulum.SSPSimulationParame
 import com.ikartehfox.pendulumstudio.doublependulum.DPGLActivity;
 import com.ikartehfox.pendulumstudio.doublependulum.DPGLRenderer;
 import com.ikartehfox.pendulumstudio.doublependulum.DPSimulationParameters;
+import com.ikartehfox.pendulumstudio.triplependulum.TPGLActivity;
+import com.ikartehfox.pendulumstudio.triplependulum.TPGLRenderer;
+import com.ikartehfox.pendulumstudio.triplependulum.TPSimulationParameters;
 import com.ikartehfox.pendulumstudio.doublesphericalpendulum.DSPGLActivity;
 import com.ikartehfox.pendulumstudio.doublesphericalpendulum.DSPGLRenderer;
 import com.ikartehfox.pendulumstudio.doublesphericalpendulum.DSPSimulationParameters;
@@ -145,6 +148,19 @@ public class MainActivity extends AppCompatActivity {
             DPSimulationParameters.simParams.readSettings(this.getSharedPreferences(DPSimulationParameters.PREFS_NAME, 0));
             DPGLRenderer.mPendulum.restart();
             DPGLRenderer.mPendulum.k = 0.;
+        }
+
+        {
+            final Map<String, Object> item = new HashMap<>();
+            item.put(ITEM_IMAGE, R.drawable.ic_tp);
+            item.put(ITEM_TITLE, getText(R.string.tp));
+            item.put(ITEM_SUBTITLE, getText(R.string.tp_subtitle));
+            data.add(item);
+            activityMapping.put(i++, TPGLActivity.class);
+
+            TPSimulationParameters.simParams.readSettings(this.getSharedPreferences(TPSimulationParameters.PREFS_NAME, 0));
+            TPGLRenderer.mPendulum.restart();
+            TPGLRenderer.mPendulum.k = 0.;
         }
 
         {

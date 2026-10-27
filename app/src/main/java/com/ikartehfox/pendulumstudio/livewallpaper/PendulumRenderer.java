@@ -14,6 +14,7 @@ import com.ikartehfox.pendulumstudio.springmathematicalpendulum.SpringMathematic
 import com.ikartehfox.pendulumstudio.springpendulum2d.SpringPendulum2D;
 import com.ikartehfox.pendulumstudio.springpendulum3d.SpringPendulum3D;
 import com.ikartehfox.pendulumstudio.springsphericalpendulum.SpringSphericalPendulum;
+import com.ikartehfox.pendulumstudio.triplependulum.TriplePendulum;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -60,6 +61,9 @@ public class PendulumRenderer implements GLSurfaceView.Renderer {
     public static final PendulumWave mPendulumPW = new PendulumWave
             (12, 40, 100., 1., 30. * Math.PI / 180.,
                     9.81 * 100., 0. / 1.e6, true, 3000, true);
+    public static final TriplePendulum mPendulumTP = new TriplePendulum(60., 60., 60., 1., 1., 1., 45. * Math.PI / 180.,
+            5. * Math.PI / 8., 5. * Math.PI / 8., 0. * Math.PI / 180.,
+            45. * Math.PI / 180., 45. * Math.PI / 180., 9.81 * 100., 0. / 1.e6, true, 100, true);
     private int Width, Height;
     private int mProgram;
     public volatile int mIndex;
@@ -241,6 +245,9 @@ public class PendulumRenderer implements GLSurfaceView.Renderer {
                 break;
             case "7":
                 this.mPendulum = mPendulumSSP;
+                break;
+            case "9":
+                this.mPendulum = mPendulumTP;
                 break;
             default:
                 this.mPendulum = mPendulumPW;

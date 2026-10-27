@@ -42,6 +42,13 @@ public class WallpaperSettings extends PreferenceActivity implements SharedPrefe
         return !pendulum.equals("0") && !pendulum.equals("1") && !pendulum.equals("2") && !pendulum.equals("3") && !pendulum.equals("8");
     }
 
+    boolean threePendulums() {
+        String pendulum = PreferenceManager.getDefaultSharedPreferences(
+                this).getString("pendulum_selection", "5");
+
+        return pendulum.equals("9");
+    }
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         String pendulum = PreferenceManager.getDefaultSharedPreferences(
@@ -109,6 +116,8 @@ public class WallpaperSettings extends PreferenceActivity implements SharedPrefe
             screen.removePreference(pref);
             pref = getPreferenceManager().findPreference("wallpaper_pendulum_color_2");
             if (!twoPendulums()) screen.removePreference(pref);
+            pref = getPreferenceManager().findPreference("wallpaper_pendulum_color_3");
+            if (!threePendulums()) screen.removePreference(pref);
             pref = getPreferenceManager().findPreference("wallpaper_pendulum_color_wave");
             screen.removePreference(pref);
         }

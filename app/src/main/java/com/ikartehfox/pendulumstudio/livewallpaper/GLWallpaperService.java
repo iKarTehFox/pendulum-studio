@@ -46,6 +46,8 @@ public abstract class GLWallpaperService extends WallpaperService implements Sen
                 return PendulumRenderer.mPendulumSMP;
             case "7":
                 return PendulumRenderer.mPendulumSSP;
+            case "9":
+                return PendulumRenderer.mPendulumTP;
             default:
                 return PendulumRenderer.mPendulumPW;
         }
@@ -129,6 +131,7 @@ public abstract class GLWallpaperService extends WallpaperService implements Sen
             }
             mPendulum.setColorPendulum1(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_1", 0xFFFF0000));
             mPendulum.setColorPendulum2(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_2", 0xFF0000FF));
+            mPendulum.setColorPendulum3(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_3", 0xFFFF0000));
             if (PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getString("pendulum_selection", "5").equals("8"))
                 mPendulum.setColorPendulum1(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_wave", 0xFF0000FF));
             display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -167,6 +170,7 @@ public abstract class GLWallpaperService extends WallpaperService implements Sen
                                     30. / 180. * Math.PI);
                         mRenderer.mPendulum.setColorPendulum1(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_1", 0xFFFF0000));
                         mRenderer.mPendulum.setColorPendulum2(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_2", 0xFF0000FF));
+                        mRenderer.mPendulum.setColorPendulum3(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_3", 0xFFFF0000));
                         if (PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getString("pendulum_selection", "5").equals("8"))
                             mPendulum.setColorPendulum1(PreferenceManager.getDefaultSharedPreferences(GLWallpaperService.this).getInt("wallpaper_pendulum_color_wave", 0xFF0000FF));
                         mRenderer.recompileProgram();

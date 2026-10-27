@@ -97,7 +97,30 @@
     <string name="DP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
     <string name="DP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
 	<string name="DP_label_trlength">Trajectory length</string>
-	
+
+	<string name="tp">Triple Pendulum (2D)</string>
+    <string name="tp_subtitle">Three coupled pendulums in a chain produce even richer chaotic motion than the double pendulum.</string>
+
+    <string name="TP_label_l">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
+    <string name="TP_label_l2">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
+    <string name="TP_label_l3">l&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (m) =</string>
+    <string name="TP_label_m">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
+    <string name="TP_label_m2">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
+    <string name="TP_label_m3">m&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (kg) =</string>
+    <string name="TP_label_g">g (m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_k">γ (mg/s) =</string>
+    <string name="TP_init">Initial conditions</string>
+    <string name="TP_init_rand">Random</string>
+    <string name="TP_init_fixed">Fixed</string>
+    <string name="TP_trajectory">Trajectory</string>
+    <string name="TP_label_th0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_th2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_th3">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;3&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; =</string>
+    <string name="TP_label_thv0">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;1 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_thv2">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;2 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+    <string name="TP_label_thv3">θ&lt;sub&gt;&lt;small&gt;&lt;small&gt;3 t&lt;/small&gt;&lt;/small&gt;&lt;/sub&gt; (s&lt;sup&gt;&lt;small&gt;&lt;small&gt;-1&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;) =</string>
+	<string name="TP_label_trlength">Trajectory length</string>
+
 	<string name="sp3d">Spring Pendulum (3D)</string>
     <string name="sp3d_subtitle">A mass connected to a spring, moving in three dimensions.</string>
     
@@ -208,6 +231,7 @@
     <string name="pendulum_color">Pendulum color:</string>
     <string name="pendulum_color_1">Pendulum 1 color:</string>
     <string name="pendulum_color_2">Pendulum 2 color:</string>
+    <string name="pendulum_color_3">Pendulum 3 color:</string>
     <string name="appearance">Appearance</string>
     <string name="pendulum_color_wave">Pendulum wave color:</string>
 

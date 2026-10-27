@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.ikartehfox.pendulumstudio.triplependulum.TPGLSurfaceView
+        android:id="@+id/gl_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/fps_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="FPS: " />
+
+        <TextView
+            android:id="@+id/fps_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="10dp"
+            android:text="" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/TP_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/button_playpause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_restart"
+                android:src="@drawable/ic_action_pause"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="fill_parent" />
+
+            <ImageButton
+                android:id="@+id/button_restart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_restart"
+                android:src="@drawable/ic_action_replay"/>
+
+            <View
+                android:id="@+id/view_settings"
+                android:layout_width="4dp"
+                android:layout_height="fill_parent" />
+
+            <ImageButton
+                android:id="@+id/button_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_restart"
+                android:src="@drawable/ic_settings"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="fill_parent" />
+
+            <ImageButton
+                android:id="@+id/button_reset_zoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_reset_zoom"
+                android:src="@drawable/ic_action_zoom_reset"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="4dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/togglebutton_sensor_gravity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="@string/button_sensor_gravity"
+                android:textOff="@string/button_sensor_gravity_off" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="fill_parent" />
+
+            <ToggleButton
+                android:id="@+id/togglebutton_damping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="@string/button_damping"
+                android:textOff="@string/button_damping_off" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="fill_parent" />
+
+            <ToggleButton
+                android:id="@+id/togglebutton_trace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="@string/button_trace"
+                android:textOff="@string/button_trace_off" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

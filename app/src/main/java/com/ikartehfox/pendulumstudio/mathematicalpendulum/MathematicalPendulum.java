@@ -258,11 +258,13 @@ public class MathematicalPendulum extends GenericPendulum {
         // would otherwise divide by zero and permanently poison the state with NaN.
         l = Math.max(ll, 1e-6);
         q[0] = Math.atan2(x, y);
-        // Velocity of the angle: theta_dot = (x_dot * cos(theta) + y_dot * sin(theta)) / l,
-        // expressed without dividing by y (which may be zero).
+        // Velocity of the angle. With x = l*sin(theta), y = l*cos(theta):
+        //   x_dot = l*cos(theta)*theta_dot,  y_dot = -l*sin(theta)*theta_dot
+        // so theta_dot = (x_dot*cos(theta) - y_dot*sin(theta)) / l.
+        // Expressed without dividing by y (which may be zero).
         double sint = Math.sin(q[0]);
         double cost = Math.cos(q[0]);
-        qv[0] = (yv * sint - xv * cost) / l;
+        qv[0] = (xv * cost - yv * sint) / l;
         timeInterval2 = SystemClock.uptimeMillis();
         moved = true;
         mTrajectory.addPointToTrajectory((float) getx(), (float) gety(), (float) getz());

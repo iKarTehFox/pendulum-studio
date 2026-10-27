@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingBottom="16dp">
+
+                <!-- ================= Parameters ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/label_param" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labell1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_l" />
+
+                    <EditText
+                        android:id="@+id/TP_editl"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labell2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_l2" />
+
+                    <EditText
+                        android:id="@+id/TP_editl2"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labell3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_l3" />
+
+                    <EditText
+                        android:id="@+id/TP_editl3"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelm1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_m" />
+
+                    <EditText
+                        android:id="@+id/TP_editm"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelm2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_m2" />
+
+                    <EditText
+                        android:id="@+id/TP_editm2"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelm3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_m3" />
+
+                    <EditText
+                        android:id="@+id/TP_editm3"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelg"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_g" />
+
+                    <EditText
+                        android:id="@+id/TP_editg"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_k" />
+
+                    <EditText
+                        android:id="@+id/TP_editk"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <!-- ================= Initial conditions ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/TP_init" />
+
+                <RadioGroup
+                    android:id="@+id/TP_radioGroupInit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/TP_radioRand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
+                        android:text="@string/TP_init_rand" />
+
+                    <RadioButton
+                        android:id="@+id/TP_radioFixed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
+                        android:text="@string/TP_init_fixed" />
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelth0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_th0" />
+
+                    <EditText
+                        android:id="@+id/TP_editth0"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelthv0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_thv0" />
+
+                    <EditText
+                        android:id="@+id/TP_editthv0"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelth2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_th2" />
+
+                    <EditText
+                        android:id="@+id/TP_editth2"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelthv2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_thv2" />
+
+                    <EditText
+                        android:id="@+id/TP_editthv2"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelth3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_th3" />
+
+                    <EditText
+                        android:id="@+id/TP_editth3"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:id="@+id/TP_labelthv3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_thv3" />
+
+                    <EditText
+                        android:id="@+id/TP_editthv3"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <!-- ================= Appearance ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/appearance" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pendulum_color_1" />
+
+                    <FrameLayout
+                        android:layout_width="72dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/parameter_color_border"
+                        android:padding="1dp">
+
+                        <Button
+                            android:id="@+id/TP_PendulumColor"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:onClick="PendulumColor" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pendulum_color_2" />
+
+                    <FrameLayout
+                        android:layout_width="72dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/parameter_color_border"
+                        android:padding="1dp">
+
+                        <Button
+                            android:id="@+id/TP_PendulumColor2"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:onClick="PendulumColor2" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <View
+                    style="@style/ParameterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pendulum_color_3" />
+
+                    <FrameLayout
+                        android:layout_width="72dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/parameter_color_border"
+                        android:padding="1dp">
+
+                        <Button
+                            android:id="@+id/TP_PendulumColor3"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:onClick="PendulumColor3" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <!-- ================= Trajectory ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/TP_trajectory" />
+
+                <CheckBox
+                    android:id="@+id/TP_checkBoxTraj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/TP_trajectory" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TP_label_trlength" />
+
+                    <EditText
+                        android:id="@+id/TP_edittrajle"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/TP_checkBoxTrajInfinite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/trajectory_infinite" />
+
+                <!-- ================= Display ================= -->
+                <TextView
+                    style="@style/ParameterHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/settings" />
+
+                <CheckBox
+                    android:id="@+id/pref_fullscreen_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/pref_fullscreen" />
+
+                <CheckBox
+                    android:id="@+id/pref_fps_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/pref_fps" />
+
+                <CheckBox
+                    android:id="@+id/pref_buttons_fade_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/pref_buttons_fade" />
+
+                <CheckBox
+                    android:id="@+id/pref_touch_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/pref_touch" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            style="?attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/TP_okButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="okButton"
+                android:text="@string/button_ok" />
+
+            <Button
+                android:id="@+id/TP_cancelButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="cancelButton"
+                android:text="@string/button_cancel" />
+
+            <Button
+                android:id="@+id/TP_resetButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="resetButton"
+                android:text="@string/button_reset" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

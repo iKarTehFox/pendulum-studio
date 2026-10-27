@@ -28,6 +28,14 @@
             android:layout_marginLeft="10dp"
             android:text="FPS: " />
 
+        <TextView
+            android:id="@+id/fps_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="10dp"
+            android:text="" />
+
     </LinearLayout>
 
     <LinearLayout

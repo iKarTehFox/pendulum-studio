@@ -29,6 +29,8 @@ public class PendulumStudioWallpaperService extends OpenGLES2WallpaperService {
                 return new PendulumRenderer(PendulumRenderer.mPendulumSMP);
             case "7":
                 return new PendulumRenderer(PendulumRenderer.mPendulumSSP);
+            case "9":
+                return new PendulumRenderer(PendulumRenderer.mPendulumTP);
             default:
                 return new PendulumRenderer(PendulumRenderer.mPendulumPW);
         }

@@ -76,6 +76,15 @@
             android:theme="@style/AppTheme.Parameters"/>
 
         <activity
+            android:name=".triplependulum.TPGLActivity"
+            android:label="@string/tp"
+            android:logo="@drawable/ic_tp_logo"
+            android:theme="@style/AppTheme.GL" />
+        <activity
+            android:name=".triplependulum.TPParametersActivity"
+            android:theme="@style/AppTheme.Parameters"/>
+
+        <activity
             android:name=".doublesphericalpendulum.DSPGLActivity"
             android:label="@string/dsp"
             android:logo="@drawable/ic_dsp_logo"

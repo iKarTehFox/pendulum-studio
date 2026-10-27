@@ -55,6 +55,16 @@ public class SMPGLActivity extends AppCompatActivity implements SensorEventListe
         }
     };
 
+    // Updates the angle/velocity readout once per rendered frame (driven by the
+    // display refresh via postOnAnimation), independently of the 1 Hz FPS counter.
+    final Runnable timerStateRunnable = new Runnable() {
+        @Override
+        public void run() {
+            ((TextView) findViewById(R.id.fps_info)).setText(buildStateInfo(SMPGLRenderer.mPendulum));
+            if (!paused) findViewById(R.id.fps_info).postOnAnimation(this);
+        }
+    };
+
     boolean buttonsAreOff;
     final Runnable timerButtonsOff = new Runnable() {
         @Override
@@ -145,6 +155,9 @@ public class SMPGLActivity extends AppCompatActivity implements SensorEventListe
                 deltaT = System.currentTimeMillis();
                 timerHandler.postDelayed(timerRunnable, frequency);
             }
+            // Keep the state readout live regardless of the play/pause state.
+            findViewById(R.id.fps_info).removeCallbacks(timerStateRunnable);
+            findViewById(R.id.fps_info).postOnAnimation(timerStateRunnable);
 
         });
 
@@ -240,6 +253,7 @@ public class SMPGLActivity extends AppCompatActivity implements SensorEventListe
         mGLView.onPause();
         if (useDynGravity) mSensorManager.unregisterListener(this);
         paused = true;
+        findViewById(R.id.fps_info).removeCallbacks(timerStateRunnable);
         makeButtonsVisible();
     }
 
@@ -273,6 +287,9 @@ public class SMPGLActivity extends AppCompatActivity implements SensorEventListe
         makeButtonsVisible();
 
         paused = false;
+        // Keep the state readout live whenever the activity is visible.
+        findViewById(R.id.fps_info).removeCallbacks(timerStateRunnable);
+        findViewById(R.id.fps_info).postOnAnimation(timerStateRunnable);
         if (isRunning) {
             SMPGLRenderer.mPendulum.frames = 0;
             deltaT = System.currentTimeMillis();
@@ -290,6 +307,7 @@ public class SMPGLActivity extends AppCompatActivity implements SensorEventListe
     protected void onStop() {
         super.onStop();
         paused = true;
+        findViewById(R.id.fps_info).removeCallbacks(timerStateRunnable);
     }
 
     protected void setFullScreenMode() {
@@ -348,6 +366,25 @@ public class SMPGLActivity extends AppCompatActivity implements SensorEventListe
             view.setVisibility(View.VISIBLE);
         else
             view.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * Builds a multi-line string with the angle (deg) and angular velocity (deg/s)
+     * of each mass, shown alongside the FPS counter.
+     */
+    protected String buildStateInfo(com.ikartehfox.pendulumstudio.common.GenericPendulum pendulum) {
+        StringBuilder sb = new StringBuilder();
+        int n = pendulum.getNumMasses();
+        for (int i = 0; i < n; ++i) {
+            if (i > 0) sb.append('\n');
+            double angleDeg = pendulum.getAngle(i) * 180. / Math.PI;
+            // Normalize into [0, 360) so the displayed angle stays within bounds.
+            angleDeg = ((angleDeg % 360.) + 360.) % 360.;
+            sb.append(String.format("θ%d: %.1f°  ω%d: %.1f°/s", i + 1,
+                    angleDeg,
+                    i + 1, pendulum.getAngularVelocity(i) * 180. / Math.PI));
+        }
+        return sb.toString();
     }
 
     protected void makeButtonsVisible() {
